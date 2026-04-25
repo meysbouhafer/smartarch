@@ -2774,7 +2774,7 @@ function findLocalAccount(accounts, identifier) {
 function Chatbot({ dark }) {
   const [open, setOpen] = useState(false);
   const [msgs, setMsgs] = useState([
-    { role:'bot', text:`Bonjour ! 👋 Je suis l'assistant Smart Archives propulsé par **${AI_MODEL_LABEL} via ${AI_PROVIDER_LABEL}**.\n\nComment puis-je vous aider aujourd'hui ? Je dispose d'une base de connaissances complète sur nos services, logiciels et formations pour vous répondre avec précision. ✅ RAG activé`, time: new Date().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'}) }
+    { role:'bot', text:`Bonjour ! 👋 Je suis l'assistant Smart Archives propulsé par l'intelligence artificielle de Smart Archives.\n\nComment puis-je vous aider aujourd'hui ? Je dispose d'une base de connaissances complète sur nos services, logiciels et formations pour vous répondre avec précision.`, time: new Date().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'}) }
   ]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
@@ -3378,7 +3378,7 @@ function Chatbot({ dark }) {
               <div style={{fontSize:11.5, color:'rgba(255,255,255,.75)', display:'flex', alignItems:'center', gap:5, marginTop:2}}>
                 <span style={{width:7,height:7,borderRadius:'50%',background:'#4ade80',display:'inline-block',
                   animation:'statusPulse 2s infinite'}}></span>
-                {loading ? '⌛ En train de réfléchir…' : `En ligne · ${AI_MODEL_LABEL} ${speechSupported ? '· Micro 🎤' : ''}`}
+                {loading ? '⌛ En train de réfléchir…' : '● En ligne'}
               </div>
             </div>
             <div style={{display:'flex', gap:6, position:'relative', zIndex:1}}>
