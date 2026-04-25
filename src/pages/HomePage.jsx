@@ -486,31 +486,40 @@ export default function PageHome({ go }) {
 
         .sa-timeline {
           position: relative;
-          padding: 40px 0;
+          padding: 20px 0;
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+          gap: 16px;
         }
 
         .sa-timeline-line {
-          position: absolute;
-          left: 50%;
-          top: 0;
-          bottom: 0;
-          width: 2px;
-          background: linear-gradient(180deg, rgba(99, 102, 241, 0.2) 0%, rgba(99, 102, 241, 0.5) 50%, rgba(99, 102, 241, 0.2) 100%);
-          transform: translateX(-50%);
+          display: none;
         }
 
         @media (max-width: 768px) {
           .sa-timeline-line {
-            left: 20px;
+            display: none;
           }
         }
 
         .sa-timeline-item {
-          margin-bottom: 40px;
+          margin-bottom: 0;
           position: relative;
           opacity: 0;
           transform: translateY(30px);
           animation: timelineSlideIn 0.8s ease-out forwards;
+          background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(124, 58, 237, 0.05) 100%);
+          border: 1px solid rgba(99, 102, 241, 0.3);
+          border-radius: 12px;
+          padding: 20px;
+          transition: all 0.3s ease;
+        }
+
+        .sa-timeline-item:hover {
+          border-color: rgba(99, 102, 241, 0.6);
+          background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(124, 58, 237, 0.1) 100%);
+          box-shadow: 0 12px 32px rgba(59, 130, 246, 0.2);
+          transform: translateY(0);
         }
 
         @keyframes timelineSlideIn {
@@ -526,47 +535,43 @@ export default function PageHome({ go }) {
         .sa-timeline-item:nth-child(4) { animation-delay: 0.8s; }
 
         .sa-timeline-dot {
-          position: absolute;
-          left: 50%;
-          top: 0;
-          width: 16px;
-          height: 16px;
+          position: static;
+          width: 12px;
+          height: 12px;
           background: linear-gradient(135deg, #3B82F6, #7C3AED);
           border-radius: 50%;
-          transform: translateX(-50%);
-          box-shadow: 0 0 0 4px rgba(15, 23, 42, 1), 0 0 20px rgba(59, 130, 246, 0.6);
+          transform: none;
+          box-shadow: 0 0 0 3px rgba(15, 23, 42, 1), 0 0 12px rgba(59, 130, 246, 0.5);
           transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+          display: inline-block;
+          margin-right: 12px;
         }
 
         .sa-timeline-item:hover .sa-timeline-dot {
-          width: 24px;
-          height: 24px;
-          top: -4px;
-          box-shadow: 0 0 0 6px rgba(15, 23, 42, 1), 0 0 40px rgba(59, 130, 246, 0.8);
+          width: 16px;
+          height: 16px;
+          box-shadow: 0 0 0 4px rgba(15, 23, 42, 1), 0 0 24px rgba(59, 130, 246, 0.8);
         }
 
         @media (max-width: 768px) {
           .sa-timeline-dot {
-            left: 20px;
-          }
-
-          .sa-timeline-item:hover .sa-timeline-dot {
-            left: 20px;
+            position: static;
           }
         }
 
         .sa-timeline-year {
-          position: absolute;
-          left: 50%;
-          top: -8px;
-          font-size: 20px;
+          position: static;
+          font-size: 16px;
           font-weight: 900;
           color: #3B82F6;
-          transform: translateX(-50%);
-          background: rgba(15, 23, 42, 0.95);
-          padding: 0 12px;
-          border-radius: 8px;
+          transform: none;
+          background: none;
+          padding: 0;
+          border-radius: 0;
           transition: color 0.3s ease;
+          display: inline-block;
+          margin-bottom: 12px;
+          font-weight: 700;
         }
 
         .sa-timeline-item:hover .sa-timeline-year {
@@ -574,7 +579,7 @@ export default function PageHome({ go }) {
         }
 
         html.light-theme .sa-timeline-year {
-          background: rgba(255, 255, 255, 0.95);
+          background: none;
           color: #2563EB;
         }
 
@@ -582,59 +587,64 @@ export default function PageHome({ go }) {
           color: #7C3AED;
         }
 
+        @media (max-width: 768px) {
+          .sa-timeline-year {
+            position: static;
+          }
+        }
+
         .sa-timeline-text {
-          margin-left: 50%;
-          padding: 20px 32px;
-          background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(124, 58, 237, 0.05) 100%);
-          border: 1px solid rgba(99, 102, 241, 0.3);
-          border-radius: 12px;
+          margin-left: 0;
+          padding: 0;
+          background: none;
+          border: none;
+          border-radius: 0;
           color: #94A3B8;
-          font-size: 15px;
-          line-height: 1.7;
+          font-size: 14px;
+          line-height: 1.6;
           transition: all 0.3s ease;
           cursor: pointer;
         }
 
         .sa-timeline-item:hover .sa-timeline-text {
-          border-color: rgba(99, 102, 241, 0.8);
-          background: linear-gradient(135deg, rgba(59, 130, 246, 0.2) 0%, rgba(124, 58, 237, 0.1) 100%);
-          box-shadow: 0 12px 32px rgba(59, 130, 246, 0.2);
+          border: none;
+          background: none;
+          box-shadow: none;
           color: #F1F5F9;
         }
 
         html.light-theme .sa-timeline-text {
-          background: linear-gradient(135deg, rgba(37, 99, 235, 0.08) 0%, rgba(124, 58, 237, 0.04) 100%);
-          border-color: rgba(37, 99, 235, 0.2);
+          background: none;
+          border: none;
           color: #3D4D6A;
         }
 
         html.light-theme .sa-timeline-item:hover .sa-timeline-text {
-          border-color: rgba(37, 99, 235, 0.6);
-          background: linear-gradient(135deg, rgba(37, 99, 235, 0.15) 0%, rgba(124, 58, 237, 0.08) 100%);
+          border: none;
+          background: none;
           color: #0A0F2C;
         }
 
         @media (max-width: 768px) {
           .sa-timeline-text {
-            margin-left: 60px;
+            margin-left: 0;
           }
         }
 
-        /* STATS GRID */
         .sa-stats-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-          gap: 16px;
-          margin-top: 40px;
+          grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+          gap: 12px;
+          margin-top: 32px;
           position: relative;
           z-index: 2;
         }
 
         .sa-stat-card {
-          background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(124, 58, 237, 0.08) 100%);
+          background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(124, 58, 237, 0.05) 100%);
           border: 1.5px solid rgba(99, 102, 241, 0.3);
-          border-radius: 16px;
-          padding: 32px 24px;
+          border-radius: 12px;
+          padding: 20px 16px;
           text-align: center;
           transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
           position: relative;
@@ -650,10 +660,10 @@ export default function PageHome({ go }) {
           transform: translateX(0);
         }
 
-        .sa-stat-card:nth-child(1) { animation-delay: 0.4s; }
-        .sa-stat-card:nth-child(2) { animation-delay: 0.5s; }
-        .sa-stat-card:nth-child(3) { animation-delay: 0.6s; }
-        .sa-stat-card:nth-child(4) { animation-delay: 0.7s; }
+        .sa-stat-card:nth-child(1) { animation-delay: 0.3s; }
+        .sa-stat-card:nth-child(2) { animation-delay: 0.35s; }
+        .sa-stat-card:nth-child(3) { animation-delay: 0.4s; }
+        .sa-stat-card:nth-child(4) { animation-delay: 0.45s; }
 
         html.light-theme .sa-stat-card {
           background: linear-gradient(135deg, rgba(37, 99, 235, 0.12) 0%, rgba(124, 58, 237, 0.06) 100%);
@@ -661,29 +671,29 @@ export default function PageHome({ go }) {
         }
 
         .sa-stat-card:hover {
-          transform: translateY(-8px);
+          transform: translateY(-6px);
           border-color: rgba(99, 102, 241, 0.8);
-          box-shadow: 0 20px 60px rgba(59, 130, 246, 0.3), inset 0 0 1px rgba(255, 255, 255, 0.1);
+          box-shadow: 0 16px 48px rgba(59, 130, 246, 0.25), inset 0 0 1px rgba(255, 255, 255, 0.1);
         }
 
         html.light-theme .sa-stat-card:hover {
           border-color: rgba(37, 99, 235, 0.6);
-          box-shadow: 0 20px 60px rgba(37, 99, 235, 0.15), inset 0 0 1px rgba(37, 99, 235, 0.1);
+          box-shadow: 0 16px 48px rgba(37, 99, 235, 0.12), inset 0 0 1px rgba(37, 99, 235, 0.1);
         }
 
         .sa-stat-value {
-          font-size: 40px;
+          font-size: 28px;
           font-weight: 900;
           background: linear-gradient(135deg, #3B82F6, #7C3AED);
           background-clip: text;
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
-          margin: 0 0 12px 0;
+          margin: 0 0 8px 0;
           letter-spacing: -1px;
         }
 
         .sa-stat-label {
-          font-size: 14px;
+          font-size: 12px;
           font-weight: 700;
           color: #94A3B8;
           margin: 0;
@@ -705,7 +715,7 @@ export default function PageHome({ go }) {
         /* =============== HISTOIRE SECTION PREMIUM =============== */
         .sa-section-histoire {
           background: linear-gradient(135deg, #020817 0%, #0A0F2E 50%, #020817 100%);
-          padding: 80px 40px;
+          padding: 60px 40px;
           position: relative;
           overflow: hidden;
           border-top: 2px solid rgba(99, 102, 241, 0.12);
@@ -1039,7 +1049,7 @@ export default function PageHome({ go }) {
         /* =============== FEATURES SECTION PREMIUM =============== */
         .sa-section-features {
           background: linear-gradient(135deg, #0D1117 0%, #0F1729 50%, #0D1117 100%);
-          padding: 80px 40px;
+          padding: 60px 40px;
           position: relative;
           overflow: hidden;
           border-top: 2px solid rgba(99, 102, 241, 0.12);
@@ -1056,7 +1066,31 @@ export default function PageHome({ go }) {
         .sa-features-header {
           text-align: center;
           max-width: 700px;
-          margin: 0 auto 40px;
+          margin: 0 auto 32px;
+          position: relative;
+          z-index: 2;
+        }
+
+        .sa-services-header {
+          text-align: center;
+          max-width: 700px;
+          margin: 0 auto 32px;
+          position: relative;
+          z-index: 2;
+        }
+
+        .sa-team-header {
+          text-align: center;
+          max-width: 700px;
+          margin: 0 auto 32px;
+          position: relative;
+          z-index: 2;
+        }
+
+        .sa-histoire-title {
+          text-align: center;
+          max-width: 700px;
+          margin: 0 auto 32px;
           position: relative;
           z-index: 2;
         }
@@ -1669,7 +1703,7 @@ export default function PageHome({ go }) {
         /* =============== SERVICES SECTION PREMIUM =============== */
         .sa-section-services {
           background: linear-gradient(135deg, #0D1117 0%, #0F1729 50%, #0D1117 100%);
-          padding: 80px 40px;
+          padding: 60px 40px;
           position: relative;
           overflow: hidden;
           border-top: 2px solid rgba(99, 102, 241, 0.12);
@@ -1748,7 +1782,7 @@ export default function PageHome({ go }) {
 
         .sa-services-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+          grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
           gap: 20px;
           max-width: 1300px;
           margin: 0 auto;
@@ -1759,8 +1793,8 @@ export default function PageHome({ go }) {
         .sa-service-card {
           background: linear-gradient(135deg, rgba(15, 23, 42, 0.7) 0%, rgba(15, 23, 42, 0.4) 100%);
           border: 1.5px solid rgba(99, 102, 241, 0.3);
-          border-radius: 18px;
-          padding: 40px 32px;
+          border-radius: 16px;
+          padding: 32px;
           cursor: pointer;
           transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
           position: relative;
@@ -1769,7 +1803,10 @@ export default function PageHome({ go }) {
           -webkit-backdrop-filter: blur(12px);
           box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2), inset 0 0 1px rgba(255, 255, 255, 0.1);
           opacity: 0;
-          transform: translateY(40px);
+          transform: translateY(30px);
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
         }
 
         .sa-visible .sa-service-card {
@@ -1778,10 +1815,10 @@ export default function PageHome({ go }) {
         }
 
         .sa-service-card:nth-child(1) { animation-delay: 0.1s; }
-        .sa-service-card:nth-child(2) { animation-delay: 0.2s; }
-        .sa-service-card:nth-child(3) { animation-delay: 0.3s; }
-        .sa-service-card:nth-child(4) { animation-delay: 0.15s; }
-        .sa-service-card:nth-child(5) { animation-delay: 0.25s; }
+        .sa-service-card:nth-child(2) { animation-delay: 0.15s; }
+        .sa-service-card:nth-child(3) { animation-delay: 0.2s; }
+        .sa-service-card:nth-child(4) { animation-delay: 0.25s; }
+        .sa-service-card:nth-child(5) { animation-delay: 0.3s; }
         .sa-service-card:nth-child(6) { animation-delay: 0.35s; }
 
         html.light-theme .sa-service-card {
@@ -1791,14 +1828,14 @@ export default function PageHome({ go }) {
         }
 
         .sa-service-card:hover {
-          transform: translateY(-12px);
+          transform: translateY(-8px);
           border-color: rgba(99, 102, 241, 0.8);
-          box-shadow: 0 30px 80px rgba(59, 130, 246, 0.4), inset 0 0 1px rgba(255, 255, 255, 0.2);
+          box-shadow: 0 24px 64px rgba(59, 130, 246, 0.35), inset 0 0 1px rgba(255, 255, 255, 0.2);
         }
 
         html.light-theme .sa-service-card:hover {
           border-color: rgba(37, 99, 235, 0.6);
-          box-shadow: 0 30px 80px rgba(37, 99, 235, 0.2), inset 0 0 1px rgba(37, 99, 235, 0.15);
+          box-shadow: 0 24px 64px rgba(37, 99, 235, 0.18), inset 0 0 1px rgba(37, 99, 235, 0.15);
         }
 
         .sa-service-card::before {
@@ -1808,7 +1845,7 @@ export default function PageHome({ go }) {
           background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(124, 58, 237, 0.05) 100%);
           opacity: 0;
           transition: opacity 0.3s ease;
-          border-radius: 18px;
+          border-radius: 16px;
           pointer-events: none;
         }
 
@@ -1817,23 +1854,23 @@ export default function PageHome({ go }) {
         }
 
         .sa-service-icon {
-          font-size: 48px;
+          font-size: 40px;
           color: #3B82F6;
-          margin-bottom: 20px;
           transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
           display: inline-block;
+          width: fit-content;
         }
 
         .sa-service-card:hover .sa-service-icon {
-          transform: rotate(12deg) scale(1.15);
+          transform: scale(1.2);
           color: #7C3AED;
         }
 
         .sa-service-title {
-          font-size: 20px;
+          font-size: 18px;
           font-weight: 800;
           color: #F1F5F9;
-          margin: 0 0 12px 0;
+          margin: 0;
           letter-spacing: -0.5px;
           transition: color 0.3s ease;
         }
@@ -1846,7 +1883,7 @@ export default function PageHome({ go }) {
           font-size: 14px;
           color: #94A3B8;
           margin: 0;
-          line-height: 1.8;
+          line-height: 1.6;
           transition: color 0.3s ease;
         }
 
@@ -2141,7 +2178,7 @@ export default function PageHome({ go }) {
         /* =============== TEAM SECTION PREMIUM =============== */
         .sa-section-team {
           background: #020817;
-          padding: 80px 40px;
+          padding: 60px 40px;
           position: relative;
           overflow: hidden;
           border-bottom: 2px solid rgba(99, 102, 241, 0.12);
@@ -2192,8 +2229,8 @@ export default function PageHome({ go }) {
 
         .sa-team-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-          gap: 24px;
+          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+          gap: 20px;
           max-width: 1300px;
           margin: 0 auto;
           position: relative;
@@ -2203,8 +2240,8 @@ export default function PageHome({ go }) {
         .sa-team-card {
           background: linear-gradient(135deg, rgba(15, 23, 42, 0.7) 0%, rgba(15, 23, 42, 0.4) 100%);
           border: 1.5px solid rgba(99, 102, 241, 0.3);
-          border-radius: 18px;
-          padding: 40px;
+          border-radius: 16px;
+          padding: 28px 24px;
           text-align: center;
           cursor: pointer;
           transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -2214,7 +2251,7 @@ export default function PageHome({ go }) {
           -webkit-backdrop-filter: blur(12px);
           box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2), inset 0 0 1px rgba(255, 255, 255, 0.1);
           opacity: 0;
-          transform: translateY(40px);
+          transform: translateY(30px);
         }
 
         .sa-visible .sa-team-card {
@@ -2222,9 +2259,9 @@ export default function PageHome({ go }) {
           transform: translateY(0);
         }
 
-        .sa-team-card:nth-child(1) { animation-delay: 0.15s; }
-        .sa-team-card:nth-child(2) { animation-delay: 0.25s; }
-        .sa-team-card:nth-child(3) { animation-delay: 0.35s; }
+        .sa-team-card:nth-child(1) { animation-delay: 0.1s; }
+        .sa-team-card:nth-child(2) { animation-delay: 0.15s; }
+        .sa-team-card:nth-child(3) { animation-delay: 0.2s; }
 
         html.light-theme .sa-team-card {
           background: linear-gradient(135deg, rgba(248, 250, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%);
@@ -2233,42 +2270,42 @@ export default function PageHome({ go }) {
         }
 
         .sa-team-card:hover {
-          transform: translateY(-12px);
+          transform: translateY(-8px);
           border-color: rgba(99, 102, 241, 0.8);
-          box-shadow: 0 30px 80px rgba(59, 130, 246, 0.4), inset 0 0 1px rgba(255, 255, 255, 0.2);
+          box-shadow: 0 24px 64px rgba(59, 130, 246, 0.35), inset 0 0 1px rgba(255, 255, 255, 0.2);
         }
 
         html.light-theme .sa-team-card:hover {
           border-color: rgba(37, 99, 235, 0.6);
-          box-shadow: 0 30px 80px rgba(37, 99, 235, 0.2), inset 0 0 1px rgba(37, 99, 235, 0.15);
+          box-shadow: 0 24px 64px rgba(37, 99, 235, 0.18), inset 0 0 1px rgba(37, 99, 235, 0.15);
         }
 
         .sa-team-avatar {
-          width: 100px;
-          height: 100px;
+          width: 80px;
+          height: 80px;
           border-radius: 50%;
           background: linear-gradient(135deg, #3B82F6, #7C3AED);
           display: flex;
           align-items: center;
           justify-content: center;
           color: white;
-          font-size: 40px;
+          font-size: 32px;
           font-weight: 800;
-          margin: 0 auto 20px;
-          box-shadow: 0 12px 32px rgba(59, 130, 246, 0.3);
+          margin: 0 auto 16px;
+          box-shadow: 0 8px 24px rgba(59, 130, 246, 0.3);
           transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         .sa-team-card:hover .sa-team-avatar {
-          transform: scale(1.12);
-          box-shadow: 0 20px 50px rgba(59, 130, 246, 0.5);
+          transform: scale(1.1);
+          box-shadow: 0 12px 32px rgba(59, 130, 246, 0.4);
         }
 
         .sa-team-name {
-          font-size: 20px;
+          font-size: 18px;
           font-weight: 800;
           color: #F1F5F9;
-          margin: 0 0 8px 0;
+          margin: 0 0 6px 0;
           letter-spacing: -0.5px;
           transition: color 0.3s ease;
         }
@@ -2278,10 +2315,10 @@ export default function PageHome({ go }) {
         }
 
         .sa-team-role {
-          font-size: 14px;
+          font-size: 13px;
           font-weight: 700;
           color: #3B82F6;
-          margin: 0 0 12px 0;
+          margin: 0 0 10px 0;
           transition: color 0.3s ease;
         }
 
@@ -2290,12 +2327,12 @@ export default function PageHome({ go }) {
         }
 
         .sa-team-bio {
-          font-size: 14px;
+          font-size: 13px;
           color: #94A3B8;
-          margin: 0 0 16px 0;
-          line-height: 1.8;
+          margin: 0;
+          line-height: 1.5;
           transition: color 0.3s ease;
-          min-height: 60px;
+          min-height: 45px;
         }
 
         html.light-theme .sa-team-bio {
