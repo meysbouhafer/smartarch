@@ -1,0 +1,14 @@
+{
+  "admins": [
+    {
+      "id": "admin-root",
+      "name": "Super Admin",
+      "email": "admin@smart-archives.dz",
+      "role": "Super Admin",
+      "status": "Active",
+      "passwordHash": "$2a$10$mjWTcC701venv.KMb.OFRevcaf6Y2.4kr3UVxd3Y9IApVemshWUUW",
+      "createdAt": "2026-04-01T21:24:17.710Z"
+    }
+  ],
+  "courses": []
+}
