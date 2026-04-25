@@ -227,9 +227,9 @@ export default function PageHome({ go }) {
         }
 
         .sa-section-histoire {
-          background: rgba(255, 255, 255, 0.7);
-          backdrop-filter: blur(12px);
-          -webkit-backdrop-filter: blur(12px);
+          background: rgba(255, 255, 255, 0.4);
+          backdrop-filter: blur(8px);
+          -webkit-backdrop-filter: blur(8px);
           padding: 80px 40px;
           position: relative;
           overflow: hidden;
@@ -242,7 +242,7 @@ export default function PageHome({ go }) {
           right: -10%;
           width: 600px;
           height: 600px;
-          background: radial-gradient(circle, rgba(99,102,241,0.12) 0%, transparent 70%);
+          background: radial-gradient(circle, rgba(99,102,241,0.25) 0%, transparent 70%);
           border-radius: 50%;
           filter: blur(50px);
           pointer-events: none;
@@ -256,7 +256,7 @@ export default function PageHome({ go }) {
           left: -5%;
           width: 500px;
           height: 500px;
-          background: radial-gradient(circle, rgba(14,165,233,0.1) 0%, transparent 70%);
+          background: radial-gradient(circle, rgba(14,165,233,0.2) 0%, transparent 70%);
           border-radius: 50%;
           filter: blur(45px);
           pointer-events: none;
@@ -354,13 +354,13 @@ export default function PageHome({ go }) {
         .sa-timeline-year {
           font-size: 28px;
           font-weight: 800;
-          color: #6366F1;
+          color: #4F46E5;
           margin-bottom: 12px;
           letter-spacing: -0.5px;
         }
 
         .sa-timeline-text {
-          color: #64748B;
+          color: #334155;
           font-size: 15px;
           line-height: 1.7;
           font-weight: 500;
