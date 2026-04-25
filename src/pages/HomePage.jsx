@@ -1014,7 +1014,7 @@ export default function PageHome({ go }) {
 
         .sa-team-card {
           background: linear-gradient(135deg, rgba(15, 23, 42, 0.6) 0%, rgba(15, 23, 42, 0.3) 100%);
-          border: 1px solid rgba(99, 102, 241, 0.25);
+          border: 2px solid rgba(99, 102, 241, 0.25);
           border-radius: 24px;
           padding: 44px;
           text-align: center;
@@ -1025,6 +1025,25 @@ export default function PageHome({ go }) {
           -webkit-backdrop-filter: blur(16px);
           opacity: 0;
           transform: translateY(40px);
+          overflow: hidden;
+        }
+
+        .sa-team-card::before {
+          content: '';
+          position: absolute;
+          top: -50%;
+          left: -50%;
+          width: 200%;
+          height: 200%;
+          background: linear-gradient(45deg, transparent 30%, rgba(59, 130, 246, 0.1), transparent 70%);
+          animation: shimmerTeam 3s infinite;
+          opacity: 0;
+          pointer-events: none;
+        }
+
+        @keyframes shimmerTeam {
+          0% { transform: translate(-100%, -100%); }
+          100% { transform: translate(100%, 100%); }
         }
 
         html.light-theme .sa-team-card {
@@ -1061,75 +1080,193 @@ export default function PageHome({ go }) {
           opacity: 1;
         }
 
+        @keyframes borderGlow {
+          0% { border-color: rgba(59, 130, 246, 0.3); }
+          50% { border-color: rgba(124, 58, 237, 0.8); }
+          100% { border-color: rgba(59, 130, 246, 0.3); }
+        }
+
         .sa-team-card:hover {
           transform: translateY(-20px);
-          border-color: rgba(99, 102, 241, 0.5);
-          box-shadow: 0 20px 60px rgba(59, 130, 246, 0.3), inset 0 0 1px rgba(255, 255, 255, 0.2);
-          background: linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(15, 23, 42, 0.5) 100%);
+          animation: borderGlow 2s ease-in-out infinite;
+          box-shadow: 0 30px 80px rgba(59, 130, 246, 0.4), inset 0 0 1px rgba(255, 255, 255, 0.2), 0 0 40px rgba(59, 130, 246, 0.2);
+          background: linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(20, 30, 60, 0.5) 100%);
+        }
+
+        .sa-team-card:hover::before {
+          opacity: 1;
+        }
+
+        html.light-theme .sa-team-card:hover {
+          border-color: rgba(37, 99, 235, 0.6);
+          box-shadow: 0 30px 80px rgba(37, 99, 235, 0.2), inset 0 0 1px rgba(37, 99, 235, 0.15), 0 0 40px rgba(37, 99, 235, 0.15);
+          background: linear-gradient(135deg, rgba(248, 250, 255, 1) 0%, rgba(240, 248, 255, 0.9) 100%);
         }
 
         .sa-team-avatar {
-          width: 110px;
-          height: 110px;
+          width: 120px;
+          height: 120px;
           border-radius: 50%;
-          background: linear-gradient(135deg, #3B82F6, #7C3AED, #06B6D4);
+          background: linear-gradient(135deg, #3B82F6 0%, #7C3AED 50%, #06B6D4 100%);
           display: flex;
           align-items: center;
           justify-content: center;
-          font-size: 44px;
+          font-size: 48px;
           font-weight: 800;
           color: white;
-          margin: 0 auto 24px;
-          box-shadow: 0 16px 40px rgba(59, 130, 246, 0.3), inset 0 0 20px rgba(255, 255, 255, 0.1);
+          margin: 0 auto 28px;
+          box-shadow: 0 20px 50px rgba(59, 130, 246, 0.4), inset 0 0 30px rgba(255, 255, 255, 0.15);
           transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
           position: relative;
           z-index: 2;
           letter-spacing: -1px;
+          border: 3px solid rgba(255, 255, 255, 0.2);
+          overflow: hidden;
+        }
+
+        .sa-team-avatar::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          border-radius: 50%;
+          background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.2), transparent 70%);
+          animation: avatarShimmer 3s infinite;
+          opacity: 0;
+        }
+
+        @keyframes avatarShimmer {
+          0% { transform: translateX(-100%); }
+          50% { opacity: 1; }
+          100% { transform: translateX(100%); }
         }
 
         .sa-team-card:hover .sa-team-avatar {
-          transform: scale(1.2);
-          box-shadow: 0 24px 48px rgba(59, 130, 246, 0.4), inset 0 0 20px rgba(255, 255, 255, 0.15);
+          transform: scale(1.25) rotate(5deg);
+          box-shadow: 0 30px 70px rgba(59, 130, 246, 0.5), inset 0 0 30px rgba(255, 255, 255, 0.2), 0 0 50px rgba(124, 58, 237, 0.3);
+        }
+
+        .sa-team-card:hover .sa-team-avatar::before {
+          animation: avatarShimmer 1.5s infinite;
+          opacity: 1;
+        }
+
+        html.light-theme .sa-team-avatar {
+          box-shadow: 0 20px 50px rgba(37, 99, 235, 0.3), inset 0 0 30px rgba(255, 255, 255, 0.2);
+        }
+
+        html.light-theme .sa-team-card:hover .sa-team-avatar {
+          box-shadow: 0 30px 70px rgba(37, 99, 235, 0.3), inset 0 0 30px rgba(255, 255, 255, 0.25), 0 0 50px rgba(37, 99, 235, 0.2);
         }
 
         .sa-team-name {
-          font-size: 22px;
-          font-weight: 800;
+          font-size: 24px;
+          font-weight: 900;
           color: #F1F5F9;
-          margin-bottom: 8px;
+          margin: 0 0 12px 0;
           letter-spacing: -0.5px;
           position: relative;
           z-index: 2;
+          transition: all 0.3s ease;
+        }
+
+        html.light-theme .sa-team-name {
+          color: #0A0F2C;
+        }
+
+        .sa-team-card:hover .sa-team-name {
+          color: #3B82F6;
+        }
+
+        html.light-theme .sa-team-card:hover .sa-team-name {
+          color: #2563EB;
         }
 
         .sa-team-role {
-          font-size: 15px;
+          font-size: 13px;
           color: #3B82F6;
-          margin-bottom: 16px;
-          font-weight: 700;
+          margin: 0 0 4px 0;
+          font-weight: 800;
           text-transform: uppercase;
-          letter-spacing: 0.5px;
+          letter-spacing: 1.2px;
           position: relative;
           z-index: 2;
-          transition: color 0.3s ease;
+          transition: all 0.3s ease;
         }
 
         html.light-theme .sa-team-role {
           color: #2563EB;
         }
 
+        .sa-team-card:hover .sa-team-role {
+          color: #7C3AED;
+        }
+
+        html.light-theme .sa-team-card:hover .sa-team-role {
+          color: #7C3AED;
+        }
+
         .sa-team-bio {
-          font-size: 14px;
+          font-size: 15px;
           color: #94A3B8;
           line-height: 1.8;
           font-weight: 500;
           position: relative;
           z-index: 2;
-          transition: color 0.3s ease;
+          transition: all 0.3s ease;
+          margin-bottom: 20px;
         }
 
         html.light-theme .sa-team-bio {
           color: #3D4D6A;
+        }
+
+        .sa-team-socials {
+          display: flex;
+          gap: 12px;
+          justify-content: center;
+          position: relative;
+          z-index: 2;
+          opacity: 0;
+          transform: translateY(10px);
+          transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+          margin-top: 20px;
+        }
+
+        .sa-team-card:hover .sa-team-socials {
+          opacity: 1;
+          transform: translateY(0);
+        }
+
+        .sa-team-social-btn {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(124, 58, 237, 0.2));
+          border: 1px solid rgba(99, 102, 241, 0.3);
+          color: #3B82F6;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: all 0.3s ease;
+          font-size: 14px;
+        }
+
+        .sa-team-social-btn:hover {
+          transform: scale(1.15);
+          background: linear-gradient(135deg, rgba(59, 130, 246, 0.4), rgba(124, 58, 237, 0.4));
+          box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
+          color: #7C3AED;
+        }
+
+        html.light-theme .sa-team-social-btn {
+          background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(124, 58, 237, 0.1));
+          color: #2563EB;
+        }
+
+        html.light-theme .sa-team-social-btn:hover {
+          background: linear-gradient(135deg, rgba(37, 99, 235, 0.2), rgba(124, 58, 237, 0.2));
+          color: #7C3AED;
         }
 
         .sa-animate .sa-team-card {
@@ -1437,6 +1574,11 @@ export default function PageHome({ go }) {
             <div className="sa-team-name">Dr. Haddad Nabil</div>
             <div className="sa-team-role">Directeur Technique</div>
             <div className="sa-team-bio">Expert en architecture cloud et sécurité informatique avec 20+ ans d&apos;expérience dans l&apos;innovation documentaire.</div>
+            <div className="sa-team-socials">
+              <button className="sa-team-social-btn" title="LinkedIn"><i className="fab fa-linkedin"></i></button>
+              <button className="sa-team-social-btn" title="Twitter"><i className="fab fa-twitter"></i></button>
+              <button className="sa-team-social-btn" title="Email"><i className="fas fa-envelope"></i></button>
+            </div>
           </div>
 
           <div className="sa-team-card">
@@ -1444,6 +1586,11 @@ export default function PageHome({ go }) {
             <div className="sa-team-name">Mme Kaci Lynda</div>
             <div className="sa-team-role">Responsable Formation</div>
             <div className="sa-team-bio">Pédagogue expérimentée certifiée, elle conçoit des formations pratiques et adaptées aux besoins des entreprises.</div>
+            <div className="sa-team-socials">
+              <button className="sa-team-social-btn" title="LinkedIn"><i className="fab fa-linkedin"></i></button>
+              <button className="sa-team-social-btn" title="Twitter"><i className="fab fa-twitter"></i></button>
+              <button className="sa-team-social-btn" title="Email"><i className="fas fa-envelope"></i></button>
+            </div>
           </div>
 
           <div className="sa-team-card">
@@ -1451,6 +1598,11 @@ export default function PageHome({ go }) {
             <div className="sa-team-name">M. Meziane Adel</div>
             <div className="sa-team-role">Cybersécurité</div>
             <div className="sa-team-bio">Spécialiste en cybersécurité ISO 27001 et ethical hacking, garant de la protection de vos données sensibles.</div>
+            <div className="sa-team-socials">
+              <button className="sa-team-social-btn" title="LinkedIn"><i className="fab fa-linkedin"></i></button>
+              <button className="sa-team-social-btn" title="Twitter"><i className="fab fa-twitter"></i></button>
+              <button className="sa-team-social-btn" title="Email"><i className="fas fa-envelope"></i></button>
+            </div>
           </div>
 
           <div className="sa-team-card">
@@ -1458,6 +1610,11 @@ export default function PageHome({ go }) {
             <div className="sa-team-name">M. Benmoussa Yacine</div>
             <div className="sa-team-role">Développeur Full Stack</div>
             <div className="sa-team-bio">Développeur passionné spécialisé en React et Node.js, créateur de solutions web performantes et scalables.</div>
+            <div className="sa-team-socials">
+              <button className="sa-team-social-btn" title="LinkedIn"><i className="fab fa-linkedin"></i></button>
+              <button className="sa-team-social-btn" title="Twitter"><i className="fab fa-twitter"></i></button>
+              <button className="sa-team-social-btn" title="Email"><i className="fas fa-envelope"></i></button>
+            </div>
           </div>
         </div>
       </section>
