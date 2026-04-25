@@ -1,12 +1,40 @@
 import { useReveal } from "./pageHooks";
 import { PARTNERS } from "./pageData";
+import { useEffect } from "react";
 
 export default function PageHome({ go }) {
   useReveal();
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => entries.forEach(e => {
+        if (e.isIntersecting) e.target.classList.add('sa-visible');
+      }),
+      { threshold: 0.15 }
+    );
+    document.querySelectorAll('.sa-animate').forEach(el => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <>
       <style>{`
+        /* =============== LIGHT MODE COLOR SYSTEM =============== */
+        :root {
+          --sa-bg-primary: #F0F4FF;
+          --sa-bg-secondary: #F8FAFF;
+          --sa-bg-white: #FFFFFF;
+          --sa-text-primary: #1E293B;
+          --sa-text-secondary: #64748B;
+          --sa-accent-blue: #3B82F6;
+          --sa-accent-indigo: #6366F1;
+          --sa-accent-violet: #7C3AED;
+          --sa-accent-cyan: #0EA5E9;
+          --sa-border-light: #E2E8F0;
+          --sa-indigo-light: #C7D2FE;
+          --sa-indigo-medium: #818CF8;
+        }
+
         /* =============== AURORA BLOBS & ENHANCEMENTS =============== */
         @keyframes floatY {
           0%, 100% { transform: translateY(0px); }
@@ -41,7 +69,7 @@ export default function PageHome({ go }) {
         .sa-aurora-blob.blob1 {
           width: 400px;
           height: 400px;
-          background: radial-gradient(circle, rgba(59,130,246,0.5) 0%, transparent 70%);
+          background: radial-gradient(circle, rgba(99,102,241,0.25) 0%, transparent 70%);
           top: -100px;
           left: 100px;
           animation-delay: 0s;
@@ -50,7 +78,7 @@ export default function PageHome({ go }) {
         .sa-aurora-blob.blob2 {
           width: 400px;
           height: 400px;
-          background: radial-gradient(circle, rgba(139,92,246,0.4) 0%, transparent 70%);
+          background: radial-gradient(circle, rgba(124,58,237,0.2) 0%, transparent 70%);
           bottom: 100px;
           right: 50px;
           animation-delay: 2s;
@@ -58,20 +86,21 @@ export default function PageHome({ go }) {
 
         /* Enhance cubes with glow & size */
         .sa-neo-cube {
-          box-shadow: 0 0 30px rgba(59,130,246,0.6), inset 0 0 20px rgba(139,92,246,0.4);
+          box-shadow: 0 8px 32px rgba(99,102,241,0.2);
           animation: floatY 4s ease-in-out infinite;
           width: 80px !important;
           height: 80px !important;
+          background: linear-gradient(135deg, #FFFFFF 0%, #C7D2FE 50%, #818CF8 100%) !important;
         }
 
-        .sa-neo-cube.c1 { animation-delay: 0s; box-shadow: 0 0 40px rgba(59,130,246,0.8), inset 0 0 20px rgba(59,130,246,0.5); }
-        .sa-neo-cube.c2 { animation-delay: 0.2s; box-shadow: 0 0 35px rgba(139,92,246,0.7), inset 0 0 20px rgba(139,92,246,0.4); }
-        .sa-neo-cube.c3 { animation-delay: 0.4s; box-shadow: 0 0 30px rgba(6,182,212,0.6), inset 0 0 20px rgba(6,182,212,0.3); }
-        .sa-neo-cube.c4 { animation-delay: 0.6s; box-shadow: 0 0 35px rgba(59,130,246,0.7), inset 0 0 20px rgba(59,130,246,0.4); }
-        .sa-neo-cube.c5 { animation-delay: 0.8s; box-shadow: 0 0 40px rgba(139,92,246,0.8), inset 0 0 20px rgba(139,92,246,0.5); }
-        .sa-neo-cube.c6 { animation-delay: 1s; box-shadow: 0 0 30px rgba(6,182,212,0.6), inset 0 0 20px rgba(6,182,212,0.3); }
-        .sa-neo-cube.c7 { animation-delay: 1.2s; box-shadow: 0 0 35px rgba(59,130,246,0.7), inset 0 0 20px rgba(59,130,246,0.4); }
-        .sa-neo-cube.c8 { animation-delay: 1.4s; box-shadow: 0 0 40px rgba(139,92,246,0.8), inset 0 0 20px rgba(139,92,246,0.5); }
+        .sa-neo-cube.c1 { animation-delay: 0s; }
+        .sa-neo-cube.c2 { animation-delay: 0.2s; }
+        .sa-neo-cube.c3 { animation-delay: 0.4s; }
+        .sa-neo-cube.c4 { animation-delay: 0.6s; }
+        .sa-neo-cube.c5 { animation-delay: 0.8s; }
+        .sa-neo-cube.c6 { animation-delay: 1s; }
+        .sa-neo-cube.c7 { animation-delay: 1.2s; }
+        .sa-neo-cube.c8 { animation-delay: 1.4s; }
 
         /* Cube cloud sway */
         .sa-cube-cloud {
@@ -83,33 +112,88 @@ export default function PageHome({ go }) {
           position: absolute;
           width: 6px;
           height: 6px;
-          background: radial-gradient(circle, #3B82F6, #8B5CF6);
+          background: radial-gradient(circle, #6366F1, #7C3AED);
           border-radius: 50%;
-          box-shadow: 0 0 12px rgba(59,130,246,0.8);
+          box-shadow: 0 0 12px rgba(99,102,241,0.6);
           left: 50%;
           top: 50%;
           margin: -3px 0 0 -3px;
           animation: orbitParticle 6s linear infinite;
         }
 
-        .sa-orbit-particle:nth-child(1) { animation-delay: 0s; }
-        .sa-orbit-particle:nth-child(2) { animation-delay: -1.5s; }
-        .sa-orbit-particle:nth-child(3) { animation-delay: -3s; }
-        .sa-orbit-particle:nth-child(4) { animation-delay: -4.5s; }
+        /* =============== HERO LAYOUT FIX =============== */
+        .sa-hero {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          min-height: 100vh;
+          padding: 0 6%;
+          gap: 4rem;
+          background: linear-gradient(135deg, #EEF2FF 0%, #F5F3FF 50%, #EFF6FF 100%);
+          position: relative;
+          overflow: hidden;
+        }
+
+        .sa-hero-inner {
+          flex: 1;
+          max-width: 50%;
+          text-align: left;
+          z-index: 2;
+        }
+
+        .sa-hero-visual {
+          flex: 1;
+          max-width: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          min-height: 500px;
+          position: relative;
+          z-index: 1;
+        }
 
         /* =============== TIMELINE SECTION =============== */
         @keyframes slideInLeft {
-          from { opacity: 0; transform: translateX(-50px); }
+          from { opacity: 0; transform: translateX(-40px); }
           to { opacity: 1; transform: translateX(0); }
         }
 
         @keyframes slideInRight {
-          from { opacity: 0; transform: translateX(50px); }
+          from { opacity: 0; transform: translateX(40px); }
           to { opacity: 1; transform: translateX(0); }
         }
 
+        .sa-animate {
+          opacity: 0;
+          transform: translateX(-40px);
+          transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .sa-animate.sa-visible {
+          opacity: 1;
+          transform: translateX(0);
+        }
+
+        .sa-animate.from-right {
+          transform: translateX(40px);
+        }
+
+        .sa-animate.from-right.sa-visible {
+          transform: translateX(0);
+        }
+
+        .sa-timeline-line {
+          transform: scaleY(0);
+          transform-origin: top;
+          transition: transform 1s ease;
+        }
+
+        .sa-visible .sa-timeline-line {
+          transform: scaleY(1);
+        }
+
         .sa-section-histoire {
-          background: linear-gradient(135deg, #020817 0%, #0f172a 100%);
+          background: #FFFFFF;
           padding: 80px 40px;
           position: relative;
           overflow: hidden;
@@ -136,20 +220,14 @@ export default function PageHome({ go }) {
           top: 0;
           bottom: 0;
           width: 2px;
-          background: linear-gradient(180deg, #3B82F6 0%, #8B5CF6 50%, #06B6D4 100%);
-          box-shadow: 0 0 20px rgba(59,130,246,0.6);
+          background: linear-gradient(180deg, #6366F1 0%, #7C3AED 50%, #0EA5E9 100%);
+          box-shadow: 0 0 20px rgba(99,102,241,0.3);
         }
 
         .sa-timeline-item {
           position: relative;
           margin-bottom: 50px;
-          animation: slideInLeft 0.8s ease-out;
         }
-
-        .sa-timeline-item:nth-child(1) { animation-delay: 0.1s; }
-        .sa-timeline-item:nth-child(2) { animation-delay: 0.2s; }
-        .sa-timeline-item:nth-child(3) { animation-delay: 0.3s; }
-        .sa-timeline-item:nth-child(4) { animation-delay: 0.4s; }
 
         .sa-timeline-dot {
           position: absolute;
@@ -157,64 +235,53 @@ export default function PageHome({ go }) {
           top: 0;
           width: 24px;
           height: 24px;
-          background: #020817;
-          border: 3px solid #3B82F6;
+          background: #FFFFFF;
+          border: 3px solid #6366F1;
           border-radius: 50%;
-          box-shadow: 0 0 20px rgba(59,130,246,0.8);
+          box-shadow: 0 0 20px rgba(99,102,241,0.4);
           transition: all 0.3s ease;
         }
 
         .sa-timeline-item:hover .sa-timeline-dot {
           transform: scale(1.4);
-          box-shadow: 0 0 30px rgba(59,130,246,1);
-          border-color: #8B5CF6;
+          box-shadow: 0 0 30px rgba(99,102,241,0.8);
+          border-color: #7C3AED;
         }
 
         .sa-timeline-year {
           font-size: 24px;
           font-weight: 700;
-          color: #3B82F6;
+          color: #6366F1;
           margin-bottom: 8px;
         }
 
         .sa-timeline-text {
-          color: #cbd5e1;
+          color: #64748B;
           font-size: 14px;
           line-height: 1.6;
         }
 
-        .sa-stats-grid {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 30px;
-        }
-
         .sa-stat-card {
-          background: rgba(59,130,246,0.05);
-          border: 1px solid rgba(59,130,246,0.2);
+          background: #F8FAFF;
+          border: 1px solid #E2E8F0;
           border-radius: 12px;
           padding: 30px;
           backdrop-filter: blur(10px);
-          animation: slideInRight 0.8s ease-out;
           transition: all 0.3s ease;
+          box-shadow: 0 4px 24px rgba(99,102,241,0.08);
         }
 
-        .sa-stat-card:nth-child(1) { animation-delay: 0.1s; }
-        .sa-stat-card:nth-child(2) { animation-delay: 0.2s; }
-        .sa-stat-card:nth-child(3) { animation-delay: 0.3s; }
-        .sa-stat-card:nth-child(4) { animation-delay: 0.4s; }
-
         .sa-stat-card:hover {
-          background: rgba(59,130,246,0.1);
-          border-color: rgba(139,92,246,0.4);
+          background: #FFFFFF;
+          border-color: #C7D2FE;
           transform: translateY(-8px);
-          box-shadow: 0 20px 40px rgba(59,130,246,0.1);
+          box-shadow: 0 20px 40px rgba(99,102,241,0.15);
         }
 
         .sa-stat-value {
           font-size: 32px;
           font-weight: 700;
-          background: linear-gradient(135deg, #3B82F6, #8B5CF6, #06B6D4);
+          background: linear-gradient(135deg, #6366F1, #7C3AED, #0EA5E9);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
@@ -223,12 +290,12 @@ export default function PageHome({ go }) {
 
         .sa-stat-label {
           font-size: 14px;
-          color: #94a3b8;
+          color: #64748B;
         }
 
         /* =============== SERVICES SECTION =============== */
         .sa-section-services {
-          background: #020817;
+          background: #F8FAFF;
           padding: 80px 40px;
           position: relative;
           overflow: hidden;
@@ -237,82 +304,52 @@ export default function PageHome({ go }) {
         .sa-services-header {
           text-align: center;
           margin-bottom: 60px;
-          animation: slideInLeft 0.8s ease-out;
         }
 
         .sa-services-header h2 {
           font-size: 42px;
           font-weight: 700;
-          color: white;
+          color: #1E293B;
           margin: 0 0 16px 0;
-          background: linear-gradient(135deg, #3B82F6, #8B5CF6);
+        }
+
+        .sa-services-header h2 em {
+          background: linear-gradient(135deg, #6366F1, #7C3AED);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
+          font-style: normal;
         }
 
         .sa-services-header p {
-          color: #94a3b8;
+          color: #64748B;
           font-size: 16px;
           max-width: 600px;
           margin: 0 auto;
         }
 
-        .sa-services-grid {
-          max-width: 1200px;
-          margin: 0 auto;
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-          gap: 30px;
-        }
-
         .sa-service-card {
-          background: linear-gradient(135deg, rgba(59,130,246,0.05) 0%, rgba(139,92,246,0.05) 100%);
-          border: 1px solid rgba(59,130,246,0.2);
+          background: #FFFFFF;
+          border: 1px solid #E2E8F0;
           border-radius: 16px;
           padding: 40px;
-          backdrop-filter: blur(10px);
           cursor: pointer;
-          animation: slideInLeft 0.8s ease-out;
           transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
           position: relative;
           overflow: hidden;
-        }
-
-        .sa-service-card:nth-child(1) { animation-delay: 0.1s; }
-        .sa-service-card:nth-child(2) { animation-delay: 0.2s; }
-        .sa-service-card:nth-child(3) { animation-delay: 0.3s; }
-        .sa-service-card:nth-child(4) { animation-delay: 0.4s; }
-        .sa-service-card:nth-child(5) { animation-delay: 0.5s; }
-        .sa-service-card:nth-child(6) { animation-delay: 0.6s; }
-
-        .sa-service-card::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background: linear-gradient(135deg, rgba(59,130,246,0.2) 0%, transparent 100%);
-          opacity: 0;
-          transition: opacity 0.3s ease;
-          pointer-events: none;
+          box-shadow: 0 4px 24px rgba(99,102,241,0.08);
         }
 
         .sa-service-card:hover {
           transform: translateY(-12px);
-          border-color: rgba(139,92,246,0.5);
-          box-shadow: 0 30px 60px rgba(59,130,246,0.15), inset 0 0 40px rgba(59,130,246,0.05);
-        }
-
-        .sa-service-card:hover::before {
-          opacity: 1;
+          border-color: #C7D2FE;
+          box-shadow: 0 30px 60px rgba(99,102,241,0.15);
         }
 
         .sa-service-icon {
           width: 60px;
           height: 60px;
-          background: linear-gradient(135deg, #3B82F6, #8B5CF6);
+          background: linear-gradient(135deg, #6366F1, #7C3AED);
           border-radius: 12px;
           display: flex;
           align-items: center;
@@ -320,31 +357,31 @@ export default function PageHome({ go }) {
           font-size: 28px;
           color: white;
           margin-bottom: 24px;
-          box-shadow: 0 10px 30px rgba(59,130,246,0.3);
+          box-shadow: 0 10px 30px rgba(99,102,241,0.2);
           transition: all 0.3s ease;
         }
 
         .sa-service-card:hover .sa-service-icon {
           transform: scale(1.1) rotate(5deg);
-          box-shadow: 0 15px 40px rgba(139,92,246,0.4);
+          box-shadow: 0 15px 40px rgba(99,102,241,0.3);
         }
 
         .sa-service-title {
           font-size: 20px;
           font-weight: 700;
-          color: white;
+          color: #1E293B;
           margin-bottom: 12px;
         }
 
         .sa-service-desc {
           font-size: 14px;
-          color: #cbd5e1;
+          color: #64748B;
           line-height: 1.6;
         }
 
         /* =============== TEAM SECTION =============== */
         .sa-section-team {
-          background: linear-gradient(135deg, #0f172a 0%, #020817 100%);
+          background: #FFFFFF;
           padding: 80px 40px;
           position: relative;
           overflow: hidden;
@@ -353,61 +390,50 @@ export default function PageHome({ go }) {
         .sa-team-header {
           text-align: center;
           margin-bottom: 60px;
-          animation: slideInRight 0.8s ease-out;
         }
 
         .sa-team-header h2 {
           font-size: 42px;
           font-weight: 700;
-          color: white;
+          color: #1E293B;
           margin: 0 0 16px 0;
-          background: linear-gradient(135deg, #06B6D4, #3B82F6);
+        }
+
+        .sa-team-header h2 em {
+          background: linear-gradient(135deg, #0EA5E9, #6366F1);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
+          font-style: normal;
         }
 
         .sa-team-header p {
-          color: #94a3b8;
+          color: #64748B;
           font-size: 16px;
         }
 
-        .sa-team-grid {
-          max-width: 1200px;
-          margin: 0 auto;
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-          gap: 40px;
-        }
-
         .sa-team-card {
-          background: linear-gradient(135deg, rgba(139,92,246,0.08) 0%, rgba(6,182,212,0.05) 100%);
-          border: 1px solid rgba(139,92,246,0.3);
+          background: #F8FAFF;
+          border: 1px solid #E2E8F0;
           border-radius: 20px;
           padding: 40px;
-          backdrop-filter: blur(10px);
           text-align: center;
-          animation: slideInRight 0.8s ease-out;
           transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
           position: relative;
+          box-shadow: 0 4px 24px rgba(99,102,241,0.08);
         }
-
-        .sa-team-card:nth-child(1) { animation-delay: 0.1s; }
-        .sa-team-card:nth-child(2) { animation-delay: 0.2s; }
-        .sa-team-card:nth-child(3) { animation-delay: 0.3s; }
-        .sa-team-card:nth-child(4) { animation-delay: 0.4s; }
 
         .sa-team-card:hover {
           transform: translateY(-16px);
-          border-color: rgba(59,130,246,0.6);
-          box-shadow: 0 40px 80px rgba(59,130,246,0.2), inset 0 0 40px rgba(139,92,246,0.1);
+          border-color: #C7D2FE;
+          box-shadow: 0 40px 80px rgba(99,102,241,0.15);
         }
 
         .sa-team-avatar {
           width: 100px;
           height: 100px;
           border-radius: 50%;
-          background: linear-gradient(135deg, #3B82F6, #8B5CF6, #06B6D4);
+          background: linear-gradient(135deg, #6366F1, #7C3AED, #0EA5E9);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -415,37 +441,54 @@ export default function PageHome({ go }) {
           font-weight: 700;
           color: white;
           margin: 0 auto 20px;
-          box-shadow: 0 15px 40px rgba(59,130,246,0.3);
+          box-shadow: 0 15px 40px rgba(99,102,241,0.2);
           transition: all 0.3s ease;
         }
 
         .sa-team-card:hover .sa-team-avatar {
           transform: scale(1.15);
-          box-shadow: 0 20px 60px rgba(139,92,246,0.5);
+          box-shadow: 0 20px 60px rgba(99,102,241,0.3);
         }
 
         .sa-team-name {
           font-size: 20px;
           font-weight: 700;
-          color: white;
+          color: #1E293B;
           margin-bottom: 6px;
         }
 
         .sa-team-role {
           font-size: 14px;
-          color: #06B6D4;
+          color: #0EA5E9;
           margin-bottom: 12px;
           font-weight: 600;
         }
 
         .sa-team-bio {
           font-size: 13px;
-          color: #cbd5e1;
+          color: #64748B;
           line-height: 1.6;
         }
 
         /* Responsive */
         @media (max-width: 768px) {
+          .sa-hero {
+            flex-direction: column;
+            padding: 60px 20px;
+            min-height: auto;
+            gap: 2rem;
+          }
+
+          .sa-hero-inner {
+            max-width: 100%;
+            text-align: center;
+          }
+
+          .sa-hero-visual {
+            max-width: 100%;
+            min-height: 400px;
+          }
+
           .sa-histoire-container {
             grid-template-columns: 1fr;
             gap: 40px;
@@ -551,25 +594,26 @@ export default function PageHome({ go }) {
       </div>
 
       {/* SECTION 1: HISTOIRE (TIMELINE) */}
-      <section className="sa-section-histoire">
+      <section className="sa-section-histoire sa-animate">
         <div className="sa-histoire-container">
-          <div className="sa-timeline">
-            <div className="sa-timeline-item">
+          <div className="sa-timeline sa-animate">
+            <div className="sa-timeline-line"></div>
+            <div className="sa-timeline-item sa-animate">
               <div className="sa-timeline-dot"></div>
               <div className="sa-timeline-year">2010</div>
               <div className="sa-timeline-text">Fondation de Smart Archives avec une vision claire de la transformation documentaire</div>
             </div>
-            <div className="sa-timeline-item">
+            <div className="sa-timeline-item sa-animate">
               <div className="sa-timeline-dot"></div>
               <div className="sa-timeline-year">2015</div>
               <div className="sa-timeline-text">Lancement de nos services cloud et expansion à travers le continent africain</div>
             </div>
-            <div className="sa-timeline-item">
+            <div className="sa-timeline-item sa-animate">
               <div className="sa-timeline-dot"></div>
               <div className="sa-timeline-year">2020</div>
               <div className="sa-timeline-text">Certification ISO 27001 et adoption massive par les institutions publiques</div>
             </div>
-            <div className="sa-timeline-item">
+            <div className="sa-timeline-item sa-animate">
               <div className="sa-timeline-dot"></div>
               <div className="sa-timeline-year">2024</div>
               <div className="sa-timeline-text">Leader incontournable de l&apos;archivage numérique en Algérie avec 500+ clients</div>
@@ -577,19 +621,19 @@ export default function PageHome({ go }) {
           </div>
 
           <div className="sa-stats-grid">
-            <div className="sa-stat-card">
+            <div className="sa-stat-card sa-animate from-right">
               <div className="sa-stat-value">500+</div>
               <div className="sa-stat-label">Clients satisfaits</div>
             </div>
-            <div className="sa-stat-card">
+            <div className="sa-stat-card sa-animate from-right">
               <div className="sa-stat-value">1M+</div>
               <div className="sa-stat-label">Documents archivés</div>
             </div>
-            <div className="sa-stat-card">
+            <div className="sa-stat-card sa-animate from-right">
               <div className="sa-stat-value">15+</div>
               <div className="sa-stat-label">Années d&apos;expérience</div>
             </div>
-            <div className="sa-stat-card">
+            <div className="sa-stat-card sa-animate from-right">
               <div className="sa-stat-value">99.9%</div>
               <div className="sa-stat-label">Disponibilité garantie</div>
             </div>
