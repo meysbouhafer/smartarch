@@ -3757,7 +3757,10 @@ function Chatbot({ dark }) {
    ROOT APP
 ═══════════════════════════════════════════ */
 export default function SmartArchives() {
-  const [dark, setDark] = useState(false);
+  const [dark, setDark] = useState(() => {
+    const saved = localStorage.getItem('sa-theme-dark');
+    return saved !== null ? JSON.parse(saved) : false;
+  });
   const [page, setPage] = useState('home');
   const [flash, setFlash] = useState('');
   const [mnavOpen, setMnavOpen] = useState(false);
@@ -3809,10 +3812,26 @@ export default function SmartArchives() {
       link.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css';
       document.head.appendChild(link);
     }
+
+    // Initialize theme class on page load
+    if (!dark) {
+      document.documentElement.classList.add('light-theme');
+    }
   }, []);
 
   // scroll to top on page change
   useEffect(() => { window.scrollTo({top:0,behavior:'smooth'}); }, [page]);
+
+  // save theme preference to localStorage
+  useEffect(() => {
+    localStorage.setItem('sa-theme-dark', JSON.stringify(dark));
+    // Apply theme class to html element for HomePage
+    if (dark) {
+      document.documentElement.classList.remove('light-theme');
+    } else {
+      document.documentElement.classList.add('light-theme');
+    }
+  }, [dark]);
 
   useEffect(() => {
     const unsubscribe = watchAuthState((user) => {

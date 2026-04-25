@@ -37,6 +37,23 @@ export default function PageHome({ go }) {
           --sa-glow-violet: rgba(124, 58, 237, 0.15);
         }
 
+        html.light-theme {
+          --sa-bg-primary: #F7FAFF;
+          --sa-bg-secondary: #FFFFFF;
+          --sa-bg-card: #F8FAFF;
+          --sa-bg-card-hover: #FFFFFF;
+          --sa-border: rgba(99, 102, 241, 0.2);
+          --sa-border-hover: rgba(99, 102, 241, 0.5);
+          --sa-text-primary: #0A0F2C;
+          --sa-text-secondary: #3D4D6A;
+          --sa-text-muted: #8494B2;
+          --sa-accent-blue: #2563EB;
+          --sa-accent-violet: #7C3AED;
+          --sa-accent-cyan: #0EA5E9;
+          --sa-glow-blue: rgba(37, 99, 235, 0.15);
+          --sa-glow-violet: rgba(124, 58, 237, 0.12);
+        }
+
         /* =============== AURORA BLOBS & ENHANCEMENTS =============== */
         @keyframes floatY {
           0%, 100% { transform: translateY(0px); }
@@ -151,6 +168,12 @@ export default function PageHome({ go }) {
           position: relative;
           overflow: hidden;
           border-bottom: 1px solid rgba(99, 102, 241, 0.08);
+          transition: background 0.5s ease;
+        }
+
+        html.light-theme .sa-hero {
+          background: linear-gradient(135deg, #ffffff 0%, #f8faff 50%, #eef3ff 100%);
+          border-bottom: 1px solid rgba(99, 102, 241, 0.12);
         }
 
         .sa-hero::before {
@@ -292,6 +315,12 @@ export default function PageHome({ go }) {
           position: relative;
           overflow: hidden;
           border-bottom: 1px solid rgba(99, 102, 241, 0.08);
+          transition: background 0.5s ease;
+        }
+
+        html.light-theme .sa-section-histoire {
+          background: #F7FAFF;
+          border-bottom: 1px solid rgba(99, 102, 241, 0.12);
         }
 
         .sa-section-histoire::before {
@@ -420,6 +449,11 @@ export default function PageHome({ go }) {
           color: #3B82F6;
           margin-bottom: 12px;
           letter-spacing: -0.5px;
+          transition: color 0.3s ease;
+        }
+
+        html.light-theme .sa-timeline-year {
+          color: #2563EB;
         }
 
         .sa-timeline-text {
@@ -427,6 +461,11 @@ export default function PageHome({ go }) {
           font-size: 15px;
           line-height: 1.7;
           font-weight: 500;
+          transition: color 0.3s ease;
+        }
+
+        html.light-theme .sa-timeline-text {
+          color: #3D4D6A;
         }
 
         .sa-stats-grid {
@@ -615,6 +654,12 @@ export default function PageHome({ go }) {
           position: relative;
           overflow: hidden;
           border-bottom: 1px solid rgba(99, 102, 241, 0.08);
+          transition: background 0.5s ease;
+        }
+
+        html.light-theme .sa-section-services {
+          background: #FFFFFF;
+          border-bottom: 1px solid rgba(99, 102, 241, 0.12);
         }
 
         .sa-section-services::before {
@@ -666,6 +711,11 @@ export default function PageHome({ go }) {
           color: #F1F5F9;
           margin: 0 0 16px 0;
           letter-spacing: -1px;
+          transition: color 0.3s ease;
+        }
+
+        html.light-theme .sa-services-header h2 {
+          color: #0A0F2C;
         }
 
         .sa-services-header p {
@@ -674,6 +724,11 @@ export default function PageHome({ go }) {
           max-width: 700px;
           margin: 0 auto;
           font-weight: 500;
+          transition: color 0.3s ease;
+        }
+
+        html.light-theme .sa-services-header p {
+          color: #3D4D6A;
         }
 
         .sa-services-grid {
@@ -700,6 +755,12 @@ export default function PageHome({ go }) {
           -webkit-backdrop-filter: blur(16px);
           opacity: 0;
           transform: translateY(40px);
+        }
+
+        html.light-theme .sa-service-card {
+          background: linear-gradient(135deg, rgba(248, 250, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%);
+          border-color: rgba(99, 102, 241, 0.2);
+          box-shadow: 0 8px 32px rgba(37, 99, 235, 0.1), inset 0 0 1px rgba(37, 99, 235, 0.1);
         }
 
         .sa-animate .sa-service-card {
@@ -766,6 +827,11 @@ export default function PageHome({ go }) {
           letter-spacing: -0.5px;
           position: relative;
           z-index: 1;
+          transition: color 0.3s ease;
+        }
+
+        html.light-theme .sa-service-title {
+          color: #0A0F2C;
         }
 
         .sa-service-desc {
@@ -775,6 +841,11 @@ export default function PageHome({ go }) {
           font-weight: 500;
           position: relative;
           z-index: 1;
+          transition: color 0.3s ease;
+        }
+
+        html.light-theme .sa-service-desc {
+          color: #3D4D6A;
         }
 
         .sa-animate .sa-service-card {
@@ -876,6 +947,12 @@ export default function PageHome({ go }) {
           position: relative;
           overflow: hidden;
           border-bottom: 1px solid rgba(99, 102, 241, 0.08);
+          transition: background 0.5s ease;
+        }
+
+        html.light-theme .sa-section-team {
+          background: #F7FAFF;
+          border-bottom: 1px solid rgba(99, 102, 241, 0.12);
         }
 
         .sa-section-team::before {
@@ -948,6 +1025,12 @@ export default function PageHome({ go }) {
           -webkit-backdrop-filter: blur(16px);
           opacity: 0;
           transform: translateY(40px);
+        }
+
+        html.light-theme .sa-team-card {
+          background: linear-gradient(135deg, rgba(248, 250, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%);
+          border-color: rgba(99, 102, 241, 0.2);
+          box-shadow: 0 8px 32px rgba(37, 99, 235, 0.1), inset 0 0 1px rgba(37, 99, 235, 0.1);
         }
 
         .sa-animate .sa-team-card {
@@ -1028,6 +1111,11 @@ export default function PageHome({ go }) {
           letter-spacing: 0.5px;
           position: relative;
           z-index: 2;
+          transition: color 0.3s ease;
+        }
+
+        html.light-theme .sa-team-role {
+          color: #2563EB;
         }
 
         .sa-team-bio {
@@ -1037,6 +1125,11 @@ export default function PageHome({ go }) {
           font-weight: 500;
           position: relative;
           z-index: 2;
+          transition: color 0.3s ease;
+        }
+
+        html.light-theme .sa-team-bio {
+          color: #3D4D6A;
         }
 
         .sa-animate .sa-team-card {
