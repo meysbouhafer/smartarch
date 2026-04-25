@@ -1992,15 +1992,6 @@ export default function PageHome({ go }) {
             </div>
           </div>
         </div>
-            Debloquez le plein potentiel de votre gestion documentaire avec une
-            plateforme unifiee: classement, OCR, recherche instantanee et suivi
-            intelligent.
-          </p>
-          <div className="sa-hero-leadform">
-            <input type="email" placeholder="Votre email professionnel" />
-            <button onClick={() => go("contact")}>Rejoindre la liste</button>
-          </div>
-        </div>
 
         <div className="sa-hero-visual">
           <div className="sa-neo-visual-badge"><i className="fas fa-wave-square"></i> Analyse temps reel</div>
