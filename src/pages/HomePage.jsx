@@ -1,8 +1,24 @@
 import { useReveal } from "./pageHooks";
 import { PARTNERS } from "./pageData";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function PageHome({ go }) {
+  const [openChatbot, setOpenChatbot] = useState(false);
+  const [chatMessages, setChatMessages] = useState([
+    { type: 'bot', text: 'Bonjour 👋 Je suis Smart Archives AI. Comment puis-je vous aider aujourd\'hui ?' }
+  ]);
+  const [chatInput, setChatInput] = useState('');
+
+  const handleChatSend = () => {
+    if (!chatInput.trim()) return;
+    setChatMessages([
+      ...chatMessages,
+      { type: 'user', text: chatInput },
+      { type: 'bot', text: 'Merci pour votre question. Notre équipe vous répondra bientôt.' }
+    ]);
+    setChatInput('');
+  };
+
   useReveal();
 
   useEffect(() => {
@@ -463,6 +479,36 @@ export default function PageHome({ go }) {
         html.light-theme .sa-section-histoire {
           background: #F7FAFF;
           border-bottom: 1px solid rgba(99, 102, 241, 0.12);
+        }
+
+        .sa-histoire-title {
+          text-align: center;
+          max-width: 600px;
+          margin: 0 auto 60px;
+        }
+
+        .sa-histoire-title h2 {
+          font-size: 44px;
+          font-weight: 900;
+          color: #F1F5F9;
+          margin: 0 0 16px 0;
+          letter-spacing: -1px;
+          transition: color 0.3s ease;
+        }
+
+        html.light-theme .sa-histoire-title h2 {
+          color: #0A0F2C;
+        }
+
+        .sa-histoire-title p {
+          font-size: 17px;
+          color: #94A3B8;
+          margin: 0;
+          transition: color 0.3s ease;
+        }
+
+        html.light-theme .sa-histoire-title p {
+          color: #3D4D6A;
         }
 
         /* =============== CHATBOT GLASSMORPHIC SECTION =============== */
@@ -1809,6 +1855,234 @@ export default function PageHome({ go }) {
           color: #7C3AED;
         }
 
+        /* =============== FLOATING CHATBOT BUTTON =============== */
+        .sa-chatbot-float-btn {
+          position: fixed;
+          bottom: 28px;
+          right: 28px;
+          width: 60px;
+          height: 60px;
+          border-radius: 50%;
+          background: linear-gradient(135deg, #3B82F6 0%, #7C3AED 100%);
+          border: none;
+          color: white;
+          font-size: 24px;
+          cursor: pointer;
+          box-shadow: 0 12px 40px rgba(59, 130, 246, 0.4);
+          transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+          z-index: 999;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .sa-chatbot-float-btn:hover {
+          transform: scale(1.12);
+          box-shadow: 0 20px 60px rgba(59, 130, 246, 0.5);
+        }
+
+        .sa-chatbot-float-btn:active {
+          transform: scale(0.95);
+        }
+
+        /* =============== CHATBOT MODAL GLASSMORPHIC =============== */
+        .sa-chatbot-modal-overlay {
+          position: fixed;
+          inset: 0;
+          background: rgba(0, 0, 0, 0.4);
+          backdrop-filter: blur(4px);
+          -webkit-backdrop-filter: blur(4px);
+          z-index: 1000;
+          animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+
+        .sa-chatbot-modal {
+          position: fixed;
+          bottom: 100px;
+          right: 28px;
+          width: 420px;
+          height: 600px;
+          background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(15, 23, 42, 0.85) 100%);
+          border: 1.5px solid rgba(99, 102, 241, 0.4);
+          border-radius: 20px;
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
+          box-shadow: 0 25px 80px rgba(0, 0, 0, 0.3), inset 0 0 1px rgba(255, 255, 255, 0.1);
+          display: flex;
+          flex-direction: column;
+          animation: slideInUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+          z-index: 1001;
+        }
+
+        @keyframes slideInUp {
+          from { 
+            opacity: 0;
+            transform: translateY(40px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        html.light-theme .sa-chatbot-modal {
+          background: linear-gradient(135deg, rgba(248, 250, 255, 0.95) 0%, rgba(255, 255, 255, 0.9) 100%);
+          border-color: rgba(99, 102, 241, 0.3);
+          box-shadow: 0 25px 80px rgba(37, 99, 235, 0.15), inset 0 0 1px rgba(37, 99, 235, 0.1);
+        }
+
+        .sa-chatbot-modal-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 20px 24px;
+          border-bottom: 1px solid rgba(99, 102, 241, 0.15);
+        }
+
+        .sa-chatbot-modal-header h3 {
+          margin: 0;
+          font-size: 18px;
+          font-weight: 700;
+          color: #F1F5F9;
+        }
+
+        html.light-theme .sa-chatbot-modal-header h3 {
+          color: #0A0F2C;
+        }
+
+        .sa-chatbot-close-btn {
+          background: none;
+          border: none;
+          color: #94A3B8;
+          font-size: 18px;
+          cursor: pointer;
+          transition: color 0.3s ease;
+          width: 32px;
+          height: 32px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .sa-chatbot-close-btn:hover {
+          color: #F1F5F9;
+        }
+
+        .sa-chatbot-modal-messages {
+          flex: 1;
+          overflow-y: auto;
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+          padding: 16px;
+        }
+
+        .sa-chatbot-modal-messages::-webkit-scrollbar {
+          width: 6px;
+        }
+
+        .sa-chatbot-modal-messages::-webkit-scrollbar-track {
+          background: transparent;
+        }
+
+        .sa-chatbot-modal-messages::-webkit-scrollbar-thumb {
+          background: rgba(99, 102, 241, 0.3);
+          border-radius: 3px;
+        }
+
+        .sa-chatbot-modal-messages::-webkit-scrollbar-thumb:hover {
+          background: rgba(99, 102, 241, 0.5);
+        }
+
+        .sa-chatbot-modal-input {
+          display: flex;
+          gap: 8px;
+          padding: 16px;
+          border-top: 1px solid rgba(99, 102, 241, 0.15);
+        }
+
+        .sa-chatbot-modal-input .sa-chatbot-input {
+          flex: 1;
+          padding: 12px 16px;
+          border: 1px solid rgba(99, 102, 241, 0.25);
+          border-radius: 10px;
+          background: rgba(15, 23, 42, 0.4);
+          color: #F1F5F9;
+          font-size: 14px;
+          outline: none;
+          transition: all 0.3s ease;
+        }
+
+        .sa-chatbot-modal-input .sa-chatbot-input:focus {
+          border-color: rgba(99, 102, 241, 0.6);
+          box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
+        }
+
+        .sa-chatbot-modal-input .sa-chatbot-input::placeholder {
+          color: #64748B;
+        }
+
+        html.light-theme .sa-chatbot-modal-input .sa-chatbot-input {
+          background: rgba(248, 250, 255, 0.5);
+          color: #0A0F2C;
+          border-color: rgba(37, 99, 235, 0.2);
+        }
+
+        html.light-theme .sa-chatbot-modal-input .sa-chatbot-input:focus {
+          border-color: rgba(37, 99, 235, 0.5);
+          box-shadow: 0 0 20px rgba(37, 99, 235, 0.15);
+        }
+
+        html.light-theme .sa-chatbot-modal-input .sa-chatbot-input::placeholder {
+          color: #8494B2;
+        }
+
+        .sa-chatbot-modal-input .sa-chatbot-send {
+          width: 44px;
+          height: 44px;
+          border: none;
+          border-radius: 10px;
+          background: linear-gradient(135deg, #3B82F6 0%, #7C3AED 100%);
+          color: white;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 16px;
+          transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+          box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
+        }
+
+        .sa-chatbot-modal-input .sa-chatbot-send:hover {
+          transform: scale(1.08);
+          box-shadow: 0 12px 30px rgba(59, 130, 246, 0.4);
+        }
+
+        .sa-chatbot-modal-input .sa-chatbot-send:active {
+          transform: scale(0.95);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 640px) {
+          .sa-chatbot-modal {
+            width: calc(100vw - 32px);
+            height: 500px;
+            bottom: 90px;
+            right: 16px;
+          }
+
+          .sa-chatbot-float-btn {
+            width: 52px;
+            height: 52px;
+            font-size: 20px;
+          }
+        }
+
         .sa-animate .sa-team-card {
           opacity: 1;
           transform: translateY(0);
@@ -2034,45 +2308,6 @@ export default function PageHome({ go }) {
         </div>
       </div>
 
-      {/* CHATBOT GLASSMORPHIC SECTION */}
-      <section className="sa-section-chatbot">
-        <div className="sa-chatbot-container">
-          <div className="sa-chatbot-title">
-            <h2>Assistez-vous avec notre Intelligence Artificielle</h2>
-            <p>Posez vos questions sur nos formations, logiciels et services</p>
-          </div>
-          <div className="sa-chatbot-wrapper sa-animate">
-            <div className="sa-chatbot-messages">
-              <div className="sa-chat-message bot">
-                <div className="sa-chat-avatar bot-avatar">
-                  <i className="fas fa-robot"></i>
-                </div>
-                <div className="sa-chat-content">
-                  <p>Bonjour 👋 Je suis Smart Archives AI. Comment puis-je vous aider aujourd'hui ?</p>
-                </div>
-              </div>
-              <div className="sa-chat-message user">
-                <div className="sa-chat-content">
-                  <p>Quelles formations proposez-vous ?</p>
-                </div>
-              </div>
-              <div className="sa-chat-message bot">
-                <div className="sa-chat-avatar bot-avatar">
-                  <i className="fas fa-robot"></i>
-                </div>
-                <div className="sa-chat-content">
-                  <p>Nous proposons plusieurs formations spécialisées en gestion documentaire, archivage numérique, et solutions cloud. Consultez notre catalogue pour plus de détails.</p>
-                </div>
-              </div>
-            </div>
-            <div className="sa-chatbot-input-area">
-              <input type="text" placeholder="Posez votre question..." className="sa-chatbot-input" />
-              <button className="sa-chatbot-send"><i className="fas fa-paper-plane"></i></button>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* PREMIUM FEATURES SECTION */}
       <section className="sa-section-features">
         <div className="sa-features-header">
@@ -2116,6 +2351,11 @@ export default function PageHome({ go }) {
       {/* SECTION 1: HISTOIRE (TIMELINE) */}
       <section className="sa-section-histoire sa-animate">
         <div className="sa-histoire-container">
+          <div className="sa-histoire-title">
+            <h2>Notre Parcours</h2>
+            <p>Plus de 15 ans d'expertise en archivage numérique et transformation documentaire</p>
+          </div>
+
           <div className="sa-timeline sa-animate">
             <div className="sa-timeline-line"></div>
             <div className="sa-timeline-item sa-animate">
@@ -2151,7 +2391,7 @@ export default function PageHome({ go }) {
             </div>
             <div className="sa-stat-card sa-animate from-right">
               <div className="sa-stat-value">15+</div>
-              <div className="sa-stat-label">Ann��es d&apos;expérience</div>
+              <div className="sa-stat-label">Années d&apos;expérience</div>
             </div>
             <div className="sa-stat-card sa-animate from-right">
               <div className="sa-stat-value">99.9%</div>
@@ -2264,6 +2504,61 @@ export default function PageHome({ go }) {
           </div>
         </div>
       </section>
+
+      {/* FLOATING CHATBOT BUTTON */}
+      <button 
+        className="sa-chatbot-float-btn"
+        onClick={() => setOpenChatbot(!openChatbot)}
+        title="Assistant IA"
+      >
+        <i className="fas fa-robot"></i>
+      </button>
+
+      {/* CHATBOT MODAL GLASSMORPHIC */}
+      {openChatbot && (
+        <div className="sa-chatbot-modal-overlay" onClick={() => setOpenChatbot(false)}>
+          <div className="sa-chatbot-modal" onClick={(e) => e.stopPropagation()}>
+            <div className="sa-chatbot-modal-header">
+              <h3>Assistant IA</h3>
+              <button className="sa-chatbot-close-btn" onClick={() => setOpenChatbot(false)}>
+                <i className="fas fa-times"></i>
+              </button>
+            </div>
+            
+            <div className="sa-chatbot-modal-messages">
+              {chatMessages.map((msg, idx) => (
+                <div key={idx} className={`sa-chat-message ${msg.type}`}>
+                  {msg.type === 'bot' && (
+                    <div className="sa-chat-avatar bot-avatar">
+                      <i className="fas fa-robot"></i>
+                    </div>
+                  )}
+                  <div className="sa-chat-content">
+                    <p>{msg.text}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="sa-chatbot-modal-input">
+              <input
+                type="text"
+                placeholder="Votre question..."
+                value={chatInput}
+                onChange={(e) => setChatInput(e.target.value)}
+                onKeyPress={(e) => e.key === 'Enter' && handleChatSend()}
+                className="sa-chatbot-input"
+              />
+              <button 
+                className="sa-chatbot-send"
+                onClick={handleChatSend}
+              >
+                <i className="fas fa-paper-plane"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }
