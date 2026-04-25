@@ -227,10 +227,36 @@ export default function PageHome({ go }) {
         }
 
         .sa-section-histoire {
-          background: #FFFFFF;
+          background: linear-gradient(135deg, #FFFFFF 0%, #F8FAFF 100%);
           padding: 80px 40px;
           position: relative;
           overflow: hidden;
+        }
+
+        .sa-section-histoire::before {
+          content: '';
+          position: absolute;
+          top: -50%;
+          right: -10%;
+          width: 600px;
+          height: 600px;
+          background: radial-gradient(circle, rgba(99,102,241,0.08) 0%, transparent 70%);
+          border-radius: 50%;
+          filter: blur(50px);
+          pointer-events: none;
+        }
+
+        .sa-section-histoire::after {
+          content: '';
+          position: absolute;
+          bottom: -30%;
+          left: -5%;
+          width: 500px;
+          height: 500px;
+          background: radial-gradient(circle, rgba(14,165,233,0.06) 0%, transparent 70%);
+          border-radius: 50%;
+          filter: blur(45px);
+          pointer-events: none;
         }
 
         .sa-histoire-container {
@@ -495,10 +521,36 @@ export default function PageHome({ go }) {
 
         /* =============== SERVICES SECTION =============== */
         .sa-section-services {
-          background: #F8FAFF;
+          background: linear-gradient(180deg, #F8FAFF 0%, #F0F4FF 100%);
           padding: 80px 40px;
           position: relative;
           overflow: hidden;
+        }
+
+        .sa-section-services::before {
+          content: '';
+          position: absolute;
+          top: -30%;
+          left: -8%;
+          width: 700px;
+          height: 700px;
+          background: radial-gradient(circle, rgba(99,102,241,0.1) 0%, transparent 70%);
+          border-radius: 50%;
+          filter: blur(55px);
+          pointer-events: none;
+        }
+
+        .sa-section-services::after {
+          content: '';
+          position: absolute;
+          bottom: -25%;
+          right: -5%;
+          width: 600px;
+          height: 600px;
+          background: radial-gradient(circle, rgba(124,58,237,0.08) 0%, transparent 70%);
+          border-radius: 50%;
+          filter: blur(50px);
+          pointer-events: none;
         }
 
         .sa-services-header {
@@ -646,10 +698,36 @@ export default function PageHome({ go }) {
 
         /* =============== TEAM SECTION =============== */
         .sa-section-team {
-          background: #FFFFFF;
+          background: linear-gradient(135deg, #FFFFFF 0%, #F8FAFF 100%);
           padding: 80px 40px;
           position: relative;
           overflow: hidden;
+        }
+
+        .sa-section-team::before {
+          content: '';
+          position: absolute;
+          top: -40%;
+          right: -12%;
+          width: 750px;
+          height: 750px;
+          background: radial-gradient(circle, rgba(14,165,233,0.09) 0%, transparent 70%);
+          border-radius: 50%;
+          filter: blur(60px);
+          pointer-events: none;
+        }
+
+        .sa-section-team::after {
+          content: '';
+          position: absolute;
+          bottom: -35%;
+          left: -8%;
+          width: 650px;
+          height: 650px;
+          background: radial-gradient(circle, rgba(99,102,241,0.08) 0%, transparent 70%);
+          border-radius: 50%;
+          filter: blur(55px);
+          pointer-events: none;
         }
 
         .sa-team-header {
