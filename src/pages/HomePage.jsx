@@ -971,7 +971,7 @@ export default function PageHome({ go }) {
       </section>
 
       {/* SECTION 2: NOS SERVICES */}
-      <section className="sa-section-services">
+      <section className="sa-section-services sa-animate">
         <div className="sa-services-header">
           <h2>Nos Services</h2>
           <p>Une solution complète pour tous vos besoins en gestion documentaire et archivage</p>
@@ -1017,7 +1017,7 @@ export default function PageHome({ go }) {
       </section>
 
       {/* SECTION 3: NOTRE ÉQUIPE */}
-      <section className="sa-section-team">
+      <section className="sa-section-team sa-animate">
         <div className="sa-team-header">
           <h2>Notre Équipe</h2>
           <p>Des experts passionnés au service de l&apos;excellence</p>
