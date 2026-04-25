@@ -298,7 +298,7 @@ export default function PageHome({ go }) {
         .sa-hero-subtitle {
           font-size: 20px;
           color: #94A3B8;
-          margin: 0 0 36px 0;
+          margin: 0 0 24px 0;
           line-height: 1.7;
           font-weight: 500;
           animation: fadeInUp 0.8s ease-out 0.2s both;
@@ -2987,7 +2987,7 @@ export default function PageHome({ go }) {
           </div>
 
           {/* Quick Stats */}
-          <div style={{ display: "flex", gap: "32px", marginTop: "48px" }}>
+          <div style={{ display: "flex", gap: "32px", marginTop: "32px" }}>
             <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
               <div style={{ width: "44px", height: "44px", background: "rgba(59, 130, 246, 0.15)", borderRadius: "8px", display: "flex", alignItems: "center", justifyContent: "center", color: "#3B82F6", fontSize: "18px", fontWeight: "700" }}>+10</div>
               <div>
@@ -3071,7 +3071,7 @@ export default function PageHome({ go }) {
             <p>Des solutions cloud-ready, sécurisées et conformes aux normes ISO pour votre tranquillité.</p>
           </div>
           <div className="sa-feature-card">
-            <div className="sa-feature-icon">🔒</div>
+            <div className="sa-feature-icon">��</div>
             <h3>Sécurité Maximale</h3>
             <p>Chiffrement bout en bout, conformité RGPD, et authentification multi-facteurs intégrée.</p>
           </div>
