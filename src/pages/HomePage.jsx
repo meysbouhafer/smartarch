@@ -58,6 +58,22 @@ export default function PageHome({ go }) {
           100% { transform: rotateZ(360deg) translateX(120px); opacity: 0; }
         }
 
+        @keyframes gradientShift {
+          0%, 100% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+        }
+
+        @keyframes gridFloat {
+          0% { transform: translateY(0); opacity: 0.1; }
+          50% { opacity: 0.2; }
+          100% { transform: translateY(-20px); opacity: 0.1; }
+        }
+
+        @keyframes blobPulse {
+          0%, 100% { transform: scale(1); opacity: 0.4; }
+          50% { transform: scale(1.1); opacity: 0.6; }
+        }
+
         .sa-aurora-blob {
           position: absolute;
           border-radius: 50%;
@@ -130,8 +146,25 @@ export default function PageHome({ go }) {
           padding: 0 6%;
           gap: 4rem;
           background: linear-gradient(135deg, #EEF2FF 0%, #F5F3FF 50%, #EFF6FF 100%);
+          background-size: 200% 200%;
+          animation: gradientShift 15s ease infinite;
           position: relative;
           overflow: hidden;
+        }
+
+        .sa-hero::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-image: 
+            radial-gradient(circle at 20% 50%, rgba(99,102,241,0.1) 0%, transparent 50%),
+            radial-gradient(circle at 80% 80%, rgba(124,58,237,0.08) 0%, transparent 50%),
+            radial-gradient(circle at 40% 20%, rgba(14,165,233,0.08) 0%, transparent 50%);
+          pointer-events: none;
+          z-index: 0;
         }
 
         .sa-hero-inner {
@@ -139,6 +172,7 @@ export default function PageHome({ go }) {
           max-width: 50%;
           text-align: left;
           z-index: 2;
+          position: relative;
         }
 
         .sa-hero-visual {
@@ -193,10 +227,40 @@ export default function PageHome({ go }) {
         }
 
         .sa-section-histoire {
-          background: #FFFFFF;
+          background: linear-gradient(180deg, #FFFFFF 0%, #F0F4FF 50%, #FFFFFF 100%);
+          background-size: 100% 200%;
+          animation: gradientShift 20s ease infinite;
           padding: 80px 40px;
           position: relative;
           overflow: hidden;
+        }
+
+        .sa-section-histoire::before {
+          content: '';
+          position: absolute;
+          top: -50%;
+          right: -10%;
+          width: 800px;
+          height: 800px;
+          background: radial-gradient(circle, rgba(99,102,241,0.15) 0%, transparent 70%);
+          border-radius: 50%;
+          filter: blur(60px);
+          animation: blobPulse 8s ease-in-out infinite;
+          pointer-events: none;
+        }
+
+        .sa-section-histoire::after {
+          content: '';
+          position: absolute;
+          bottom: -30%;
+          left: -5%;
+          width: 600px;
+          height: 600px;
+          background: radial-gradient(circle, rgba(14,165,233,0.1) 0%, transparent 70%);
+          border-radius: 50%;
+          filter: blur(50px);
+          animation: blobPulse 10s ease-in-out infinite 1s;
+          pointer-events: none;
         }
 
         .sa-histoire-container {
@@ -295,10 +359,52 @@ export default function PageHome({ go }) {
 
         /* =============== SERVICES SECTION =============== */
         .sa-section-services {
-          background: #F8FAFF;
+          background: linear-gradient(135deg, #F8FAFF 0%, #F0F4FF 50%, #F5F3FF 100%);
+          background-size: 200% 200%;
+          animation: gradientShift 18s ease infinite;
           padding: 80px 40px;
           position: relative;
           overflow: hidden;
+        }
+
+        .sa-section-services::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          height: 100%;
+          background-image: 
+            repeating-linear-gradient(
+              90deg,
+              transparent,
+              transparent 2px,
+              rgba(99,102,241,0.03) 2px,
+              rgba(99,102,241,0.03) 4px
+            ),
+            repeating-linear-gradient(
+              0deg,
+              transparent,
+              transparent 2px,
+              rgba(124,58,237,0.03) 2px,
+              rgba(124,58,237,0.03) 4px
+            );
+          pointer-events: none;
+          animation: gridFloat 8s ease-in-out infinite;
+        }
+
+        .sa-section-services::after {
+          content: '';
+          position: absolute;
+          bottom: -20%;
+          right: -15%;
+          width: 700px;
+          height: 700px;
+          background: radial-gradient(circle, rgba(124,58,237,0.12) 0%, transparent 70%);
+          border-radius: 50%;
+          filter: blur(70px);
+          animation: blobPulse 12s ease-in-out infinite;
+          pointer-events: none;
         }
 
         .sa-services-header {
@@ -381,10 +487,40 @@ export default function PageHome({ go }) {
 
         /* =============== TEAM SECTION =============== */
         .sa-section-team {
-          background: #FFFFFF;
+          background: linear-gradient(180deg, #FFFFFF 0%, #F8FAFF 50%, #F0F4FF 100%);
+          background-size: 100% 200%;
+          animation: gradientShift 22s ease infinite;
           padding: 80px 40px;
           position: relative;
           overflow: hidden;
+        }
+
+        .sa-section-team::before {
+          content: '';
+          position: absolute;
+          top: -40%;
+          left: -10%;
+          width: 900px;
+          height: 900px;
+          background: radial-gradient(circle, rgba(14,165,233,0.12) 0%, transparent 70%);
+          border-radius: 50%;
+          filter: blur(80px);
+          animation: blobPulse 14s ease-in-out infinite 2s;
+          pointer-events: none;
+        }
+
+        .sa-section-team::after {
+          content: '';
+          position: absolute;
+          bottom: -35%;
+          right: -8%;
+          width: 750px;
+          height: 750px;
+          background: radial-gradient(circle, rgba(99,102,241,0.1) 0%, transparent 70%);
+          border-radius: 50%;
+          filter: blur(65px);
+          animation: blobPulse 16s ease-in-out infinite 1s;
+          pointer-events: none;
         }
 
         .sa-team-header {
