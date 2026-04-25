@@ -525,9 +525,9 @@ export default function PageHome({ go }) {
 
         /* =============== SERVICES SECTION =============== */
         .sa-section-services {
-          background: rgba(248, 250, 255, 0.65);
-          backdrop-filter: blur(15px);
-          -webkit-backdrop-filter: blur(15px);
+          background: rgba(248, 250, 255, 0.4);
+          backdrop-filter: blur(8px);
+          -webkit-backdrop-filter: blur(8px);
           padding: 80px 40px;
           position: relative;
           overflow: hidden;
@@ -540,7 +540,7 @@ export default function PageHome({ go }) {
           left: -8%;
           width: 700px;
           height: 700px;
-          background: radial-gradient(circle, rgba(99,102,241,0.15) 0%, transparent 70%);
+          background: radial-gradient(circle, rgba(99,102,241,0.28) 0%, transparent 70%);
           border-radius: 50%;
           filter: blur(55px);
           pointer-events: none;
@@ -554,7 +554,7 @@ export default function PageHome({ go }) {
           right: -5%;
           width: 600px;
           height: 600px;
-          background: radial-gradient(circle, rgba(124,58,237,0.12) 0%, transparent 70%);
+          background: radial-gradient(circle, rgba(124,58,237,0.25) 0%, transparent 70%);
           border-radius: 50%;
           filter: blur(50px);
           pointer-events: none;
@@ -710,9 +710,9 @@ export default function PageHome({ go }) {
 
         /* =============== TEAM SECTION =============== */
         .sa-section-team {
-          background: rgba(255, 255, 255, 0.68);
-          backdrop-filter: blur(14px);
-          -webkit-backdrop-filter: blur(14px);
+          background: rgba(255, 255, 255, 0.4);
+          backdrop-filter: blur(8px);
+          -webkit-backdrop-filter: blur(8px);
           padding: 80px 40px;
           position: relative;
           overflow: hidden;
@@ -725,7 +725,7 @@ export default function PageHome({ go }) {
           right: -12%;
           width: 750px;
           height: 750px;
-          background: radial-gradient(circle, rgba(14,165,233,0.12) 0%, transparent 70%);
+          background: radial-gradient(circle, rgba(14,165,233,0.2) 0%, transparent 70%);
           border-radius: 50%;
           filter: blur(60px);
           pointer-events: none;
@@ -739,7 +739,7 @@ export default function PageHome({ go }) {
           left: -8%;
           width: 650px;
           height: 650px;
-          background: radial-gradient(circle, rgba(99,102,241,0.11) 0%, transparent 70%);
+          background: radial-gradient(circle, rgba(99,102,241,0.18) 0%, transparent 70%);
           border-radius: 50%;
           filter: blur(55px);
           pointer-events: none;
@@ -1058,7 +1058,7 @@ export default function PageHome({ go }) {
             </div>
             <div className="sa-stat-card sa-animate from-right">
               <div className="sa-stat-value">15+</div>
-              <div className="sa-stat-label">Années d&apos;expérience</div>
+              <div className="sa-stat-label">Ann��es d&apos;expérience</div>
             </div>
             <div className="sa-stat-card sa-animate from-right">
               <div className="sa-stat-value">99.9%</div>
