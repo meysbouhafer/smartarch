@@ -506,7 +506,7 @@ export default function PageHome({ go }) {
         }
 
         .sa-timeline-item {
-          margin-bottom: 60px;
+          margin-bottom: 40px;
           position: relative;
           opacity: 0;
           transform: translateY(30px);
@@ -624,8 +624,8 @@ export default function PageHome({ go }) {
         .sa-stats-grid {
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-          gap: 24px;
-          margin-top: 60px;
+          gap: 16px;
+          margin-top: 40px;
           position: relative;
           z-index: 2;
         }
@@ -705,7 +705,7 @@ export default function PageHome({ go }) {
         /* =============== HISTOIRE SECTION PREMIUM =============== */
         .sa-section-histoire {
           background: linear-gradient(135deg, #020817 0%, #0A0F2E 50%, #020817 100%);
-          padding: 120px 40px;
+          padding: 80px 40px;
           position: relative;
           overflow: hidden;
           border-top: 2px solid rgba(99, 102, 241, 0.12);
@@ -748,7 +748,7 @@ export default function PageHome({ go }) {
         .sa-histoire-title {
           text-align: center;
           max-width: 700px;
-          margin: 0 auto 60px;
+          margin: 0 auto 40px;
           position: relative;
           z-index: 2;
         }
@@ -760,6 +760,10 @@ export default function PageHome({ go }) {
           margin: 0 0 16px 0;
           letter-spacing: -1px;
           transition: color 0.3s ease;
+          background: linear-gradient(135deg, #3B82F6 0%, #7C3AED 100%);
+          background-clip: text;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
         }
 
         html.light-theme .sa-histoire-title h2 {
@@ -781,7 +785,7 @@ export default function PageHome({ go }) {
         /* =============== CHATBOT GLASSMORPHIC SECTION =============== */
         .sa-section-chatbot {
           background: #020817;
-          padding: 120px 40px;
+          padding: 80px 40px;
           position: relative;
           overflow: hidden;
           border-top: 2px solid rgba(99, 102, 241, 0.12);
@@ -1035,7 +1039,7 @@ export default function PageHome({ go }) {
         /* =============== FEATURES SECTION PREMIUM =============== */
         .sa-section-features {
           background: linear-gradient(135deg, #0D1117 0%, #0F1729 50%, #0D1117 100%);
-          padding: 120px 40px;
+          padding: 80px 40px;
           position: relative;
           overflow: hidden;
           border-top: 2px solid rgba(99, 102, 241, 0.12);
@@ -1052,7 +1056,7 @@ export default function PageHome({ go }) {
         .sa-features-header {
           text-align: center;
           max-width: 700px;
-          margin: 0 auto 60px;
+          margin: 0 auto 40px;
           position: relative;
           z-index: 2;
         }
@@ -1064,6 +1068,10 @@ export default function PageHome({ go }) {
           margin: 0 0 16px 0;
           letter-spacing: -1px;
           transition: color 0.3s ease;
+          background: linear-gradient(135deg, #3B82F6 0%, #7C3AED 100%);
+          background-clip: text;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
         }
 
         html.light-theme .sa-features-header h2 {
@@ -1085,7 +1093,7 @@ export default function PageHome({ go }) {
         .sa-features-grid {
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-          gap: 28px;
+          gap: 20px;
           max-width: 1300px;
           margin: 0 auto;
           position: relative;
@@ -1661,7 +1669,7 @@ export default function PageHome({ go }) {
         /* =============== SERVICES SECTION PREMIUM =============== */
         .sa-section-services {
           background: linear-gradient(135deg, #0D1117 0%, #0F1729 50%, #0D1117 100%);
-          padding: 120px 40px;
+          padding: 80px 40px;
           position: relative;
           overflow: hidden;
           border-top: 2px solid rgba(99, 102, 241, 0.12);
@@ -1704,7 +1712,7 @@ export default function PageHome({ go }) {
         .sa-services-header {
           text-align: center;
           max-width: 700px;
-          margin: 0 auto 60px;
+          margin: 0 auto 40px;
           position: relative;
           z-index: 2;
         }
@@ -1716,6 +1724,10 @@ export default function PageHome({ go }) {
           margin: 0 0 16px 0;
           letter-spacing: -1px;
           transition: color 0.3s ease;
+          background: linear-gradient(135deg, #3B82F6 0%, #7C3AED 100%);
+          background-clip: text;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
         }
 
         html.light-theme .sa-services-header h2 {
@@ -1737,7 +1749,7 @@ export default function PageHome({ go }) {
         .sa-services-grid {
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-          gap: 28px;
+          gap: 20px;
           max-width: 1300px;
           margin: 0 auto;
           position: relative;
@@ -2129,7 +2141,7 @@ export default function PageHome({ go }) {
         /* =============== TEAM SECTION PREMIUM =============== */
         .sa-section-team {
           background: #020817;
-          padding: 120px 40px;
+          padding: 80px 40px;
           position: relative;
           overflow: hidden;
           border-bottom: 2px solid rgba(99, 102, 241, 0.12);
@@ -2144,7 +2156,7 @@ export default function PageHome({ go }) {
         .sa-team-header {
           text-align: center;
           max-width: 700px;
-          margin: 0 auto 60px;
+          margin: 0 auto 40px;
           position: relative;
           z-index: 2;
         }
@@ -2156,6 +2168,10 @@ export default function PageHome({ go }) {
           margin: 0 0 16px 0;
           letter-spacing: -1px;
           transition: color 0.3s ease;
+          background: linear-gradient(135deg, #3B82F6 0%, #7C3AED 100%);
+          background-clip: text;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
         }
 
         html.light-theme .sa-team-header h2 {
@@ -2177,7 +2193,7 @@ export default function PageHome({ go }) {
         .sa-team-grid {
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-          gap: 32px;
+          gap: 24px;
           max-width: 1300px;
           margin: 0 auto;
           position: relative;
