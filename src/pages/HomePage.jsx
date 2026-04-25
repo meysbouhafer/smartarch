@@ -187,6 +187,50 @@ export default function PageHome({ go }) {
           z-index: 1;
         }
 
+        /* Navigation Bar */
+        .sa-neo-topnav {
+          position: absolute;
+          top: 2rem;
+          left: 50%;
+          transform: translateX(-50%);
+          display: flex;
+          align-items: center;
+          gap: 0.25rem;
+          background: rgba(15, 23, 42, 0.7);
+          backdrop-filter: blur(16px);
+          border: 1px solid rgba(99, 102, 241, 0.2);
+          border-radius: 999px;
+          padding: 0.4rem 0.5rem;
+          z-index: 100;
+        }
+
+        .sa-neo-navitem {
+          background: none;
+          border: none;
+          color: #94A3B8;
+          padding: 0.5rem 1.2rem;
+          border-radius: 999px;
+          cursor: pointer;
+          font-size: 0.875rem;
+          transition: all 0.2s;
+        }
+
+        .sa-neo-navitem.on, .sa-neo-navitem:hover {
+          background: rgba(99, 102, 241, 0.15);
+          color: #F1F5F9;
+        }
+
+        .sa-neo-navcta {
+          background: linear-gradient(135deg, #6366F1, #7C3AED);
+          color: white;
+          border: none;
+          padding: 0.5rem 1.4rem;
+          border-radius: 999px;
+          cursor: pointer;
+          font-size: 0.875rem;
+          font-weight: 600;
+        }
+
         /* =============== TIMELINE SECTION =============== */
         @keyframes slideInLeft {
           from { opacity: 0; transform: translateX(-40px); }
