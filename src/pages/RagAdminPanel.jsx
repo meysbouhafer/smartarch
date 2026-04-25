@@ -21,8 +21,13 @@ function Badge({ cat }) {
 }
 
 function Card({ children, style }) {
-  return <div style={{ border:"1px solid var(--border)", borderRadius:16, background:"var(--bg2)",
-    padding:20, boxShadow:"var(--s2)", ...style }}>{children}</div>;
+  return <div style={{ border:"1.5px solid var(--border)", borderRadius:16, 
+    background:"linear-gradient(135deg, rgba(15, 23, 42, 0.6) 0%, rgba(15, 23, 42, 0.3) 100%)",
+    backdropFilter:"blur(16px)", WebkitBackdropFilter:"blur(16px)",
+    padding:20, boxShadow:"0 8px 32px rgba(0, 0, 0, 0.2), inset 0 0 1px rgba(255, 255, 255, 0.1)",
+    transition:"all 0.3s ease", ...style, 
+    _hover: { borderColor:"rgba(99, 102, 241, 0.6)", boxShadow:"0 20px 60px rgba(59, 130, 246, 0.3), inset 0 0 1px rgba(255, 255, 255, 0.15)" }
+  }}>{children}</div>;
 }
 
 function Btn({ children, onClick, variant="primary", disabled, small, style }) {

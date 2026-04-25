@@ -156,7 +156,7 @@ export default function PageHome({ go }) {
           animation: orbitParticle 6s linear infinite;
         }
 
-        /* =============== HERO LAYOUT FIX =============== */
+        /* =============== HERO PREMIUM DESIGN =============== */
         .sa-hero {
           display: flex;
           flex-direction: row;
@@ -164,16 +164,50 @@ export default function PageHome({ go }) {
           min-height: 100vh;
           padding: 0 6%;
           gap: 4rem;
-          background: linear-gradient(135deg, #020817 0%, #0a0f2e 50%, #020817 100%);
+          background: linear-gradient(135deg, #020817 0%, #0a0f2e 40%, #0f1729 70%, #020817 100%);
           position: relative;
           overflow: hidden;
           border-bottom: 1px solid rgba(99, 102, 241, 0.08);
           transition: background 0.5s ease;
         }
 
+        .sa-hero::before {
+          content: '';
+          position: absolute;
+          top: -50%;
+          right: -20%;
+          width: 600px;
+          height: 600px;
+          background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
+          border-radius: 50%;
+          filter: blur(40px);
+          pointer-events: none;
+        }
+
+        .sa-hero::after {
+          content: '';
+          position: absolute;
+          bottom: -30%;
+          left: -10%;
+          width: 500px;
+          height: 500px;
+          background: radial-gradient(circle, rgba(124, 58, 237, 0.1) 0%, transparent 70%);
+          border-radius: 50%;
+          filter: blur(40px);
+          pointer-events: none;
+        }
+
         html.light-theme .sa-hero {
-          background: linear-gradient(135deg, #ffffff 0%, #f8faff 50%, #eef3ff 100%);
+          background: linear-gradient(135deg, #ffffff 0%, #f8faff 40%, #f0f5ff 70%, #ffffff 100%);
           border-bottom: 1px solid rgba(99, 102, 241, 0.12);
+        }
+
+        html.light-theme .sa-hero::before {
+          background: radial-gradient(circle, rgba(37, 99, 235, 0.12) 0%, transparent 70%);
+        }
+
+        html.light-theme .sa-hero::after {
+          background: radial-gradient(circle, rgba(124, 58, 237, 0.08) 0%, transparent 70%);
         }
 
         .sa-hero::before {
@@ -211,6 +245,114 @@ export default function PageHome({ go }) {
         }
 
         /* Navigation Bar */
+        .sa-hero-left {
+          flex: 1;
+          position: relative;
+          z-index: 2;
+        }
+
+        .sa-hero-title {
+          font-size: 64px;
+          font-weight: 900;
+          color: #F1F5F9;
+          margin: 0 0 24px 0;
+          line-height: 1.1;
+          letter-spacing: -2px;
+          text-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+          animation: titleGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes titleGlow {
+          0%, 100% { text-shadow: 0 10px 40px rgba(0, 0, 0, 0.3); }
+          50% { text-shadow: 0 20px 60px rgba(59, 130, 246, 0.4); }
+        }
+
+        html.light-theme .sa-hero-title {
+          color: #0A0F2C;
+          text-shadow: 0 5px 20px rgba(37, 99, 235, 0.1);
+        }
+
+        .sa-hero-subtitle {
+          font-size: 20px;
+          color: #94A3B8;
+          margin: 0 0 32px 0;
+          line-height: 1.6;
+          font-weight: 500;
+          animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        @keyframes fadeInUp {
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+
+        html.light-theme .sa-hero-subtitle {
+          color: #3D4D6A;
+        }
+
+        .sa-hero-cta {
+          display: flex;
+          gap: 16px;
+          animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+
+        .sa-hero-btn {
+          padding: 16px 32px;
+          border-radius: 12px;
+          border: none;
+          font-size: 15px;
+          font-weight: 700;
+          cursor: pointer;
+          transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          letter-spacing: -0.5px;
+        }
+
+        .sa-hero-btn-primary {
+          background: linear-gradient(135deg, #3B82F6 0%, #7C3AED 100%);
+          color: white;
+          box-shadow: 0 12px 40px rgba(59, 130, 246, 0.3);
+        }
+
+        .sa-hero-btn-primary:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 20px 60px rgba(59, 130, 246, 0.4);
+        }
+
+        .sa-hero-btn-secondary {
+          background: rgba(99, 102, 241, 0.1);
+          color: #3B82F6;
+          border: 1.5px solid rgba(99, 102, 241, 0.3);
+          backdrop-filter: blur(10px);
+        }
+
+        .sa-hero-btn-secondary:hover {
+          background: rgba(99, 102, 241, 0.2);
+          border-color: rgba(99, 102, 241, 0.6);
+          transform: translateY(-3px);
+        }
+
+        html.light-theme .sa-hero-btn-primary {
+          box-shadow: 0 12px 40px rgba(37, 99, 235, 0.25);
+        }
+
+        html.light-theme .sa-hero-btn-primary:hover {
+          box-shadow: 0 20px 60px rgba(37, 99, 235, 0.35);
+        }
+
+        html.light-theme .sa-hero-btn-secondary {
+          background: rgba(37, 99, 235, 0.08);
+          color: #2563EB;
+          border-color: rgba(37, 99, 235, 0.25);
+        }
+
+        html.light-theme .sa-hero-btn-secondary:hover {
+          background: rgba(37, 99, 235, 0.15);
+          border-color: rgba(37, 99, 235, 0.5);
+        }
+
         .sa-neo-topnav {
           position: absolute;
           top: 2rem;
@@ -321,6 +463,404 @@ export default function PageHome({ go }) {
         html.light-theme .sa-section-histoire {
           background: #F7FAFF;
           border-bottom: 1px solid rgba(99, 102, 241, 0.12);
+        }
+
+        /* =============== CHATBOT GLASSMORPHIC SECTION =============== */
+        .sa-section-chatbot {
+          background: #020817;
+          padding: 80px 40px;
+          position: relative;
+          overflow: hidden;
+          border-top: 1px solid rgba(99, 102, 241, 0.08);
+          border-bottom: 1px solid rgba(99, 102, 241, 0.08);
+          transition: background 0.5s ease;
+        }
+
+        html.light-theme .sa-section-chatbot {
+          background: #FFFFFF;
+          border-top: 1px solid rgba(99, 102, 241, 0.12);
+          border-bottom: 1px solid rgba(99, 102, 241, 0.12);
+        }
+
+        .sa-chatbot-container {
+          max-width: 900px;
+          margin: 0 auto;
+        }
+
+        .sa-chatbot-title {
+          text-align: center;
+          margin-bottom: 48px;
+        }
+
+        .sa-chatbot-title h2 {
+          font-size: 40px;
+          font-weight: 900;
+          color: #F1F5F9;
+          margin: 0 0 12px 0;
+          letter-spacing: -1px;
+          transition: color 0.3s ease;
+        }
+
+        html.light-theme .sa-chatbot-title h2 {
+          color: #0A0F2C;
+        }
+
+        .sa-chatbot-title p {
+          font-size: 17px;
+          color: #94A3B8;
+          margin: 0;
+          transition: color 0.3s ease;
+        }
+
+        html.light-theme .sa-chatbot-title p {
+          color: #3D4D6A;
+        }
+
+        .sa-chatbot-wrapper {
+          background: linear-gradient(135deg, rgba(15, 23, 42, 0.6) 0%, rgba(15, 23, 42, 0.3) 100%);
+          border: 1.5px solid rgba(99, 102, 241, 0.3);
+          border-radius: 20px;
+          padding: 24px;
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2), inset 0 0 1px rgba(255, 255, 255, 0.1);
+          display: flex;
+          flex-direction: column;
+          height: 500px;
+          transition: all 0.3s ease;
+          opacity: 0;
+          transform: translateY(40px);
+        }
+
+        html.light-theme .sa-chatbot-wrapper {
+          background: linear-gradient(135deg, rgba(248, 250, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%);
+          border-color: rgba(99, 102, 241, 0.2);
+          box-shadow: 0 8px 32px rgba(37, 99, 235, 0.1), inset 0 0 1px rgba(37, 99, 235, 0.1);
+        }
+
+        .sa-visible .sa-chatbot-wrapper {
+          opacity: 1;
+          transform: translateY(0);
+        }
+
+        .sa-chatbot-wrapper:hover {
+          border-color: rgba(99, 102, 241, 0.6);
+          box-shadow: 0 20px 60px rgba(59, 130, 246, 0.3), inset 0 0 1px rgba(255, 255, 255, 0.15);
+        }
+
+        html.light-theme .sa-chatbot-wrapper:hover {
+          border-color: rgba(37, 99, 235, 0.5);
+          box-shadow: 0 20px 60px rgba(37, 99, 235, 0.15), inset 0 0 1px rgba(37, 99, 235, 0.15);
+        }
+
+        .sa-chatbot-messages {
+          flex: 1;
+          overflow-y: auto;
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
+          margin-bottom: 16px;
+          padding-right: 8px;
+        }
+
+        .sa-chatbot-messages::-webkit-scrollbar {
+          width: 6px;
+        }
+
+        .sa-chatbot-messages::-webkit-scrollbar-track {
+          background: transparent;
+        }
+
+        .sa-chatbot-messages::-webkit-scrollbar-thumb {
+          background: rgba(99, 102, 241, 0.3);
+          border-radius: 3px;
+        }
+
+        .sa-chatbot-messages::-webkit-scrollbar-thumb:hover {
+          background: rgba(99, 102, 241, 0.5);
+        }
+
+        .sa-chat-message {
+          display: flex;
+          gap: 12px;
+          animation: chatSlideIn 0.4s ease-out;
+        }
+
+        @keyframes chatSlideIn {
+          from { opacity: 0; transform: translateY(10px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+
+        .sa-chat-message.bot {
+          justify-content: flex-start;
+        }
+
+        .sa-chat-message.user {
+          justify-content: flex-end;
+        }
+
+        .sa-chat-avatar {
+          width: 36px;
+          height: 36px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+        }
+
+        .sa-chat-avatar.bot-avatar {
+          background: linear-gradient(135deg, #3B82F6, #7C3AED);
+          color: white;
+          font-size: 18px;
+        }
+
+        .sa-chat-content {
+          max-width: 60%;
+          padding: 12px 16px;
+          border-radius: 12px;
+          line-height: 1.5;
+        }
+
+        .sa-chat-message.bot .sa-chat-content {
+          background: rgba(99, 102, 241, 0.15);
+          color: #F1F5F9;
+          border: 1px solid rgba(99, 102, 241, 0.2);
+        }
+
+        .sa-chat-message.user .sa-chat-content {
+          background: linear-gradient(135deg, #3B82F6, #7C3AED);
+          color: white;
+          box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
+        }
+
+        .sa-chat-message.bot .sa-chat-content p,
+        .sa-chat-message.user .sa-chat-content p {
+          margin: 0;
+          font-size: 14px;
+          font-weight: 500;
+        }
+
+        html.light-theme .sa-chat-message.bot .sa-chat-content {
+          background: rgba(37, 99, 235, 0.1);
+          color: #0A0F2C;
+          border-color: rgba(37, 99, 235, 0.2);
+        }
+
+        html.light-theme .sa-chat-message.user .sa-chat-content {
+          box-shadow: 0 8px 20px rgba(37, 99, 235, 0.2);
+        }
+
+        .sa-chatbot-input-area {
+          display: flex;
+          gap: 8px;
+          border-top: 1px solid rgba(99, 102, 241, 0.15);
+          padding-top: 16px;
+        }
+
+        .sa-chatbot-input {
+          flex: 1;
+          padding: 12px 16px;
+          border: 1px solid rgba(99, 102, 241, 0.25);
+          border-radius: 10px;
+          background: rgba(15, 23, 42, 0.4);
+          color: #F1F5F9;
+          font-size: 14px;
+          outline: none;
+          transition: all 0.3s ease;
+        }
+
+        .sa-chatbot-input:focus {
+          border-color: rgba(99, 102, 241, 0.6);
+          box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
+        }
+
+        .sa-chatbot-input::placeholder {
+          color: #64748B;
+        }
+
+        html.light-theme .sa-chatbot-input {
+          background: rgba(248, 250, 255, 0.5);
+          color: #0A0F2C;
+          border-color: rgba(37, 99, 235, 0.2);
+        }
+
+        html.light-theme .sa-chatbot-input:focus {
+          border-color: rgba(37, 99, 235, 0.5);
+          box-shadow: 0 0 20px rgba(37, 99, 235, 0.15);
+        }
+
+        html.light-theme .sa-chatbot-input::placeholder {
+          color: #8494B2;
+        }
+
+        .sa-chatbot-send {
+          width: 44px;
+          height: 44px;
+          border: none;
+          border-radius: 10px;
+          background: linear-gradient(135deg, #3B82F6 0%, #7C3AED 100%);
+          color: white;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 16px;
+          transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+          box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
+        }
+
+        .sa-chatbot-send:hover {
+          transform: scale(1.08);
+          box-shadow: 0 12px 30px rgba(59, 130, 246, 0.4);
+        }
+
+        .sa-chatbot-send:active {
+          transform: scale(0.95);
+        }
+
+        /* =============== PREMIUM FEATURES SECTION =============== */
+        .sa-section-features {
+          background: #0D1117;
+          padding: 80px 40px;
+          position: relative;
+          overflow: hidden;
+          border-top: 1px solid rgba(99, 102, 241, 0.08);
+          border-bottom: 1px solid rgba(99, 102, 241, 0.08);
+          transition: background 0.5s ease;
+        }
+
+        html.light-theme .sa-section-features {
+          background: #FFFFFF;
+          border-top: 1px solid rgba(99, 102, 241, 0.12);
+          border-bottom: 1px solid rgba(99, 102, 241, 0.12);
+        }
+
+        .sa-features-header {
+          text-align: center;
+          max-width: 600px;
+          margin: 0 auto 60px;
+        }
+
+        .sa-features-header h2 {
+          font-size: 44px;
+          font-weight: 900;
+          color: #F1F5F9;
+          margin: 0 0 16px 0;
+          letter-spacing: -1px;
+          transition: color 0.3s ease;
+        }
+
+        html.light-theme .sa-features-header h2 {
+          color: #0A0F2C;
+        }
+
+        .sa-features-header p {
+          font-size: 17px;
+          color: #94A3B8;
+          margin: 0;
+          transition: color 0.3s ease;
+        }
+
+        html.light-theme .sa-features-header p {
+          color: #3D4D6A;
+        }
+
+        .sa-features-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          gap: 28px;
+          max-width: 1200px;
+          margin: 0 auto;
+        }
+
+        .sa-feature-card {
+          background: linear-gradient(135deg, rgba(15, 23, 42, 0.6) 0%, rgba(15, 23, 42, 0.3) 100%);
+          border: 1px solid rgba(99, 102, 241, 0.25);
+          border-radius: 16px;
+          padding: 40px;
+          text-align: center;
+          transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+          position: relative;
+          overflow: hidden;
+          backdrop-filter: blur(10px);
+          opacity: 0;
+          transform: translateY(40px);
+        }
+
+        .sa-visible .sa-feature-card {
+          opacity: 1;
+          transform: translateY(0);
+        }
+
+        .sa-feature-card:nth-child(1) { animation-delay: 0.1s; }
+        .sa-feature-card:nth-child(2) { animation-delay: 0.2s; }
+        .sa-feature-card:nth-child(3) { animation-delay: 0.3s; }
+        .sa-feature-card:nth-child(4) { animation-delay: 0.4s; }
+        .sa-feature-card:nth-child(5) { animation-delay: 0.5s; }
+        .sa-feature-card:nth-child(6) { animation-delay: 0.6s; }
+
+        html.light-theme .sa-feature-card {
+          background: linear-gradient(135deg, rgba(248, 250, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%);
+          border-color: rgba(99, 102, 241, 0.2);
+        }
+
+        .sa-feature-card:hover {
+          transform: translateY(-16px);
+          border-color: rgba(99, 102, 241, 0.6);
+          box-shadow: 0 30px 80px rgba(59, 130, 246, 0.3), inset 0 0 1px rgba(255, 255, 255, 0.1);
+        }
+
+        html.light-theme .sa-feature-card:hover {
+          border-color: rgba(37, 99, 235, 0.5);
+          box-shadow: 0 30px 80px rgba(37, 99, 235, 0.15), inset 0 0 1px rgba(37, 99, 235, 0.1);
+        }
+
+        .sa-feature-icon {
+          font-size: 48px;
+          margin-bottom: 20px;
+          display: inline-block;
+          animation: floatingIcon 3s ease-in-out infinite;
+        }
+
+        @keyframes floatingIcon {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-10px); }
+        }
+
+        .sa-feature-card:hover .sa-feature-icon {
+          animation: rotatingIcon 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        @keyframes rotatingIcon {
+          0% { transform: rotate(0) scale(1); }
+          50% { transform: rotate(10deg) scale(1.1); }
+          100% { transform: rotate(0) scale(1); }
+        }
+
+        .sa-feature-card h3 {
+          font-size: 20px;
+          font-weight: 800;
+          color: #F1F5F9;
+          margin: 0 0 12px 0;
+          letter-spacing: -0.5px;
+          transition: color 0.3s ease;
+        }
+
+        html.light-theme .sa-feature-card h3 {
+          color: #0A0F2C;
+        }
+
+        .sa-feature-card p {
+          font-size: 14px;
+          color: #94A3B8;
+          margin: 0;
+          line-height: 1.7;
+          transition: color 0.3s ease;
+        }
+
+        html.light-theme .sa-feature-card p {
+          color: #3D4D6A;
         }
 
         .sa-section-histoire::before {
@@ -1408,14 +1948,50 @@ export default function PageHome({ go }) {
 
         <div className="sa-hero-inner">
           <div className="sa-hero-pill">
-            <div className="sa-pill-dot"><i className="fas fa-star" style={{fontSize:9}}></i></div>
-            <span>Dernieres integrations d archivage en ligne</span>
+            <div className="sa-pill-dot"><i className="fas fa-rocket" style={{fontSize:9}}></i></div>
+            <span>🎯 Transformez votre gestion documentaire</span>
           </div>
-          <h1>
-            Elevez vos performances<br />
-            d <em>archivage</em>.
+          <h1 className="sa-hero-title">
+            Archivage Intelligent.<br />
+            <em style={{background: "linear-gradient(135deg, #3B82F6, #7C3AED)", backgroundClip: "text", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", fontStyle: "normal"}}>Solutions Numériques.</em>
           </h1>
-          <p>
+          <p className="sa-hero-subtitle">
+            Découvrez Smart Archives: la plateforme complète pour moderniser votre archivage. Formations, logiciels et services intégrés pour votre succès.
+          </p>
+          <div className="sa-hero-cta">
+            <button className="sa-hero-btn sa-hero-btn-primary" onClick={() => go("contact")}>
+              <i className="fas fa-zap"></i> Commencer Maintenant
+            </button>
+            <button className="sa-hero-btn sa-hero-btn-secondary" onClick={() => go("formations")}>
+              <i className="fas fa-play-circle"></i> Découvrir nos formations
+            </button>
+          </div>
+
+          {/* Quick Stats */}
+          <div style={{ display: "flex", gap: "32px", marginTop: "48px" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+              <div style={{ width: "44px", height: "44px", background: "rgba(59, 130, 246, 0.15)", borderRadius: "8px", display: "flex", alignItems: "center", justifyContent: "center", color: "#3B82F6", fontSize: "18px", fontWeight: "700" }}>+10</div>
+              <div>
+                <div style={{ fontSize: "14px", fontWeight: "700", color: "#F1F5F9" }}>Formations</div>
+                <div style={{ fontSize: "12px", color: "#94A3B8" }}>Professionnelles</div>
+              </div>
+            </div>
+            <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+              <div style={{ width: "44px", height: "44px", background: "rgba(124, 58, 237, 0.15)", borderRadius: "8px", display: "flex", alignItems: "center", justifyContent: "center", color: "#7C3AED", fontSize: "18px", fontWeight: "700" }}>5</div>
+              <div>
+                <div style={{ fontSize: "14px", fontWeight: "700", color: "#F1F5F9" }}>Logiciels</div>
+                <div style={{ fontSize: "12px", color: "#94A3B8" }}>Spécialisés</div>
+              </div>
+            </div>
+            <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+              <div style={{ width: "44px", height: "44px", background: "rgba(6, 182, 212, 0.15)", borderRadius: "8px", display: "flex", alignItems: "center", justifyContent: "center", color: "#06B6D4", fontSize: "18px", fontWeight: "700" }}>24/7</div>
+              <div>
+                <div style={{ fontSize: "14px", fontWeight: "700", color: "#F1F5F9" }}>Support</div>
+                <div style={{ fontSize: "12px", color: "#94A3B8" }}>Réactif</div>
+              </div>
+            </div>
+          </div>
+        </div>
             Debloquez le plein potentiel de votre gestion documentaire avec une
             plateforme unifiee: classement, OCR, recherche instantanee et suivi
             intelligent.
@@ -1466,6 +2042,85 @@ export default function PageHome({ go }) {
           </div>
         </div>
       </div>
+
+      {/* CHATBOT GLASSMORPHIC SECTION */}
+      <section className="sa-section-chatbot">
+        <div className="sa-chatbot-container">
+          <div className="sa-chatbot-title">
+            <h2>Assistez-vous avec notre Intelligence Artificielle</h2>
+            <p>Posez vos questions sur nos formations, logiciels et services</p>
+          </div>
+          <div className="sa-chatbot-wrapper sa-animate">
+            <div className="sa-chatbot-messages">
+              <div className="sa-chat-message bot">
+                <div className="sa-chat-avatar bot-avatar">
+                  <i className="fas fa-robot"></i>
+                </div>
+                <div className="sa-chat-content">
+                  <p>Bonjour 👋 Je suis Smart Archives AI. Comment puis-je vous aider aujourd'hui ?</p>
+                </div>
+              </div>
+              <div className="sa-chat-message user">
+                <div className="sa-chat-content">
+                  <p>Quelles formations proposez-vous ?</p>
+                </div>
+              </div>
+              <div className="sa-chat-message bot">
+                <div className="sa-chat-avatar bot-avatar">
+                  <i className="fas fa-robot"></i>
+                </div>
+                <div className="sa-chat-content">
+                  <p>Nous proposons plusieurs formations spécialisées en gestion documentaire, archivage numérique, et solutions cloud. Consultez notre catalogue pour plus de détails.</p>
+                </div>
+              </div>
+            </div>
+            <div className="sa-chatbot-input-area">
+              <input type="text" placeholder="Posez votre question..." className="sa-chatbot-input" />
+              <button className="sa-chatbot-send"><i className="fas fa-paper-plane"></i></button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* PREMIUM FEATURES SECTION */}
+      <section className="sa-section-features">
+        <div className="sa-features-header">
+          <h2>Pourquoi choisir Smart Archives ?</h2>
+          <p>Une solution complète et intégrée pour moderniser votre gestion documentaire</p>
+        </div>
+        <div className="sa-features-grid">
+          <div className="sa-feature-card">
+            <div className="sa-feature-icon">📚</div>
+            <h3>Formations Complètes</h3>
+            <p>Maîtrisez les meilleurs pratiques d'archivage avec nos formations certifiées et adaptées à tous les niveaux.</p>
+          </div>
+          <div className="sa-feature-card">
+            <div className="sa-feature-icon">💻</div>
+            <h3>Logiciels Performants</h3>
+            <p>Des solutions cloud-ready, sécurisées et conformes aux normes ISO pour votre tranquillité.</p>
+          </div>
+          <div className="sa-feature-card">
+            <div className="sa-feature-icon">🔒</div>
+            <h3>Sécurité Maximale</h3>
+            <p>Chiffrement bout en bout, conformité RGPD, et authentification multi-facteurs intégrée.</p>
+          </div>
+          <div className="sa-feature-card">
+            <div className="sa-feature-icon">⚡</div>
+            <h3>Haute Performance</h3>
+            <p>Infrastructure cloud scalable capable de traiter millions de documents en temps réel.</p>
+          </div>
+          <div className="sa-feature-card">
+            <div className="sa-feature-icon">🤖</div>
+            <h3>IA Intégrée</h3>
+            <p>Reconnaissance documentaire automatique, indexation intelligente et recherche sémantique avancée.</p>
+          </div>
+          <div className="sa-feature-card">
+            <div className="sa-feature-icon">🌍</div>
+            <h3>Support Global</h3>
+            <p>Équipe support 24/7 multilingue, documentation complète et communauté active.</p>
+          </div>
+        </div>
+      </section>
 
       {/* SECTION 1: HISTOIRE (TIMELINE) */}
       <section className="sa-section-histoire sa-animate">
