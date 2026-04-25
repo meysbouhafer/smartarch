@@ -29,6 +29,24 @@ const defaultCourseForm = {
   coursesText: "",
 };
 
+const defaultLogicielForm = {
+  title: "",
+  ico: "fa-software",
+  grad: "linear-gradient(135deg,#2563EB,#4F46E5)",
+  desc: "",
+  feats: "",
+  price: "",
+  priceSub: "/ an - licence",
+  priceType: "paid",
+};
+
+const defaultCollaborateurForm = {
+  name: "",
+  role: "",
+  bio: "",
+  avatar: "",
+};
+
 const FORMATION_TOPS = {
   bur: "linear-gradient(90deg,#2563EB,#4F46E5)",
   dev: "linear-gradient(90deg,#8B5CF6,#4F46E5)",
@@ -105,6 +123,18 @@ export default function AdminDashboardPage({
     pdfData: "",
     pdfType: "",
   });
+
+  // Logiciels states
+  const [logiciels, setLogiciels] = useState(LOGICIELS);
+  const [openLogicielModal, setOpenLogicielModal] = useState(false);
+  const [editingLogiciel, setEditingLogiciel] = useState(null);
+  const [logicielForm, setLogicielForm] = useState(defaultLogicielForm);
+
+  // Collaborateurs states
+  const [collaborateurs, setCollaborateurs] = useState(COLLABORATEURS);
+  const [openCollabModal, setOpenCollabModal] = useState(false);
+  const [editingCollab, setEditingCollab] = useState(null);
+  const [collabForm, setCollabForm] = useState(defaultCollaborateurForm);
 
   const requesterRole = useMemo(() => mapUserRole(user, admins), [user, admins]);
   const isSuperAdmin = requesterRole === "Super Admin";
@@ -913,7 +943,7 @@ export default function AdminDashboardPage({
             <div className="card">
               <h3>Gestion des Logiciels</h3>
               <div className="software-list" style={{ maxHeight: "600px", overflowY: "auto" }}>
-                {LOGICIELS.map((software, idx) => (
+                {logiciels.map((software, idx) => (
                   <div key={idx} className="software-row" style={{
                     padding: "16px",
                     marginBottom: "12px",
@@ -928,14 +958,36 @@ export default function AdminDashboardPage({
                         <p style={{ margin: "8px 0", color: "var(--accent, #2563eb)", fontWeight: 600 }}>{software.price} {software.priceSub}</p>
                       </div>
                       <div style={{ display: "flex", gap: "8px" }}>
-                        <button className="secondary-btn" onClick={() => alert("Modifier: " + software.title)}>Modifier</button>
-                        <button className="danger-btn" onClick={() => alert("Supprimer: " + software.title)}>Supprimer</button>
+                        <button className="secondary-btn" onClick={() => {
+                          setEditingLogiciel(idx);
+                          setLogicielForm({
+                            title: software.title,
+                            ico: software.ico,
+                            grad: software.grad,
+                            desc: software.desc,
+                            feats: software.feats.join("\n"),
+                            price: software.price,
+                            priceSub: software.priceSub,
+                            priceType: software.priceType,
+                          });
+                          setOpenLogicielModal(true);
+                        }}>Modifier</button>
+                        <button className="danger-btn" onClick={() => {
+                          if (confirm(`Supprimer "${software.title}" ?`)) {
+                            setLogiciels(logiciels.filter((_, i) => i !== idx));
+                            setToast({ type: "success", message: `Logiciel "${software.title}" supprimé` });
+                          }
+                        }}>Supprimer</button>
                       </div>
                     </div>
                   </div>
                 ))}
               </div>
-              <button className="primary-btn" style={{ marginTop: "16px" }} onClick={() => alert("Ajouter un nouveau logiciel")}>
+              <button className="primary-btn" style={{ marginTop: "16px" }} onClick={() => {
+                setEditingLogiciel(null);
+                setLogicielForm(defaultLogicielForm);
+                setOpenLogicielModal(true);
+              }}>
                 Ajouter un logiciel
               </button>
             </div>
@@ -947,7 +999,7 @@ export default function AdminDashboardPage({
             <div className="card">
               <h3>Gestion des Collaborateurs</h3>
               <div className="collaborators-list" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))", gap: "16px" }}>
-                {COLLABORATEURS.map((collab) => (
+                {collaborateurs.map((collab) => (
                   <div key={collab.id} className="collaborator-card" style={{
                     padding: "20px",
                     background: "var(--bg-secondary, #f5f5f5)",
@@ -974,13 +1026,31 @@ export default function AdminDashboardPage({
                     <p style={{ margin: "0 0 8px 0", color: "var(--accent, #2563eb)", fontWeight: 600, fontSize: "14px" }}>{collab.role}</p>
                     <p style={{ margin: "0 0 12px 0", color: "var(--text-muted, #666)", fontSize: "13px" }}>{collab.bio}</p>
                     <div style={{ display: "flex", gap: "8px" }}>
-                      <button className="secondary-btn" style={{ flex: 1 }} onClick={() => alert("Modifier: " + collab.name)}>Modifier</button>
-                      <button className="danger-btn" style={{ flex: 1 }} onClick={() => alert("Supprimer: " + collab.name)}>Supprimer</button>
+                      <button className="secondary-btn" style={{ flex: 1 }} onClick={() => {
+                        setEditingCollab(collab.id);
+                        setCollabForm({
+                          name: collab.name,
+                          role: collab.role,
+                          bio: collab.bio,
+                          avatar: collab.avatar,
+                        });
+                        setOpenCollabModal(true);
+                      }}>Modifier</button>
+                      <button className="danger-btn" style={{ flex: 1 }} onClick={() => {
+                        if (confirm(`Supprimer "${collab.name}" ?`)) {
+                          setCollaborateurs(collaborateurs.filter(c => c.id !== collab.id));
+                          setToast({ type: "success", message: `Collaborateur "${collab.name}" supprimé` });
+                        }
+                      }}>Supprimer</button>
                     </div>
                   </div>
                 ))}
               </div>
-              <button className="primary-btn" style={{ marginTop: "16px" }} onClick={() => alert("Ajouter un collaborateur")}>
+              <button className="primary-btn" style={{ marginTop: "16px" }} onClick={() => {
+                setEditingCollab(null);
+                setCollabForm(defaultCollaborateurForm);
+                setOpenCollabModal(true);
+              }}>
                 Ajouter un collaborateur
               </button>
             </div>
@@ -1121,6 +1191,140 @@ export default function AdminDashboardPage({
 
               <div className="modal-actions">
                 <button type="button" onClick={() => setOpenCourseModal(false)}>Annuler</button>
+                <button type="submit">Enregistrer</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* Modal Logiciel */}
+      {openLogicielModal && (
+        <div className="modal-overlay" onClick={() => setOpenLogicielModal(false)}>
+          <div className="modal" onClick={(event) => event.stopPropagation()}>
+            <h3>{editingLogiciel !== null ? "Modifier Logiciel" : "Ajouter Logiciel"}</h3>
+            <form onSubmit={(e) => {
+              e.preventDefault();
+              if (editingLogiciel !== null) {
+                const updated = [...logiciels];
+                updated[editingLogiciel] = {
+                  ...logicielForm,
+                  feats: logicielForm.feats.split("\n").filter(f => f.trim()),
+                };
+                setLogiciels(updated);
+                setToast({ type: "success", message: "Logiciel modifié" });
+              } else {
+                setLogiciels([...logiciels, {
+                  ...logicielForm,
+                  feats: logicielForm.feats.split("\n").filter(f => f.trim()),
+                }]);
+                setToast({ type: "success", message: "Logiciel ajouté" });
+              }
+              setOpenLogicielModal(false);
+              setLogicielForm(defaultLogicielForm);
+            }} className="modal-form">
+              <input
+                placeholder="Titre du logiciel"
+                value={logicielForm.title}
+                onChange={(e) => setLogicielForm({...logicielForm, title: e.target.value})}
+                required
+              />
+              <input
+                placeholder="Icône (ex: fa-software)"
+                value={logicielForm.ico}
+                onChange={(e) => setLogicielForm({...logicielForm, ico: e.target.value})}
+              />
+              <input
+                placeholder="Gradient CSS (ex: linear-gradient(135deg,#2563EB,#4F46E5))"
+                value={logicielForm.grad}
+                onChange={(e) => setLogicielForm({...logicielForm, grad: e.target.value})}
+              />
+              <textarea
+                placeholder="Description"
+                value={logicielForm.desc}
+                onChange={(e) => setLogicielForm({...logicielForm, desc: e.target.value})}
+                required
+              />
+              <textarea
+                placeholder="Fonctionnalités (une par ligne)"
+                value={logicielForm.feats}
+                onChange={(e) => setLogicielForm({...logicielForm, feats: e.target.value})}
+              />
+              <input
+                placeholder="Prix (ex: 120 000 DA ou Sur devis)"
+                value={logicielForm.price}
+                onChange={(e) => setLogicielForm({...logicielForm, price: e.target.value})}
+              />
+              <input
+                placeholder="Sous-titre prix (ex: / an - licence)"
+                value={logicielForm.priceSub}
+                onChange={(e) => setLogicielForm({...logicielForm, priceSub: e.target.value})}
+              />
+              <select
+                value={logicielForm.priceType}
+                onChange={(e) => setLogicielForm({...logicielForm, priceType: e.target.value})}
+              >
+                <option value="paid">Payant</option>
+                <option value="contact">Sur devis</option>
+                <option value="free">Gratuit</option>
+              </select>
+              <div className="modal-actions">
+                <button type="button" onClick={() => setOpenLogicielModal(false)}>Annuler</button>
+                <button type="submit">Enregistrer</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* Modal Collaborateur */}
+      {openCollabModal && (
+        <div className="modal-overlay" onClick={() => setOpenCollabModal(false)}>
+          <div className="modal" onClick={(event) => event.stopPropagation()}>
+            <h3>{editingCollab ? "Modifier Collaborateur" : "Ajouter Collaborateur"}</h3>
+            <form onSubmit={(e) => {
+              e.preventDefault();
+              if (editingCollab) {
+                setCollaborateurs(collaborateurs.map(c => 
+                  c.id === editingCollab ? {...c, ...collabForm} : c
+                ));
+                setToast({ type: "success", message: "Collaborateur modifié" });
+              } else {
+                setCollaborateurs([...collaborateurs, {
+                  id: Date.now().toString(),
+                  ...collabForm,
+                }]);
+                setToast({ type: "success", message: "Collaborateur ajouté" });
+              }
+              setOpenCollabModal(false);
+              setCollabForm(defaultCollaborateurForm);
+            }} className="modal-form">
+              <input
+                placeholder="Nom complet"
+                value={collabForm.name}
+                onChange={(e) => setCollabForm({...collabForm, name: e.target.value})}
+                required
+              />
+              <input
+                placeholder="Rôle/Titre"
+                value={collabForm.role}
+                onChange={(e) => setCollabForm({...collabForm, role: e.target.value})}
+                required
+              />
+              <textarea
+                placeholder="Biographie"
+                value={collabForm.bio}
+                onChange={(e) => setCollabForm({...collabForm, bio: e.target.value})}
+                required
+              />
+              <input
+                placeholder="Avatar (initiales, ex: HN)"
+                value={collabForm.avatar}
+                onChange={(e) => setCollabForm({...collabForm, avatar: e.target.value})}
+                maxLength="2"
+              />
+              <div className="modal-actions">
+                <button type="button" onClick={() => setOpenCollabModal(false)}>Annuler</button>
                 <button type="submit">Enregistrer</button>
               </div>
             </form>
