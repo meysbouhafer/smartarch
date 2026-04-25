@@ -359,3 +359,34 @@ export const LOGICIELS = [
     priceType: "contact",
   },
 ];
+
+export const COLLABORATEURS = [
+  {
+    id: "1",
+    name: "Ahmed Benmoussa",
+    role: "Directeur General",
+    bio: "Expert en transformation documentaire avec 20 ans d'experience",
+    avatar: "AB",
+  },
+  {
+    id: "2",
+    name: "Fatima Hadj",
+    role: "Directrice Commerciale",
+    bio: "Pilote du developpement commercial et des partenariats strategiques",
+    avatar: "FH",
+  },
+  {
+    id: "3",
+    name: "Yacine Rais",
+    role: "Directeur Technique",
+    bio: "Architect cloud et leader de l'innovation technologique",
+    avatar: "YR",
+  },
+  {
+    id: "4",
+    name: "Samira Belhadj",
+    role: "Responsable RH",
+    bio: "Gestionnaire des talents et developpement organisationnel",
+    avatar: "SB",
+  },
+];

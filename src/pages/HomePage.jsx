@@ -232,6 +232,11 @@ export default function PageHome({ go }) {
         }
 
         /* =============== TIMELINE SECTION =============== */
+        @keyframes drawLine {
+          from { stroke-dasharray: 500; stroke-dashoffset: 500; }
+          to { stroke-dasharray: 500; stroke-dashoffset: 0; }
+        }
+
         @keyframes slideInLeft {
           from { opacity: 0; transform: translateX(-40px); }
           to { opacity: 1; transform: translateX(0); }
@@ -240,6 +245,16 @@ export default function PageHome({ go }) {
         @keyframes slideInRight {
           from { opacity: 0; transform: translateX(40px); }
           to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes fadeScaleIn {
+          from { opacity: 0; transform: scale(0.95); }
+          to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes glassShimmer {
+          0% { background-position: -1000px 0; }
+          100% { background-position: 1000px 0; }
         }
 
         .sa-animate {
@@ -643,15 +658,17 @@ export default function PageHome({ go }) {
         }
 
         .sa-service-card {
-          background: #0F172A;
-          border: 1px solid rgba(99, 102, 241, 0.15);
+          background: linear-gradient(135deg, rgba(15, 23, 42, 0.6) 0%, rgba(15, 23, 42, 0.3) 100%);
+          border: 1px solid rgba(99, 102, 241, 0.25);
           border-radius: 20px;
           padding: 44px;
           cursor: pointer;
           transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
           position: relative;
           overflow: hidden;
-          box-shadow: 0 4px 20px rgba(59, 130, 246, 0.08);
+          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2), inset 0 0 1px rgba(255, 255, 255, 0.1);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
           opacity: 0;
           transform: translateY(40px);
         }
@@ -661,50 +678,55 @@ export default function PageHome({ go }) {
           transform: translateY(0);
         }
 
-        .sa-animate .sa-service-card:nth-child(1) {
-          transition-delay: 0.2s;
-        }
-
-        .sa-animate .sa-service-card:nth-child(2) {
-          transition-delay: 0.3s;
-        }
-
-        .sa-animate .sa-service-card:nth-child(3) {
-          transition-delay: 0.4s;
-        }
-
-        .sa-animate .sa-service-card:nth-child(4) {
-          transition-delay: 0.5s;
-        }
-
-        .sa-animate .sa-service-card:nth-child(5) {
-          transition-delay: 0.6s;
-        }
-
-        .sa-animate .sa-service-card:nth-child(6) {
-          transition-delay: 0.7s;
-        }
+        .sa-animate .sa-service-card:nth-child(1) { transition-delay: 0.2s; }
+        .sa-animate .sa-service-card:nth-child(2) { transition-delay: 0.3s; }
+        .sa-animate .sa-service-card:nth-child(3) { transition-delay: 0.4s; }
+        .sa-animate .sa-service-card:nth-child(4) { transition-delay: 0.5s; }
+        .sa-animate .sa-service-card:nth-child(5) { transition-delay: 0.6s; }
+        .sa-animate .sa-service-card:nth-child(6) { transition-delay: 0.7s; }
 
         .sa-service-card::before {
           content: '';
           position: absolute;
-          top: -100%;
-          left: 0;
-          right: 0;
+          top: 0;
+          left: -100%;
+          width: 100%;
           height: 100%;
-          background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, transparent 100%);
-          transition: top 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-          pointer-events: none;
+          background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+          transition: left 0.5s;
         }
 
         .sa-service-card:hover::before {
-          top: 0;
+          left: 100%;
         }
 
         .sa-service-card:hover {
           transform: translateY(-16px);
           border-color: rgba(99, 102, 241, 0.5);
-          box-shadow: 0 30px 60px rgba(59, 130, 246, 0.15);
+          box-shadow: 0 20px 60px rgba(59, 130, 246, 0.3), inset 0 0 1px rgba(255, 255, 255, 0.2);
+          background: linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(15, 23, 42, 0.5) 100%);
+        }
+
+        .sa-service-icon {
+          width: 70px;
+          height: 70px;
+          background: linear-gradient(135deg, #3B82F6, #7C3AED);
+          border-radius: 16px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 32px;
+          color: white;
+          margin-bottom: 28px;
+          box-shadow: 0 12px 32px rgba(59, 130, 246, 0.25);
+          transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+          position: relative;
+          z-index: 1;
+        }
+
+        .sa-service-card:hover .sa-service-icon {
+          transform: scale(1.15) rotate(-5deg);
+          box-shadow: 0 16px 40px rgba(59, 130, 246, 0.4);
         }
 
         .sa-service-title {
@@ -885,16 +907,107 @@ export default function PageHome({ go }) {
         }
 
         .sa-team-card {
-          background: #0F172A;
-          border: 1px solid rgba(99, 102, 241, 0.15);
+          background: linear-gradient(135deg, rgba(15, 23, 42, 0.6) 0%, rgba(15, 23, 42, 0.3) 100%);
+          border: 1px solid rgba(99, 102, 241, 0.25);
           border-radius: 24px;
           padding: 44px;
           text-align: center;
           transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
           position: relative;
-          box-shadow: 0 4px 20px rgba(59, 130, 246, 0.08);
+          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2), inset 0 0 1px rgba(255, 255, 255, 0.1);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
           opacity: 0;
           transform: translateY(40px);
+        }
+
+        .sa-animate .sa-team-card {
+          opacity: 1;
+          transform: translateY(0);
+        }
+
+        .sa-animate .sa-team-card:nth-child(1) { transition-delay: 0.2s; }
+        .sa-animate .sa-team-card:nth-child(2) { transition-delay: 0.35s; }
+        .sa-animate .sa-team-card:nth-child(3) { transition-delay: 0.5s; }
+        .sa-animate .sa-team-card:nth-child(4) { transition-delay: 0.65s; }
+
+        .sa-team-card::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: linear-gradient(135deg, transparent, rgba(59, 130, 246, 0.1));
+          border-radius: 24px;
+          opacity: 0;
+          transition: opacity 0.4s ease;
+          pointer-events: none;
+        }
+
+        .sa-team-card:hover::before {
+          opacity: 1;
+        }
+
+        .sa-team-card:hover {
+          transform: translateY(-20px);
+          border-color: rgba(99, 102, 241, 0.5);
+          box-shadow: 0 20px 60px rgba(59, 130, 246, 0.3), inset 0 0 1px rgba(255, 255, 255, 0.2);
+          background: linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(15, 23, 42, 0.5) 100%);
+        }
+
+        .sa-team-avatar {
+          width: 110px;
+          height: 110px;
+          border-radius: 50%;
+          background: linear-gradient(135deg, #3B82F6, #7C3AED, #06B6D4);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 44px;
+          font-weight: 800;
+          color: white;
+          margin: 0 auto 24px;
+          box-shadow: 0 16px 40px rgba(59, 130, 246, 0.3), inset 0 0 20px rgba(255, 255, 255, 0.1);
+          transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+          position: relative;
+          z-index: 2;
+          letter-spacing: -1px;
+        }
+
+        .sa-team-card:hover .sa-team-avatar {
+          transform: scale(1.2);
+          box-shadow: 0 24px 48px rgba(59, 130, 246, 0.4), inset 0 0 20px rgba(255, 255, 255, 0.15);
+        }
+
+        .sa-team-name {
+          font-size: 22px;
+          font-weight: 800;
+          color: #F1F5F9;
+          margin-bottom: 8px;
+          letter-spacing: -0.5px;
+          position: relative;
+          z-index: 2;
+        }
+
+        .sa-team-role {
+          font-size: 15px;
+          color: #3B82F6;
+          margin-bottom: 16px;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+          position: relative;
+          z-index: 2;
+        }
+
+        .sa-team-bio {
+          font-size: 14px;
+          color: #94A3B8;
+          line-height: 1.8;
+          font-weight: 500;
+          position: relative;
+          z-index: 2;
         }
 
         .sa-animate .sa-team-card {
