@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import RagAdminPanel from "./RagAdminPanel.jsx";
 import "./admin.css";
-import { CAT_CLS, CAT_LBL, FORMATION_CATEGORY_OPTIONS, FORMATION_LEVEL_OPTIONS, FORMATION_MODE_OPTIONS } from "./pageData";
+import { CAT_CLS, CAT_LBL, FORMATION_CATEGORY_OPTIONS, FORMATION_LEVEL_OPTIONS, FORMATION_MODE_OPTIONS, LOGICIELS, COLLABORATEURS } from "./pageData";
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL || "/api";
 const THEME_KEY = "sa_admin_theme_v1";
@@ -467,6 +467,8 @@ export default function AdminDashboardPage({
             ["demos", "fa-video", "Demandes de demo"],
             ["admins", "fa-users", "Users / Admins"],
             ["courses", "fa-book-open", "Courses / Formations"],
+            ["logiciels", "fa-software", "Gestion Logiciels"],
+            ["collaborateurs", "fa-user-tie", "Collaborateurs"],
             ["settings", "fa-gear", "Settings"],
             ["rag", "fa-brain", "Base RAG"],
             ["logout", "fa-right-from-bracket", "Logout"],
@@ -903,6 +905,85 @@ export default function AdminDashboardPage({
           <section className="card">
             <h3>Paramètres</h3>
             <p>Le thème sombre/clair est automatiquement sauvegardé dans localStorage.</p>
+          </section>
+        )}
+
+        {activeNav === "logiciels" && (
+          <section className="admin-content-grid">
+            <div className="card">
+              <h3>Gestion des Logiciels</h3>
+              <div className="software-list" style={{ maxHeight: "600px", overflowY: "auto" }}>
+                {LOGICIELS.map((software, idx) => (
+                  <div key={idx} className="software-row" style={{
+                    padding: "16px",
+                    marginBottom: "12px",
+                    background: "var(--bg-secondary, #f5f5f5)",
+                    borderRadius: "8px",
+                    border: "1px solid var(--border-color, #ddd)",
+                  }}>
+                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "start", gap: "16px" }}>
+                      <div style={{ flex: 1 }}>
+                        <h4 style={{ margin: "0 0 8px 0", fontWeight: 700 }}>{software.title}</h4>
+                        <p style={{ margin: "0 0 8px 0", color: "var(--text-muted, #666)", fontSize: "14px" }}>{software.desc}</p>
+                        <p style={{ margin: "8px 0", color: "var(--accent, #2563eb)", fontWeight: 600 }}>{software.price} {software.priceSub}</p>
+                      </div>
+                      <div style={{ display: "flex", gap: "8px" }}>
+                        <button className="secondary-btn" onClick={() => alert("Modifier: " + software.title)}>Modifier</button>
+                        <button className="danger-btn" onClick={() => alert("Supprimer: " + software.title)}>Supprimer</button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <button className="primary-btn" style={{ marginTop: "16px" }} onClick={() => alert("Ajouter un nouveau logiciel")}>
+                Ajouter un logiciel
+              </button>
+            </div>
+          </section>
+        )}
+
+        {activeNav === "collaborateurs" && (
+          <section className="admin-content-grid">
+            <div className="card">
+              <h3>Gestion des Collaborateurs</h3>
+              <div className="collaborators-list" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))", gap: "16px" }}>
+                {COLLABORATEURS.map((collab) => (
+                  <div key={collab.id} className="collaborator-card" style={{
+                    padding: "20px",
+                    background: "var(--bg-secondary, #f5f5f5)",
+                    borderRadius: "12px",
+                    border: "1px solid var(--border-color, #ddd)",
+                    textAlign: "center",
+                  }}>
+                    <div style={{
+                      width: "80px",
+                      height: "80px",
+                      background: "linear-gradient(135deg, #3B82F6, #7C3AED)",
+                      borderRadius: "50%",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      color: "white",
+                      fontSize: "32px",
+                      fontWeight: 700,
+                      margin: "0 auto 16px",
+                    }}>
+                      {collab.avatar}
+                    </div>
+                    <h4 style={{ margin: "0 0 4px 0", fontWeight: 700 }}>{collab.name}</h4>
+                    <p style={{ margin: "0 0 8px 0", color: "var(--accent, #2563eb)", fontWeight: 600, fontSize: "14px" }}>{collab.role}</p>
+                    <p style={{ margin: "0 0 12px 0", color: "var(--text-muted, #666)", fontSize: "13px" }}>{collab.bio}</p>
+                    <div style={{ display: "flex", gap: "8px" }}>
+                      <button className="secondary-btn" style={{ flex: 1 }} onClick={() => alert("Modifier: " + collab.name)}>Modifier</button>
+                      <button className="danger-btn" style={{ flex: 1 }} onClick={() => alert("Supprimer: " + collab.name)}>Supprimer</button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <button className="primary-btn" style={{ marginTop: "16px" }} onClick={() => alert("Ajouter un collaborateur")}>
+                Ajouter un collaborateur
+              </button>
+            </div>
           </section>
         )}
       </div>

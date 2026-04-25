@@ -349,7 +349,11 @@ export default function PageHome({ go }) {
           box-shadow: 0 0 12px rgba(59, 130, 246, 0.5);
           transform: scaleY(0);
           transform-origin: top;
-          transition: transform 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+          transition: transform 1.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .sa-visible .sa-timeline::before {
+          transform: scaleY(1);
         }
 
         .sa-visible .sa-timeline::before {
@@ -512,7 +516,32 @@ export default function PageHome({ go }) {
 
         .sa-timeline-item {
           position: relative;
-          margin-bottom: 50px;
+          padding-left: 80px;
+          padding-bottom: 40px;
+          opacity: 0;
+          transform: translateX(-30px);
+          transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .sa-visible .sa-timeline-item {
+          opacity: 1;
+          transform: translateX(0);
+        }
+
+        .sa-visible .sa-timeline-item:nth-child(1) {
+          transition-delay: 0.3s;
+        }
+
+        .sa-visible .sa-timeline-item:nth-child(2) {
+          transition-delay: 0.6s;
+        }
+
+        .sa-visible .sa-timeline-item:nth-child(3) {
+          transition-delay: 0.9s;
+        }
+
+        .sa-visible .sa-timeline-item:nth-child(4) {
+          transition-delay: 1.2s;
         }
 
         .sa-timeline-dot {
@@ -1079,134 +1108,6 @@ export default function PageHome({ go }) {
         .sa-team-bio {
           font-size: 14px;
           color: #94A3B8;
-          line-height: 1.8;
-          font-weight: 500;
-          position: relative;
-          z-index: 2;
-        }
-
-        .sa-team-header p {
-          color: #64748B;
-          font-size: 17px;
-          font-weight: 500;
-        }
-
-        .sa-team-grid {
-          max-width: 1200px;
-          margin: 0 auto;
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-          gap: 40px;
-          position: relative;
-          z-index: 2;
-        }
-
-        .sa-team-card {
-          background: linear-gradient(135deg, #F8FAFF 0%, #FFFFFF 100%);
-          border: 2px solid #E2E8F0;
-          border-radius: 24px;
-          padding: 44px;
-          text-align: center;
-          transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-          position: relative;
-          box-shadow: 0 4px 20px rgba(99,102,241,0.06);
-          opacity: 0;
-          transform: translateY(40px);
-        }
-
-        .sa-animate .sa-team-card {
-          opacity: 1;
-          transform: translateY(0);
-        }
-
-        .sa-animate .sa-team-card:nth-child(1) {
-          transition-delay: 0.2s;
-        }
-
-        .sa-animate .sa-team-card:nth-child(2) {
-          transition-delay: 0.35s;
-        }
-
-        .sa-animate .sa-team-card:nth-child(3) {
-          transition-delay: 0.5s;
-        }
-
-        .sa-animate .sa-team-card:nth-child(4) {
-          transition-delay: 0.65s;
-        }
-
-        .sa-team-card::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background: linear-gradient(135deg, transparent, rgba(99,102,241,0.08));
-          border-radius: 24px;
-          opacity: 0;
-          transition: opacity 0.4s ease;
-          pointer-events: none;
-        }
-
-        .sa-team-card:hover::before {
-          opacity: 1;
-        }
-
-        .sa-team-card:hover {
-          transform: translateY(-20px);
-          border-color: #C7D2FE;
-          box-shadow: 0 40px 80px rgba(99,102,241,0.2);
-        }
-
-        .sa-team-avatar {
-          width: 110px;
-          height: 110px;
-          border-radius: 50%;
-          background: linear-gradient(135deg, #6366F1, #7C3AED, #0EA5E9);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 44px;
-          font-weight: 800;
-          color: white;
-          margin: 0 auto 24px;
-          box-shadow: 0 16px 40px rgba(99,102,241,0.25);
-          transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-          position: relative;
-          z-index: 2;
-          letter-spacing: -1px;
-        }
-
-        .sa-team-card:hover .sa-team-avatar {
-          transform: scale(1.2);
-          box-shadow: 0 24px 48px rgba(99,102,241,0.35);
-        }
-
-        .sa-team-name {
-          font-size: 22px;
-          font-weight: 800;
-          color: #1E293B;
-          margin-bottom: 8px;
-          letter-spacing: -0.5px;
-          position: relative;
-          z-index: 2;
-        }
-
-        .sa-team-role {
-          font-size: 15px;
-          color: #0EA5E9;
-          margin-bottom: 16px;
-          font-weight: 700;
-          text-transform: uppercase;
-          letter-spacing: 0.5px;
-          position: relative;
-          z-index: 2;
-        }
-
-        .sa-team-bio {
-          font-size: 14px;
-          color: #64748B;
           line-height: 1.8;
           font-weight: 500;
           position: relative;
