@@ -325,25 +325,17 @@ export default function PageHome({ go }) {
           font-size: clamp(42px, 6vw, 72px);
           font-weight: 900;
           font-family: 'Space Grotesk', 'Inter', sans-serif;
-          color: #F1F5F9;
+          color: #FFFFFF;
           margin: 0 0 24px 0;
           line-height: 1.1;
           letter-spacing: -2px;
           text-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
           animation: titleGlow 3s ease-in-out infinite;
-          background: linear-gradient(135deg, #3B82F6, #7C3AED, #3B82F6);
-          background-size: 200% 200%;
-          animation: titleGlow 3s ease-in-out infinite, gradientText 6s ease-in-out infinite;
-        }
-
-        @keyframes titleGlow {
-          0%, 100% { text-shadow: 0 10px 40px rgba(0, 0, 0, 0.3); }
-          50% { text-shadow: 0 20px 60px rgba(59, 130, 246, 0.4); }
         }
 
         html.light-theme .sa-hero-title {
-          color: #0A0F2C;
-          text-shadow: 0 5px 20px rgba(37, 99, 235, 0.1);
+          color: #000000;
+          text-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
         }
 
         .sa-hero-subtitle {
@@ -772,9 +764,10 @@ export default function PageHome({ go }) {
         }
 
         /* =============== HISTOIRE SECTION PREMIUM =============== */
+        /* =============== HISTOIRE SECTION PREMIUM REDESIGN =============== */
         .sa-section-histoire {
           background: linear-gradient(135deg, #020817 0%, #0A0F2E 50%, #020817 100%);
-          padding: 80px 40px;
+          padding: 100px 40px;
           position: relative;
           overflow: hidden;
           border-top: 2px solid rgba(99, 102, 241, 0.12);
@@ -784,15 +777,19 @@ export default function PageHome({ go }) {
 
         .sa-histoire-title h2 {
           font-family: 'Space Grotesk', 'Inter', sans-serif;
-          font-size: 46px;
+          font-size: 56px;
           font-weight: 900;
-          background: linear-gradient(135deg, #3B82F6, #7C3AED);
-          background-clip: text;
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
+          color: #FFFFFF;
           text-align: center;
-          margin: 0 0 10px 0;
-          letter-spacing: -1.5px;
+          margin: 0 0 16px 0;
+          letter-spacing: -2px;
+          text-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+          animation: titleSlideDown 0.8s ease-out;
+        }
+
+        @keyframes titleSlideDown {
+          from { opacity: 0; transform: translateY(-30px); }
+          to { opacity: 1; transform: translateY(0); }
         }
 
         .sa-histoire-title p {
@@ -802,30 +799,22 @@ export default function PageHome({ go }) {
           color: #94A3B8;
           margin: 0;
           letter-spacing: -0.2px;
+          animation: subtitleFadeIn 0.8s ease-out 0.2s both;
         }
 
-        .sa-histoire-container {
-          max-width: 1200px;
-          margin: 0 auto;
-          position: relative;
-          z-index: 2;
+        @keyframes subtitleFadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
         }
 
-        .sa-histoire-title {
-          text-align: center;
-          max-width: 800px;
-          margin: 0 auto 60px;
-          position: relative;
-          z-index: 2;
-        }
-
-        /* Vertical centered glowing timeline line */
+        /* Vertical premium timeline */
         .sa-timeline {
           position: relative;
           display: grid;
           grid-template-columns: 1fr 1fr;
           gap: 0;
-          margin: 0 auto;
+          max-width: 1000px;
+          margin: 0 auto 80px;
           padding: 0 40px;
         }
 
@@ -835,9 +824,13 @@ export default function PageHome({ go }) {
           left: 50%;
           top: 0;
           bottom: 0;
-          width: 3px;
-          background: linear-gradient(180deg, #3B82F6 0%, #7C3AED 50%, #3B82F6 100%);
-          box-shadow: 0 0 20px rgba(99, 102, 241, 0.6), 0 0 40px rgba(124, 58, 237, 0.4);
+          width: 2px;
+          background: linear-gradient(180deg, 
+            rgba(99, 102, 241, 0) 0%,
+            rgba(99, 102, 241, 0.8) 10%,
+            rgba(99, 102, 241, 0.8) 90%,
+            rgba(99, 102, 241, 0) 100%);
+          box-shadow: 0 0 20px rgba(99, 102, 241, 0.6), 0 0 40px rgba(124, 58, 237, 0.3);
           transform: translateX(-50%);
           z-index: 1;
         }
@@ -845,8 +838,7 @@ export default function PageHome({ go }) {
         .sa-timeline-item {
           position: relative;
           opacity: 0;
-          transform: translateY(30px);
-          animation: timelineSlideIn 0.8s ease-out forwards;
+          transform: translateY(40px);
           padding: 40px;
           display: flex;
           flex-direction: column;
@@ -854,100 +846,109 @@ export default function PageHome({ go }) {
         }
 
         .sa-timeline-item:nth-child(odd) {
-          animation-name: slideFromLeft;
-          padding-right: calc(50% + 20px);
+          animation: slideFromLeftTimeline 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+          padding-right: calc(50% + 30px);
           text-align: right;
         }
 
         .sa-timeline-item:nth-child(even) {
-          animation-name: slideFromRight;
-          padding-left: calc(50% + 20px);
+          animation: slideFromRightTimeline 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+          padding-left: calc(50% + 30px);
           text-align: left;
         }
 
-        .sa-timeline-item:nth-child(1) { animation-delay: 0.2s; }
-        .sa-timeline-item:nth-child(2) { animation-delay: 0.3s; }
-        .sa-timeline-item:nth-child(3) { animation-delay: 0.4s; }
-        .sa-timeline-item:nth-child(4) { animation-delay: 0.5s; }
+        @keyframes slideFromLeftTimeline {
+          from { opacity: 0; transform: translateX(-50px) translateY(40px); }
+          to { opacity: 1; transform: translateX(0) translateY(0); }
+        }
 
-        /* Glassmorphism cards */
+        @keyframes slideFromRightTimeline {
+          from { opacity: 0; transform: translateX(50px) translateY(40px); }
+          to { opacity: 1; transform: translateX(0) translateY(0); }
+        }
+
+        .sa-timeline-item:nth-child(1) { animation-delay: 0.1s; }
+        .sa-timeline-item:nth-child(2) { animation-delay: 0.2s; }
+        .sa-timeline-item:nth-child(3) { animation-delay: 0.3s; }
+        .sa-timeline-item:nth-child(4) { animation-delay: 0.4s; }
+
+        /* Glowing dots at center line */
         .sa-timeline-item::before {
           content: '';
           position: absolute;
           top: 50%;
           left: 50%;
           transform: translateX(-50%) translateY(-50%);
-          width: 20px;
-          height: 20px;
-          background: #6366F1;
-          border: 3px solid #7C3AED;
+          width: 18px;
+          height: 18px;
+          background: linear-gradient(135deg, #3B82F6, #7C3AED);
+          border: 3px solid #020817;
           border-radius: 50%;
-          box-shadow: 0 0 20px rgba(99, 102, 241, 0.8), 0 0 40px rgba(124, 58, 237, 0.4);
+          box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.4),
+                      0 0 20px rgba(99, 102, 241, 0.8),
+                      0 0 40px rgba(124, 58, 237, 0.4);
           z-index: 3;
-          animation: dotPulse 2s ease-in-out infinite;
+          animation: dotPulseTimeline 2.5s ease-in-out infinite;
         }
 
-        .sa-timeline-item::after {
-          content: '';
-          position: absolute;
-          inset: 0;
-          background: linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(15, 23, 42, 0.4) 100%);
-          border: 1px solid rgba(99, 102, 241, 0.25);
-          border-radius: 16px;
-          backdrop-filter: blur(16px);
-          -webkit-backdrop-filter: blur(16px);
-          pointer-events: none;
-          z-index: 0;
+        @keyframes dotPulseTimeline {
+          0%, 100% { 
+            box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.4),
+                        0 0 20px rgba(99, 102, 241, 0.8),
+                        0 0 40px rgba(124, 58, 237, 0.4);
+            transform: translateX(-50%) translateY(-50%) scale(1);
+          }
+          50% { 
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.2),
+                        0 0 30px rgba(99, 102, 241, 1),
+                        0 0 60px rgba(124, 58, 237, 0.6);
+            transform: translateX(-50%) translateY(-50%) scale(1.15);
+          }
         }
 
+        /* Card styling */
         .sa-timeline-item {
           background: linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(15, 23, 42, 0.4) 100%);
           border: 1px solid rgba(99, 102, 241, 0.25);
           border-radius: 16px;
           backdrop-filter: blur(16px);
           -webkit-backdrop-filter: blur(16px);
-          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2), 
+                      inset 0 0 1px rgba(255, 255, 255, 0.1);
           transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .sa-timeline-item:hover {
-          transform: translateY(-4px);
-          border-color: rgba(99, 102, 241, 0.5);
-          box-shadow: 0 20px 40px rgba(99, 102, 241, 0.15);
-        }
-
-        html.light-theme .sa-timeline-item {
-          background: linear-gradient(135deg, rgba(248, 250, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%);
-          border-color: rgba(99, 102, 241, 0.2);
-        }
-
-        html.light-theme .sa-timeline-item:hover {
-          border-color: rgba(99, 102, 241, 0.5);
-          box-shadow: 0 20px 40px rgba(99, 102, 241, 0.1);
-        }
-
-        /* Year badge styling */
-        .sa-timeline-year {
-          display: inline-block;
-          font-family: 'Space Grotesk', 'Inter', sans-serif;
-          font-size: 16px;
-          font-weight: 700;
-          background: linear-gradient(135deg, #3B82F6, #7C3AED);
-          color: white;
-          padding: 6px 18px;
-          border-radius: 999px;
-          box-shadow: 0 0 20px rgba(99, 102, 241, 0.4);
-          margin: 0 0 8px 0;
           position: relative;
           z-index: 2;
         }
 
-        .sa-timeline-item:nth-child(odd) .sa-timeline-year {
-          margin-left: 0;
+        .sa-timeline-item:hover {
+          transform: translateY(-8px);
+          border-color: rgba(99, 102, 241, 0.5);
+          box-shadow: 0 20px 48px rgba(99, 102, 241, 0.2),
+                      inset 0 0 1px rgba(255, 255, 255, 0.15);
+          background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(15, 23, 42, 0.6) 100%);
         }
 
-        .sa-timeline-item:nth-child(even) .sa-timeline-year {
-          margin-right: 0;
+        /* Year badge */
+        .sa-timeline-year {
+          display: inline-block;
+          font-family: 'Space Grotesk', 'Inter', sans-serif;
+          font-size: 16px;
+          font-weight: 800;
+          color: #FFFFFF;
+          background: linear-gradient(135deg, rgba(99, 102, 241, 0.3), rgba(124, 58, 237, 0.2));
+          padding: 8px 18px;
+          border-radius: 999px;
+          border: 1px solid rgba(99, 102, 241, 0.4);
+          margin: 0 0 12px 0;
+          box-shadow: 0 0 15px rgba(99, 102, 241, 0.3);
+          transition: all 0.3s ease;
+          backdrop-filter: blur(8px);
+        }
+
+        .sa-timeline-item:hover .sa-timeline-year {
+          background: linear-gradient(135deg, rgba(99, 102, 241, 0.5), rgba(124, 58, 237, 0.4));
+          box-shadow: 0 0 25px rgba(99, 102, 241, 0.6);
+          transform: scale(1.05);
         }
 
         /* Timeline text */
@@ -955,129 +956,128 @@ export default function PageHome({ go }) {
           font-family: 'Inter', sans-serif;
           font-size: 14px;
           color: #94A3B8;
-          line-height: 1.6;
+          line-height: 1.7;
           margin: 0;
           position: relative;
           z-index: 2;
-        }
-
-        html.light-theme .sa-timeline-text {
-          color: #3D4D6A;
+          transition: color 0.3s ease;
         }
 
         .sa-timeline-item:hover .sa-timeline-text {
           color: #F1F5F9;
         }
 
-        /* Dot (hidden in flex layout) */
-        .sa-timeline-dot {
-          display: none;
-        }
-
-        /* Stats grid with animated counters */
+        /* Stats grid below timeline */
         .sa-stats-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+          grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
           gap: 12px;
-          margin-top: 60px;
+          margin-top: 0;
           position: relative;
           z-index: 2;
+          max-width: 1000px;
+          margin-left: auto;
+          margin-right: auto;
         }
 
         .sa-stat-card {
           background: linear-gradient(135deg, rgba(59, 130, 246, 0.12) 0%, rgba(124, 58, 237, 0.06) 100%);
-          border: 1.5px solid rgba(99, 102, 241, 0.4);
+          border: 1px solid rgba(99, 102, 241, 0.3);
           border-top: 3px solid #6366F1;
           border-radius: 12px;
-          padding: 18px 14px;
+          padding: 16px 12px;
           text-align: center;
-          transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+          transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
           backdrop-filter: blur(8px);
-          -webkit-backdrop-filter: blur(8px);
           opacity: 0;
-          transform: translateY(30px);
-          animation: fadeInUp 0.8s ease-out forwards;
+          transform: translateY(20px);
+          animation: statsSlideUp 0.6s ease-out forwards;
         }
 
-        .sa-stat-card:nth-child(1) { animation-delay: 0.6s; }
-        .sa-stat-card:nth-child(2) { animation-delay: 0.65s; }
-        .sa-stat-card:nth-child(3) { animation-delay: 0.7s; }
-        .sa-stat-card:nth-child(4) { animation-delay: 0.75s; }
+        @keyframes statsSlideUp {
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+
+        .sa-stat-card:nth-child(1) { animation-delay: 0.5s; }
+        .sa-stat-card:nth-child(2) { animation-delay: 0.55s; }
+        .sa-stat-card:nth-child(3) { animation-delay: 0.6s; }
+        .sa-stat-card:nth-child(4) { animation-delay: 0.65s; }
 
         .sa-stat-card:hover {
           transform: translateY(-6px);
-          border-color: rgba(99, 102, 241, 0.8);
-          box-shadow: 0 16px 48px rgba(59, 130, 246, 0.25);
-        }
-
-        html.light-theme .sa-stat-card {
-          background: linear-gradient(135deg, rgba(37, 99, 235, 0.12) 0%, rgba(124, 58, 237, 0.06) 100%);
-          border-color: rgba(37, 99, 235, 0.3);
-          border-top-color: #3B82F6;
+          border-color: rgba(99, 102, 241, 0.6);
+          box-shadow: 0 16px 40px rgba(99, 102, 241, 0.2);
         }
 
         .sa-stat-value {
           font-family: 'Space Grotesk', 'Inter', sans-serif;
-          font-size: 26px;
+          font-size: 24px;
           font-weight: 900;
-          background: linear-gradient(135deg, #3B82F6, #7C3AED);
-          background-clip: text;
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          margin: 0 0 6px 0;
+          color: #FFFFFF;
+          margin: 0 0 4px 0;
           letter-spacing: -1px;
         }
 
         .sa-stat-label {
           font-family: 'Inter', sans-serif;
-          font-size: 11px;
+          font-size: 10px;
           font-weight: 700;
           color: #94A3B8;
           margin: 0;
-          line-height: 1.4;
+          line-height: 1.3;
+          transition: color 0.3s ease;
         }
 
-        html.light-theme .sa-stat-label {
-          color: #3D4D6A;
+        .sa-stat-card:hover .sa-stat-label {
+          color: #F1F5F9;
+        }
+
+        /* Hidden dots */
+        .sa-timeline-dot {
+          display: none;
         }
 
         /* Mobile responsive */
         @media (max-width: 768px) {
+          .sa-section-histoire {
+            padding: 60px 20px;
+          }
+
+          .sa-histoire-title h2 {
+            font-size: 38px;
+          }
+
           .sa-timeline {
             grid-template-columns: 1fr;
-            padding: 0 20px 0 60px;
+            padding: 0 0 0 40px;
           }
 
           .sa-timeline::before {
-            left: 30px;
+            left: 19px;
+            width: 2px;
           }
 
           .sa-timeline-item {
-            padding: 30px !important;
-            padding-left: 30px !important;
-          }
-
-          .sa-timeline-item::before {
-            left: -55px;
+            padding: 30px;
+            padding-left: 30px;
           }
 
           .sa-timeline-item:nth-child(odd),
           .sa-timeline-item:nth-child(even) {
-            animation-name: slideFromLeft !important;
+            animation-name: slideFromLeftTimeline !important;
             padding-right: 30px !important;
             padding-left: 30px !important;
             text-align: left !important;
           }
 
-          .sa-timeline-item:nth-child(odd) .sa-timeline-year,
-          .sa-timeline-item:nth-child(even) .sa-timeline-year {
-            margin-left: 0;
-            margin-right: 0;
+          .sa-timeline-item::before {
+            left: -36px;
           }
-        }
 
-        html.light-theme .sa-section-histoire {
-          background: linear-gradient(135deg, #F7FAFF 0%, #FFFFFF 50%, #F7FAFF 100%);
+          .sa-stats-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
         }
 
         .sa-timeline-item:nth-child(1) { animation-delay: 0.1s; }
@@ -1475,15 +1475,9 @@ export default function PageHome({ go }) {
           transform: scale(0.95);
         }
 
-        /* =============== FEATURES SECTION PREMIUM =============== */
+        /* =============== HIDE POURQUOI CHOISIR SECTION =============== */
         .sa-section-features {
-          background: linear-gradient(135deg, #0D1117 0%, #0F1729 50%, #0D1117 100%);
-          padding: 40px 40px;
-          position: relative;
-          overflow: hidden;
-          border-top: 2px solid rgba(99, 102, 241, 0.12);
-          border-bottom: 2px solid rgba(99, 102, 241, 0.12);
-          transition: background 0.5s ease;
+          display: none !important;
         }
 
         html.light-theme .sa-section-features {
@@ -1530,14 +1524,10 @@ export default function PageHome({ go }) {
         .sa-histoire-title h2 {
           font-size: 46px;
           font-weight: 900;
-          color: #F1F5F9;
+          color: #FFFFFF;
           margin: 0 0 10px 0;
           letter-spacing: -1.5px;
           transition: all 0.3s ease;
-          background: linear-gradient(135deg, #3B82F6 0%, #7C3AED 100%);
-          background-clip: text;
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
           text-align: center;
         }
 
@@ -1545,7 +1535,7 @@ export default function PageHome({ go }) {
         html.light-theme .sa-services-header h2,
         html.light-theme .sa-team-header h2,
         html.light-theme .sa-histoire-title h2 {
-          color: #0A0F2C;
+          color: #000000;
         }
 
         .sa-features-header p,
