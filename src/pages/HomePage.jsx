@@ -715,12 +715,122 @@ export default function PageHome({ go }) {
         /* =============== HISTOIRE SECTION PREMIUM =============== */
         .sa-section-histoire {
           background: linear-gradient(135deg, #020817 0%, #0A0F2E 50%, #020817 100%);
-          padding: 70px 40px;
+          padding: 60px 40px;
           position: relative;
           overflow: hidden;
           border-top: 2px solid rgba(99, 102, 241, 0.12);
           border-bottom: 2px solid rgba(99, 102, 241, 0.12);
           transition: background 0.5s ease;
+        }
+
+        .sa-histoire-container {
+          max-width: 1300px;
+          margin: 0 auto;
+          position: relative;
+          z-index: 2;
+        }
+
+        .sa-histoire-title {
+          text-align: center;
+          max-width: 800px;
+          margin: 0 auto 40px;
+          position: relative;
+          z-index: 2;
+        }
+
+        .sa-timeline {
+          position: relative;
+          padding: 20px 0;
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+          gap: 16px;
+          margin-bottom: 40px;
+        }
+
+        .sa-timeline-item {
+          margin-bottom: 0;
+          position: relative;
+          opacity: 0;
+          transform: translateY(30px);
+          animation: timelineSlideIn 0.8s ease-out forwards;
+          background: linear-gradient(135deg, rgba(59, 130, 246, 0.12) 0%, rgba(124, 58, 237, 0.06) 100%);
+          border: 1.5px solid rgba(99, 102, 241, 0.4);
+          border-radius: 12px;
+          padding: 24px;
+          transition: all 0.3s ease;
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+        }
+
+        .sa-timeline-item:nth-child(1) { animation-delay: 0.1s; }
+        .sa-timeline-item:nth-child(2) { animation-delay: 0.15s; }
+        .sa-timeline-item:nth-child(3) { animation-delay: 0.2s; }
+        .sa-timeline-item:nth-child(4) { animation-delay: 0.25s; }
+
+        html.light-theme .sa-timeline-item {
+          background: linear-gradient(135deg, rgba(37, 99, 235, 0.12) 0%, rgba(124, 58, 237, 0.06) 100%);
+          border-color: rgba(99, 102, 241, 0.3);
+        }
+
+        .sa-timeline-item:hover {
+          border-color: rgba(99, 102, 241, 0.8);
+          background: linear-gradient(135deg, rgba(59, 130, 246, 0.2) 0%, rgba(124, 58, 237, 0.1) 100%);
+          box-shadow: 0 16px 48px rgba(59, 130, 246, 0.25), inset 0 0 1px rgba(255, 255, 255, 0.1);
+          transform: translateY(0);
+        }
+
+        html.light-theme .sa-timeline-item:hover {
+          border-color: rgba(37, 99, 235, 0.6);
+          box-shadow: 0 16px 48px rgba(37, 99, 235, 0.12), inset 0 0 1px rgba(37, 99, 235, 0.1);
+        }
+
+        .sa-timeline-dot {
+          display: inline-block;
+          width: 12px;
+          height: 12px;
+          background: linear-gradient(135deg, #3B82F6, #7C3AED);
+          border-radius: 50%;
+          box-shadow: 0 0 0 3px rgba(15, 23, 42, 1), 0 0 12px rgba(59, 130, 246, 0.5);
+          transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+          margin-right: 8px;
+        }
+
+        .sa-timeline-item:hover .sa-timeline-dot {
+          width: 16px;
+          height: 16px;
+          box-shadow: 0 0 0 4px rgba(15, 23, 42, 1), 0 0 24px rgba(59, 130, 246, 0.8);
+        }
+
+        .sa-timeline-year {
+          font-size: 18px;
+          font-weight: 900;
+          background: linear-gradient(135deg, #3B82F6, #7C3AED);
+          background-clip: text;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          display: block;
+          margin: 0;
+          transition: color 0.3s ease;
+        }
+
+        .sa-timeline-text {
+          margin: 0;
+          padding: 0;
+          background: none;
+          border: none;
+          color: #94A3B8;
+          font-size: 13px;
+          line-height: 1.6;
+          transition: all 0.3s ease;
+        }
+
+        html.light-theme .sa-timeline-text {
+          color: #3D4D6A;
+        }
+
+        .sa-timeline-item:hover .sa-timeline-text {
+          color: #F1F5F9;
         }
 
         html.light-theme .sa-section-histoire {
@@ -1051,7 +1161,7 @@ export default function PageHome({ go }) {
         /* =============== FEATURES SECTION PREMIUM =============== */
         .sa-section-features {
           background: linear-gradient(135deg, #0D1117 0%, #0F1729 50%, #0D1117 100%);
-          padding: 70px 40px;
+          padding: 60px 40px;
           position: relative;
           overflow: hidden;
           border-top: 2px solid rgba(99, 102, 241, 0.12);
@@ -1068,7 +1178,7 @@ export default function PageHome({ go }) {
         .sa-features-header {
           text-align: center;
           max-width: 800px;
-          margin: 0 auto 28px;
+          margin: 0 auto 24px;
           position: relative;
           z-index: 2;
         }
@@ -1076,7 +1186,7 @@ export default function PageHome({ go }) {
         .sa-services-header {
           text-align: center;
           max-width: 800px;
-          margin: 0 auto 28px;
+          margin: 0 auto 24px;
           position: relative;
           z-index: 2;
         }
@@ -1084,7 +1194,7 @@ export default function PageHome({ go }) {
         .sa-team-header {
           text-align: center;
           max-width: 800px;
-          margin: 0 auto 28px;
+          margin: 0 auto 24px;
           position: relative;
           z-index: 2;
         }
@@ -1839,7 +1949,7 @@ export default function PageHome({ go }) {
         /* =============== SERVICES SECTION PREMIUM =============== */
         .sa-section-services {
           background: linear-gradient(135deg, #0D1117 0%, #0F1729 50%, #0D1117 100%);
-          padding: 70px 40px;
+          padding: 60px 40px;
           position: relative;
           overflow: hidden;
           border-top: 2px solid rgba(99, 102, 241, 0.12);
@@ -2398,7 +2508,7 @@ export default function PageHome({ go }) {
         /* =============== TEAM SECTION PREMIUM =============== */
         .sa-section-team {
           background: #020817;
-          padding: 70px 40px;
+          padding: 60px 40px;
           position: relative;
           overflow: hidden;
           border-bottom: 2px solid rgba(99, 102, 241, 0.12);
