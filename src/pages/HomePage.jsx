@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 
 export default function PageHome({ go }) {
   const [openChatbot, setOpenChatbot] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const [chatMessages, setChatMessages] = useState([
     { type: 'bot', text: 'Bonjour 👋 Je suis Smart Archives AI. Comment puis-je vous aider aujourd\'hui ?' }
   ]);
@@ -22,6 +23,14 @@ export default function PageHome({ go }) {
   useReveal();
 
   useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => entries.forEach(e => {
         if (e.isIntersecting) e.target.classList.add('sa-visible');
@@ -35,6 +44,8 @@ export default function PageHome({ go }) {
   return (
     <>
       <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Space+Grotesk:wght@400;500;600;700;800&display=swap');
+        
         /* =============== DARK MODE COLOR SYSTEM =============== */
         :root {
           --sa-bg-primary: #020817;
@@ -70,6 +81,25 @@ export default function PageHome({ go }) {
           --sa-glow-violet: rgba(124, 58, 237, 0.12);
         }
 
+        /* =============== SCROLLBAR =============== */
+        html {
+          scrollbar-width: thin;
+          scrollbar-color: #6366F1 #0D1117;
+        }
+
+        ::-webkit-scrollbar {
+          width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+          background: #0D1117;
+        }
+
+        ::-webkit-scrollbar-thumb {
+          background: linear-gradient(#3B82F6, #7C3AED);
+          border-radius: 3px;
+        }
+
         /* =============== AURORA BLOBS & ENHANCEMENTS =============== */
         @keyframes floatY {
           0%, 100% { transform: translateY(0px); }
@@ -98,6 +128,11 @@ export default function PageHome({ go }) {
           50% { background-position: 100% 50%; }
         }
 
+        @keyframes gradientText {
+          0%, 100% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+        }
+
         @keyframes gridFloat {
           0% { transform: translateY(0); opacity: 0.1; }
           50% { opacity: 0.2; }
@@ -109,30 +144,38 @@ export default function PageHome({ go }) {
           50% { transform: scale(1.1); opacity: 0.6; }
         }
 
-        .sa-aurora-blob {
-          position: absolute;
-          border-radius: 50%;
-          filter: blur(80px);
-          mix-blend-mode: screen;
-          animation: auroraGlow 8s ease-in-out infinite;
+        @keyframes heroFloat {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-12px); }
         }
 
-        .sa-aurora-blob.blob1 {
-          width: 400px;
-          height: 400px;
-          background: radial-gradient(circle, rgba(99,102,241,0.25) 0%, transparent 70%);
-          top: -100px;
-          left: 100px;
-          animation-delay: 0s;
+        @keyframes dotPulse {
+          0%, 100% { box-shadow: 0 0 10px rgba(99, 102, 241, 0.6), 0 0 20px rgba(99, 102, 241, 0.3); }
+          50% { box-shadow: 0 0 30px rgba(99, 102, 241, 1), 0 0 60px rgba(124, 58, 237, 0.6); }
         }
 
-        .sa-aurora-blob.blob2 {
-          width: 400px;
-          height: 400px;
-          background: radial-gradient(circle, rgba(124,58,237,0.2) 0%, transparent 70%);
-          bottom: 100px;
-          right: 50px;
-          animation-delay: 2s;
+        @keyframes slideFromLeft {
+          from { opacity: 0; transform: translateX(-40px); }
+          to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes slideFromRight {
+          from { opacity: 0; transform: translateX(40px); }
+          to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes shimmer {
+          0% { left: -100%; }
+          100% { left: 100%; }
+        }
+
+        @keyframes countUp {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          * { animation: none !important; transition: none !important; }
         }
 
         /* Enhance cubes with glow & size */
@@ -156,6 +199,10 @@ export default function PageHome({ go }) {
         /* Cube cloud sway */
         .sa-cube-cloud {
           animation: sway 8s ease-in-out infinite;
+        }
+
+        .sa-hero-visual {
+          animation: heroFloat 6s ease-in-out infinite;
         }
 
         /* Orbit particles around cluster */
@@ -275,14 +322,18 @@ export default function PageHome({ go }) {
         }
 
         .sa-hero-title {
-          font-size: 64px;
+          font-size: clamp(42px, 6vw, 72px);
           font-weight: 900;
+          font-family: 'Space Grotesk', 'Inter', sans-serif;
           color: #F1F5F9;
           margin: 0 0 24px 0;
           line-height: 1.1;
           letter-spacing: -2px;
           text-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
           animation: titleGlow 3s ease-in-out infinite;
+          background: linear-gradient(135deg, #3B82F6, #7C3AED, #3B82F6);
+          background-size: 200% 200%;
+          animation: titleGlow 3s ease-in-out infinite, gradientText 6s ease-in-out infinite;
         }
 
         @keyframes titleGlow {
@@ -297,6 +348,7 @@ export default function PageHome({ go }) {
 
         .sa-hero-subtitle {
           font-size: 20px;
+          font-family: 'Inter', sans-serif;
           color: #94A3B8;
           margin: 0 0 24px 0;
           line-height: 1.7;
@@ -379,7 +431,7 @@ export default function PageHome({ go }) {
         }
 
         .sa-neo-topnav {
-          position: absolute;
+          position: fixed;
           top: 2rem;
           left: 50%;
           transform: translateX(-50%);
@@ -392,6 +444,13 @@ export default function PageHome({ go }) {
           border-radius: 999px;
           padding: 0.4rem 0.5rem;
           z-index: 100;
+          transition: all 0.3s ease;
+        }
+
+        .sa-neo-topnav.scrolled {
+          background: rgba(15, 23, 42, 0.95);
+          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+          border-color: rgba(99, 102, 241, 0.4);
         }
 
         .sa-neo-navitem {
@@ -715,7 +774,7 @@ export default function PageHome({ go }) {
         /* =============== HISTOIRE SECTION PREMIUM =============== */
         .sa-section-histoire {
           background: linear-gradient(135deg, #020817 0%, #0A0F2E 50%, #020817 100%);
-          padding: 60px 40px;
+          padding: 80px 40px;
           position: relative;
           overflow: hidden;
           border-top: 2px solid rgba(99, 102, 241, 0.12);
@@ -723,8 +782,30 @@ export default function PageHome({ go }) {
           transition: background 0.5s ease;
         }
 
+        .sa-histoire-title h2 {
+          font-family: 'Space Grotesk', 'Inter', sans-serif;
+          font-size: 46px;
+          font-weight: 900;
+          background: linear-gradient(135deg, #3B82F6, #7C3AED);
+          background-clip: text;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          text-align: center;
+          margin: 0 0 10px 0;
+          letter-spacing: -1.5px;
+        }
+
+        .sa-histoire-title p {
+          font-family: 'Inter', sans-serif;
+          text-align: center;
+          font-size: 15px;
+          color: #94A3B8;
+          margin: 0;
+          letter-spacing: -0.2px;
+        }
+
         .sa-histoire-container {
-          max-width: 1300px;
+          max-width: 1200px;
           margin: 0 auto;
           position: relative;
           z-index: 2;
@@ -733,34 +814,270 @@ export default function PageHome({ go }) {
         .sa-histoire-title {
           text-align: center;
           max-width: 800px;
-          margin: 0 auto 40px;
+          margin: 0 auto 60px;
           position: relative;
           z-index: 2;
         }
 
+        /* Vertical centered glowing timeline line */
         .sa-timeline {
           position: relative;
-          padding: 20px 0;
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-          gap: 16px;
-          margin-bottom: 40px;
+          grid-template-columns: 1fr 1fr;
+          gap: 0;
+          margin: 0 auto;
+          padding: 0 40px;
+        }
+
+        .sa-timeline::before {
+          content: '';
+          position: absolute;
+          left: 50%;
+          top: 0;
+          bottom: 0;
+          width: 3px;
+          background: linear-gradient(180deg, #3B82F6 0%, #7C3AED 50%, #3B82F6 100%);
+          box-shadow: 0 0 20px rgba(99, 102, 241, 0.6), 0 0 40px rgba(124, 58, 237, 0.4);
+          transform: translateX(-50%);
+          z-index: 1;
         }
 
         .sa-timeline-item {
-          margin-bottom: 0;
           position: relative;
           opacity: 0;
           transform: translateY(30px);
           animation: timelineSlideIn 0.8s ease-out forwards;
-          background: linear-gradient(135deg, rgba(59, 130, 246, 0.12) 0%, rgba(124, 58, 237, 0.06) 100%);
-          border: 1.5px solid rgba(99, 102, 241, 0.4);
-          border-radius: 12px;
-          padding: 24px;
-          transition: all 0.3s ease;
+          padding: 40px;
           display: flex;
           flex-direction: column;
           gap: 12px;
+        }
+
+        .sa-timeline-item:nth-child(odd) {
+          animation-name: slideFromLeft;
+          padding-right: calc(50% + 20px);
+          text-align: right;
+        }
+
+        .sa-timeline-item:nth-child(even) {
+          animation-name: slideFromRight;
+          padding-left: calc(50% + 20px);
+          text-align: left;
+        }
+
+        .sa-timeline-item:nth-child(1) { animation-delay: 0.2s; }
+        .sa-timeline-item:nth-child(2) { animation-delay: 0.3s; }
+        .sa-timeline-item:nth-child(3) { animation-delay: 0.4s; }
+        .sa-timeline-item:nth-child(4) { animation-delay: 0.5s; }
+
+        /* Glassmorphism cards */
+        .sa-timeline-item::before {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translateX(-50%) translateY(-50%);
+          width: 20px;
+          height: 20px;
+          background: #6366F1;
+          border: 3px solid #7C3AED;
+          border-radius: 50%;
+          box-shadow: 0 0 20px rgba(99, 102, 241, 0.8), 0 0 40px rgba(124, 58, 237, 0.4);
+          z-index: 3;
+          animation: dotPulse 2s ease-in-out infinite;
+        }
+
+        .sa-timeline-item::after {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(15, 23, 42, 0.4) 100%);
+          border: 1px solid rgba(99, 102, 241, 0.25);
+          border-radius: 16px;
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          pointer-events: none;
+          z-index: 0;
+        }
+
+        .sa-timeline-item {
+          background: linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(15, 23, 42, 0.4) 100%);
+          border: 1px solid rgba(99, 102, 241, 0.25);
+          border-radius: 16px;
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .sa-timeline-item:hover {
+          transform: translateY(-4px);
+          border-color: rgba(99, 102, 241, 0.5);
+          box-shadow: 0 20px 40px rgba(99, 102, 241, 0.15);
+        }
+
+        html.light-theme .sa-timeline-item {
+          background: linear-gradient(135deg, rgba(248, 250, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%);
+          border-color: rgba(99, 102, 241, 0.2);
+        }
+
+        html.light-theme .sa-timeline-item:hover {
+          border-color: rgba(99, 102, 241, 0.5);
+          box-shadow: 0 20px 40px rgba(99, 102, 241, 0.1);
+        }
+
+        /* Year badge styling */
+        .sa-timeline-year {
+          display: inline-block;
+          font-family: 'Space Grotesk', 'Inter', sans-serif;
+          font-size: 16px;
+          font-weight: 700;
+          background: linear-gradient(135deg, #3B82F6, #7C3AED);
+          color: white;
+          padding: 6px 18px;
+          border-radius: 999px;
+          box-shadow: 0 0 20px rgba(99, 102, 241, 0.4);
+          margin: 0 0 8px 0;
+          position: relative;
+          z-index: 2;
+        }
+
+        .sa-timeline-item:nth-child(odd) .sa-timeline-year {
+          margin-left: 0;
+        }
+
+        .sa-timeline-item:nth-child(even) .sa-timeline-year {
+          margin-right: 0;
+        }
+
+        /* Timeline text */
+        .sa-timeline-text {
+          font-family: 'Inter', sans-serif;
+          font-size: 14px;
+          color: #94A3B8;
+          line-height: 1.6;
+          margin: 0;
+          position: relative;
+          z-index: 2;
+        }
+
+        html.light-theme .sa-timeline-text {
+          color: #3D4D6A;
+        }
+
+        .sa-timeline-item:hover .sa-timeline-text {
+          color: #F1F5F9;
+        }
+
+        /* Dot (hidden in flex layout) */
+        .sa-timeline-dot {
+          display: none;
+        }
+
+        /* Stats grid with animated counters */
+        .sa-stats-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+          gap: 12px;
+          margin-top: 60px;
+          position: relative;
+          z-index: 2;
+        }
+
+        .sa-stat-card {
+          background: linear-gradient(135deg, rgba(59, 130, 246, 0.12) 0%, rgba(124, 58, 237, 0.06) 100%);
+          border: 1.5px solid rgba(99, 102, 241, 0.4);
+          border-top: 3px solid #6366F1;
+          border-radius: 12px;
+          padding: 18px 14px;
+          text-align: center;
+          transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+          backdrop-filter: blur(8px);
+          -webkit-backdrop-filter: blur(8px);
+          opacity: 0;
+          transform: translateY(30px);
+          animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .sa-stat-card:nth-child(1) { animation-delay: 0.6s; }
+        .sa-stat-card:nth-child(2) { animation-delay: 0.65s; }
+        .sa-stat-card:nth-child(3) { animation-delay: 0.7s; }
+        .sa-stat-card:nth-child(4) { animation-delay: 0.75s; }
+
+        .sa-stat-card:hover {
+          transform: translateY(-6px);
+          border-color: rgba(99, 102, 241, 0.8);
+          box-shadow: 0 16px 48px rgba(59, 130, 246, 0.25);
+        }
+
+        html.light-theme .sa-stat-card {
+          background: linear-gradient(135deg, rgba(37, 99, 235, 0.12) 0%, rgba(124, 58, 237, 0.06) 100%);
+          border-color: rgba(37, 99, 235, 0.3);
+          border-top-color: #3B82F6;
+        }
+
+        .sa-stat-value {
+          font-family: 'Space Grotesk', 'Inter', sans-serif;
+          font-size: 26px;
+          font-weight: 900;
+          background: linear-gradient(135deg, #3B82F6, #7C3AED);
+          background-clip: text;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          margin: 0 0 6px 0;
+          letter-spacing: -1px;
+        }
+
+        .sa-stat-label {
+          font-family: 'Inter', sans-serif;
+          font-size: 11px;
+          font-weight: 700;
+          color: #94A3B8;
+          margin: 0;
+          line-height: 1.4;
+        }
+
+        html.light-theme .sa-stat-label {
+          color: #3D4D6A;
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+          .sa-timeline {
+            grid-template-columns: 1fr;
+            padding: 0 20px 0 60px;
+          }
+
+          .sa-timeline::before {
+            left: 30px;
+          }
+
+          .sa-timeline-item {
+            padding: 30px !important;
+            padding-left: 30px !important;
+          }
+
+          .sa-timeline-item::before {
+            left: -55px;
+          }
+
+          .sa-timeline-item:nth-child(odd),
+          .sa-timeline-item:nth-child(even) {
+            animation-name: slideFromLeft !important;
+            padding-right: 30px !important;
+            padding-left: 30px !important;
+            text-align: left !important;
+          }
+
+          .sa-timeline-item:nth-child(odd) .sa-timeline-year,
+          .sa-timeline-item:nth-child(even) .sa-timeline-year {
+            margin-left: 0;
+            margin-right: 0;
+          }
+        }
+
+        html.light-theme .sa-section-histoire {
+          background: linear-gradient(135deg, #F7FAFF 0%, #FFFFFF 50%, #F7FAFF 100%);
         }
 
         .sa-timeline-item:nth-child(1) { animation-delay: 0.1s; }
@@ -1161,7 +1478,7 @@ export default function PageHome({ go }) {
         /* =============== FEATURES SECTION PREMIUM =============== */
         .sa-section-features {
           background: linear-gradient(135deg, #0D1117 0%, #0F1729 50%, #0D1117 100%);
-          padding: 60px 40px;
+          padding: 40px 40px;
           position: relative;
           overflow: hidden;
           border-top: 2px solid rgba(99, 102, 241, 0.12);
@@ -1304,7 +1621,7 @@ export default function PageHome({ go }) {
           border-radius: 16px;
           padding: 32px;
           text-align: center;
-          transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
           position: relative;
           overflow: hidden;
           backdrop-filter: blur(12px);
@@ -1317,10 +1634,37 @@ export default function PageHome({ go }) {
         .sa-visible .sa-feature-card {
           opacity: 1;
           transform: translateY(0);
+          animation: fadeInUp 0.6s ease-out forwards;
         }
 
         .sa-feature-card:nth-child(1) { animation-delay: 0.1s; }
         .sa-feature-card:nth-child(2) { animation-delay: 0.15s; }
+        .sa-feature-card:nth-child(3) { animation-delay: 0.2s; }
+        .sa-feature-card:nth-child(4) { animation-delay: 0.25s; }
+        .sa-feature-card:nth-child(5) { animation-delay: 0.3s; }
+        .sa-feature-card:nth-child(6) { animation-delay: 0.35s; }
+
+        .sa-feature-card:hover {
+          transform: translateY(-8px) scale(1.02);
+          border-color: rgba(99, 102, 241, 0.9);
+          box-shadow: 0 28px 72px rgba(59, 130, 246, 0.45), inset 0 0 1px rgba(255, 255, 255, 0.2);
+        }
+
+        .sa-feature-card::after {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+          transition: left 0.5s;
+          pointer-events: none;
+        }
+
+        .sa-feature-card:hover::after {
+          animation: shimmer 0.6s ease-in-out;
+        }
         .sa-feature-card:nth-child(3) { animation-delay: 0.2s; }
         .sa-feature-card:nth-child(4) { animation-delay: 0.25s; }
         .sa-feature-card:nth-child(5) { animation-delay: 0.3s; }
@@ -3342,7 +3686,7 @@ export default function PageHome({ go }) {
         <div className="sa-aurora-blob blob1"></div>
         <div className="sa-aurora-blob blob2"></div>
 
-        <div className="sa-neo-topnav sa-r">
+        <div className={`sa-neo-topnav sa-r ${isScrolled ? 'scrolled' : ''}`}>
           <button className="sa-neo-navitem on">Fonctionnalites</button>
           <button className="sa-neo-navitem">Integrations</button>
           <button className="sa-neo-navitem">Tarifs</button>
