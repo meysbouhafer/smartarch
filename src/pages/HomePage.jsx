@@ -715,7 +715,7 @@ export default function PageHome({ go }) {
         /* =============== HISTOIRE SECTION PREMIUM =============== */
         .sa-section-histoire {
           background: linear-gradient(135deg, #020817 0%, #0A0F2E 50%, #020817 100%);
-          padding: 60px 40px;
+          padding: 70px 40px;
           position: relative;
           overflow: hidden;
           border-top: 2px solid rgba(99, 102, 241, 0.12);
@@ -767,13 +767,14 @@ export default function PageHome({ go }) {
           font-size: 48px;
           font-weight: 900;
           color: #F1F5F9;
-          margin: 0 0 16px 0;
+          margin: 0 0 12px 0;
           letter-spacing: -1px;
           transition: color 0.3s ease;
           background: linear-gradient(135deg, #3B82F6 0%, #7C3AED 100%);
           background-clip: text;
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
+          text-align: center;
         }
 
         html.light-theme .sa-histoire-title h2 {
@@ -781,11 +782,12 @@ export default function PageHome({ go }) {
         }
 
         .sa-histoire-title p {
-          font-size: 18px;
+          font-size: 16px;
           color: #94A3B8;
           margin: 0;
           transition: color 0.3s ease;
           line-height: 1.6;
+          text-align: center;
         }
 
         html.light-theme .sa-histoire-title p {
@@ -795,7 +797,7 @@ export default function PageHome({ go }) {
         /* =============== CHATBOT GLASSMORPHIC SECTION =============== */
         .sa-section-chatbot {
           background: #020817;
-          padding: 80px 40px;
+          padding: 70px 40px;
           position: relative;
           overflow: hidden;
           border-top: 2px solid rgba(99, 102, 241, 0.12);
@@ -1049,7 +1051,7 @@ export default function PageHome({ go }) {
         /* =============== FEATURES SECTION PREMIUM =============== */
         .sa-section-features {
           background: linear-gradient(135deg, #0D1117 0%, #0F1729 50%, #0D1117 100%);
-          padding: 60px 40px;
+          padding: 70px 40px;
           position: relative;
           overflow: hidden;
           border-top: 2px solid rgba(99, 102, 241, 0.12);
@@ -1065,47 +1067,78 @@ export default function PageHome({ go }) {
 
         .sa-features-header {
           text-align: center;
-          max-width: 700px;
-          margin: 0 auto 32px;
+          max-width: 800px;
+          margin: 0 auto 28px;
           position: relative;
           z-index: 2;
         }
 
         .sa-services-header {
           text-align: center;
-          max-width: 700px;
-          margin: 0 auto 32px;
+          max-width: 800px;
+          margin: 0 auto 28px;
           position: relative;
           z-index: 2;
         }
 
         .sa-team-header {
           text-align: center;
-          max-width: 700px;
-          margin: 0 auto 32px;
+          max-width: 800px;
+          margin: 0 auto 28px;
           position: relative;
           z-index: 2;
         }
 
         .sa-histoire-title {
           text-align: center;
-          max-width: 700px;
-          margin: 0 auto 32px;
+          max-width: 800px;
+          margin: 0 auto 28px;
           position: relative;
           z-index: 2;
         }
 
-        .sa-features-header h2 {
-          font-size: 48px;
+        .sa-features-header h2,
+        .sa-services-header h2,
+        .sa-team-header h2,
+        .sa-histoire-title h2 {
+          font-size: 46px;
           font-weight: 900;
           color: #F1F5F9;
-          margin: 0 0 16px 0;
-          letter-spacing: -1px;
-          transition: color 0.3s ease;
+          margin: 0 0 10px 0;
+          letter-spacing: -1.5px;
+          transition: all 0.3s ease;
           background: linear-gradient(135deg, #3B82F6 0%, #7C3AED 100%);
           background-clip: text;
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
+          text-align: center;
+        }
+
+        html.light-theme .sa-features-header h2,
+        html.light-theme .sa-services-header h2,
+        html.light-theme .sa-team-header h2,
+        html.light-theme .sa-histoire-title h2 {
+          color: #0A0F2C;
+        }
+
+        .sa-features-header p,
+        .sa-services-header p,
+        .sa-team-header p,
+        .sa-histoire-title p {
+          font-size: 15px;
+          color: #94A3B8;
+          margin: 0;
+          transition: color 0.3s ease;
+          line-height: 1.6;
+          text-align: center;
+          letter-spacing: -0.2px;
+        }
+
+        html.light-theme .sa-features-header p,
+        html.light-theme .sa-services-header p,
+        html.light-theme .sa-team-header p,
+        html.light-theme .sa-histoire-title p {
+          color: #3D4D6A;
         }
 
         html.light-theme .sa-features-header h2 {
@@ -1113,11 +1146,12 @@ export default function PageHome({ go }) {
         }
 
         .sa-features-header p {
-          font-size: 18px;
+          font-size: 16px;
           color: #94A3B8;
           margin: 0;
           transition: color 0.3s ease;
           line-height: 1.6;
+          text-align: center;
         }
 
         html.light-theme .sa-features-header p {
@@ -1127,7 +1161,27 @@ export default function PageHome({ go }) {
         .sa-features-grid {
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-          gap: 20px;
+          gap: 18px;
+          max-width: 1300px;
+          margin: 0 auto;
+          position: relative;
+          z-index: 2;
+        }
+
+        .sa-services-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+          gap: 18px;
+          max-width: 1300px;
+          margin: 0 auto;
+          position: relative;
+          z-index: 2;
+        }
+
+        .sa-team-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+          gap: 18px;
           max-width: 1300px;
           margin: 0 auto;
           position: relative;
@@ -1135,19 +1189,101 @@ export default function PageHome({ go }) {
         }
 
         .sa-feature-card {
-          background: linear-gradient(135deg, rgba(15, 23, 42, 0.7) 0%, rgba(15, 23, 42, 0.4) 100%);
-          border: 1.5px solid rgba(99, 102, 241, 0.3);
-          border-radius: 18px;
-          padding: 40px 32px;
+          background: linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(15, 23, 42, 0.5) 100%);
+          border: 1.5px solid rgba(99, 102, 241, 0.4);
+          border-radius: 16px;
+          padding: 32px;
           text-align: center;
           transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
           position: relative;
           overflow: hidden;
           backdrop-filter: blur(12px);
           -webkit-backdrop-filter: blur(12px);
-          box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2), inset 0 0 1px rgba(255, 255, 255, 0.1);
+          box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3), inset 0 0 1px rgba(255, 255, 255, 0.15);
           opacity: 0;
-          transform: translateY(40px);
+          transform: translateY(30px);
+        }
+
+        .sa-visible .sa-feature-card {
+          opacity: 1;
+          transform: translateY(0);
+        }
+
+        .sa-feature-card:nth-child(1) { animation-delay: 0.1s; }
+        .sa-feature-card:nth-child(2) { animation-delay: 0.15s; }
+        .sa-feature-card:nth-child(3) { animation-delay: 0.2s; }
+        .sa-feature-card:nth-child(4) { animation-delay: 0.25s; }
+        .sa-feature-card:nth-child(5) { animation-delay: 0.3s; }
+        .sa-feature-card:nth-child(6) { animation-delay: 0.35s; }
+
+        html.light-theme .sa-feature-card {
+          background: linear-gradient(135deg, rgba(248, 250, 255, 0.95) 0%, rgba(255, 255, 255, 0.8) 100%);
+          border-color: rgba(99, 102, 241, 0.3);
+          box-shadow: 0 12px 40px rgba(37, 99, 235, 0.15), inset 0 0 1px rgba(37, 99, 235, 0.15);
+        }
+
+        .sa-feature-card:hover {
+          transform: translateY(-10px);
+          border-color: rgba(99, 102, 241, 0.9);
+          box-shadow: 0 28px 72px rgba(59, 130, 246, 0.45), inset 0 0 1px rgba(255, 255, 255, 0.2);
+        }
+
+        html.light-theme .sa-feature-card:hover {
+          border-color: rgba(37, 99, 235, 0.7);
+          box-shadow: 0 28px 72px rgba(37, 99, 235, 0.25), inset 0 0 1px rgba(37, 99, 235, 0.2);
+        }
+
+        .sa-feature-card::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(124, 58, 237, 0.08) 100%);
+          opacity: 0;
+          transition: opacity 0.3s ease;
+          border-radius: 16px;
+          pointer-events: none;
+        }
+
+        .sa-feature-card:hover::before {
+          opacity: 1;
+        }
+
+        .sa-feature-icon {
+          font-size: 48px;
+          margin-bottom: 16px;
+          display: inline-block;
+          animation: floatingIcon 3s ease-in-out infinite;
+          transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .sa-feature-card:hover .sa-feature-icon {
+          animation: rotatingIcon 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+          transform: scale(1.2);
+        }
+
+        .sa-feature-card h3 {
+          font-size: 18px;
+          font-weight: 800;
+          color: #F1F5F9;
+          margin: 0 0 10px 0;
+          letter-spacing: -0.5px;
+          transition: color 0.3s ease;
+        }
+
+        html.light-theme .sa-feature-card h3 {
+          color: #0A0F2C;
+        }
+
+        .sa-feature-card p {
+          font-size: 13px;
+          color: #94A3B8;
+          margin: 0;
+          line-height: 1.6;
+          transition: color 0.3s ease;
+        }
+
+        html.light-theme .sa-feature-card p {
+          color: #3D4D6A;
         }
 
         .sa-visible .sa-feature-card {
@@ -1703,7 +1839,7 @@ export default function PageHome({ go }) {
         /* =============== SERVICES SECTION PREMIUM =============== */
         .sa-section-services {
           background: linear-gradient(135deg, #0D1117 0%, #0F1729 50%, #0D1117 100%);
-          padding: 60px 40px;
+          padding: 70px 40px;
           position: relative;
           overflow: hidden;
           border-top: 2px solid rgba(99, 102, 241, 0.12);
@@ -1755,13 +1891,14 @@ export default function PageHome({ go }) {
           font-size: 48px;
           font-weight: 900;
           color: #F1F5F9;
-          margin: 0 0 16px 0;
+          margin: 0 0 12px 0;
           letter-spacing: -1px;
           transition: color 0.3s ease;
           background: linear-gradient(135deg, #3B82F6 0%, #7C3AED 100%);
           background-clip: text;
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
+          text-align: center;
         }
 
         html.light-theme .sa-services-header h2 {
@@ -1769,11 +1906,12 @@ export default function PageHome({ go }) {
         }
 
         .sa-services-header p {
-          font-size: 18px;
+          font-size: 16px;
           color: #94A3B8;
           margin: 0;
           transition: color 0.3s ease;
           line-height: 1.6;
+          text-align: center;
         }
 
         html.light-theme .sa-services-header p {
@@ -1791,8 +1929,8 @@ export default function PageHome({ go }) {
         }
 
         .sa-service-card {
-          background: linear-gradient(135deg, rgba(15, 23, 42, 0.7) 0%, rgba(15, 23, 42, 0.4) 100%);
-          border: 1.5px solid rgba(99, 102, 241, 0.3);
+          background: linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(15, 23, 42, 0.5) 100%);
+          border: 1.5px solid rgba(99, 102, 241, 0.4);
           border-radius: 16px;
           padding: 32px;
           cursor: pointer;
@@ -1801,12 +1939,94 @@ export default function PageHome({ go }) {
           overflow: hidden;
           backdrop-filter: blur(12px);
           -webkit-backdrop-filter: blur(12px);
-          box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2), inset 0 0 1px rgba(255, 255, 255, 0.1);
+          box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3), inset 0 0 1px rgba(255, 255, 255, 0.15);
           opacity: 0;
           transform: translateY(30px);
           display: flex;
           flex-direction: column;
           gap: 12px;
+        }
+
+        .sa-visible .sa-service-card {
+          opacity: 1;
+          transform: translateY(0);
+        }
+
+        .sa-service-card:nth-child(1) { animation-delay: 0.1s; }
+        .sa-service-card:nth-child(2) { animation-delay: 0.15s; }
+        .sa-service-card:nth-child(3) { animation-delay: 0.2s; }
+        .sa-service-card:nth-child(4) { animation-delay: 0.25s; }
+        .sa-service-card:nth-child(5) { animation-delay: 0.3s; }
+        .sa-service-card:nth-child(6) { animation-delay: 0.35s; }
+
+        html.light-theme .sa-service-card {
+          background: linear-gradient(135deg, rgba(248, 250, 255, 0.95) 0%, rgba(255, 255, 255, 0.8) 100%);
+          border-color: rgba(99, 102, 241, 0.3);
+          box-shadow: 0 12px 40px rgba(37, 99, 235, 0.15), inset 0 0 1px rgba(37, 99, 235, 0.15);
+        }
+
+        .sa-service-card:hover {
+          transform: translateY(-10px);
+          border-color: rgba(99, 102, 241, 0.9);
+          box-shadow: 0 28px 72px rgba(59, 130, 246, 0.45), inset 0 0 1px rgba(255, 255, 255, 0.2);
+        }
+
+        html.light-theme .sa-service-card:hover {
+          border-color: rgba(37, 99, 235, 0.7);
+          box-shadow: 0 28px 72px rgba(37, 99, 235, 0.25), inset 0 0 1px rgba(37, 99, 235, 0.2);
+        }
+
+        .sa-service-card::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(124, 58, 237, 0.08) 100%);
+          opacity: 0;
+          transition: opacity 0.3s ease;
+          border-radius: 16px;
+          pointer-events: none;
+        }
+
+        .sa-service-card:hover::before {
+          opacity: 1;
+        }
+
+        .sa-service-icon {
+          font-size: 40px;
+          color: #3B82F6;
+          transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+          display: inline-block;
+          width: fit-content;
+        }
+
+        .sa-service-card:hover .sa-service-icon {
+          transform: scale(1.2);
+          color: #7C3AED;
+        }
+
+        .sa-service-title {
+          font-size: 18px;
+          font-weight: 800;
+          color: #F1F5F9;
+          margin: 0;
+          letter-spacing: -0.5px;
+          transition: color 0.3s ease;
+        }
+
+        html.light-theme .sa-service-title {
+          color: #0A0F2C;
+        }
+
+        .sa-service-desc {
+          font-size: 13px;
+          color: #94A3B8;
+          margin: 0;
+          line-height: 1.6;
+          transition: color 0.3s ease;
+        }
+
+        html.light-theme .sa-service-desc {
+          color: #3D4D6A;
         }
 
         .sa-visible .sa-service-card {
@@ -2178,7 +2398,7 @@ export default function PageHome({ go }) {
         /* =============== TEAM SECTION PREMIUM =============== */
         .sa-section-team {
           background: #020817;
-          padding: 60px 40px;
+          padding: 70px 40px;
           position: relative;
           overflow: hidden;
           border-bottom: 2px solid rgba(99, 102, 241, 0.12);
@@ -2202,13 +2422,14 @@ export default function PageHome({ go }) {
           font-size: 48px;
           font-weight: 900;
           color: #F1F5F9;
-          margin: 0 0 16px 0;
+          margin: 0 0 12px 0;
           letter-spacing: -1px;
           transition: color 0.3s ease;
           background: linear-gradient(135deg, #3B82F6 0%, #7C3AED 100%);
           background-clip: text;
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
+          text-align: center;
         }
 
         html.light-theme .sa-team-header h2 {
@@ -2216,11 +2437,12 @@ export default function PageHome({ go }) {
         }
 
         .sa-team-header p {
-          font-size: 18px;
+          font-size: 16px;
           color: #94A3B8;
           margin: 0;
           transition: color 0.3s ease;
           line-height: 1.6;
+          text-align: center;
         }
 
         html.light-theme .sa-team-header p {
